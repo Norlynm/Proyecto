@@ -1,0 +1,32 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+# Modelo para representar un equipo.
+class Equipo(models.Model):
+    nombre = models.CharField(max_length=50)
+    descripcion = models.TextField()
+    
+    def __str__(self) :
+        return f"{self.nombre}" # Devuelve el nombre del equipo cuando se imprime el objeto.
+     
+     # Modelo para representar un proyecto.
+class Proyecto(models.Model):
+    nombre = models.CharField(max_length=50)
+    descripcion = models.TextField()
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    estado = models.CharField(max_length=100)
+    equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE) # Relación con el equipo, borra el proyecto si el equipo se borra.
+
+    
+    def __str__(self):
+            return self.nombre # Devuelve el nombre del proyecto cuando se imprime el objeto.
+
+        # Modelo para representar los miembros del equipo en un proyecto.
+class MiembroEquipo(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    rol = models.CharField(max_length=50)
+    proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.usuario.username} - {self.rol} en {self.proyecto.nombre}"
