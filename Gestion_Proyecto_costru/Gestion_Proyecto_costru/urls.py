@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Menu import views
+from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('principal',views.principal),
     path('registrarse/',views.registro),
+    path('proyecto/', include("proyectos.urls")),
 ]
