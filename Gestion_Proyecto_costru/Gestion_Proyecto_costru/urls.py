@@ -24,4 +24,5 @@ urlpatterns = [
     path('registro/',views.registro),
     path('proyecto/', include("proyectos.urls")),
     path('tareas/',views.tareas),
+    path('Cerrar_Sesion',views.cerrar_sesion, name='Cerrar_sesion'),
 ]

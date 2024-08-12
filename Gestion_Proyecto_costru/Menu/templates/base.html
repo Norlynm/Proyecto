@@ -9,10 +9,7 @@
     
 <nav>
     <ul>
-        <li>
-            <a href="/registro">registrarse</a>
-
-        </li>
+       
         <li>
             <a href="/tareas">Tareas</a>
 
@@ -21,7 +18,17 @@
             <a href="/principal">inicio</a>
 
         </li>
+        {% if user.is_authenticated %}
+        <li>
+            <a href="/Cerrar_Sesion">Cerrar Sesion</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="/registro">registrarse</a>
 
+        </li> 
+
+        {% endif %}
     </ul>
 
 </nav>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from django.db import IntegrityError
 
 
@@ -41,3 +41,7 @@ def registro(request):
 def tareas(request):
     return render(request, 'tareas.html')
 
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect (principal)
