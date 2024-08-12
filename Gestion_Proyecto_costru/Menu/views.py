@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.contrib.auth import login
+from django.db import IntegrityError
 
 
 def principal(request):
@@ -19,10 +21,12 @@ def registro(request):
                 user = User.objects.create_user(
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()
+                login(request,user)
+                #Aqui lo redirigira a otra pagina de la funcion tareas
                 return redirect(tareas)
             # Aqui estan las condiciones por si el usuario existe y por si no
-
-            except:
+    
+            except IntegrityError:
                 return render(request, 'registro.html', {
                     'form': UserCreationForm,
                     'error': 'El usuario ya existe'
@@ -36,3 +40,4 @@ def registro(request):
 
 def tareas(request):
     return render(request, 'tareas.html')
+
