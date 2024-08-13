@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link type='text/css' href='{% static "colocar la ruta del css aqui" %}' rel='stylesheet'/>
+    <title>Editar Proyecto - Plataforma de Gestión de Proyectos</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
+        </header>
+        <nav>
+            <a href="{% url 'projects:inicio' %}">Volver al inicio</a>
+        </nav>
+        <section>
+            <form action="{% url 'projects:editarproyecto' pk=proyecto.pk %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Guardar</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
