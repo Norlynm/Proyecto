@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <link type='text/css' href='{% static "colocar la ruta del css aqui" %}', rel='stylesheet'/>
+    <body>
+        
+        <h1> PLATAFORMA DE GESTION DE PROYECTOS</h1> 
+
+        <a href=" {% url 'projects:inicio'%}"> Cancelar </a> 
+
+        <form action="{% url 'projects:eliminarproyecto' pk=proyecto.pk %}" method="POST">
+             {% csrf_token %}
+        {{form.as_p}}
+        <br>
+         <button type="submit"> Eliminar Proyecto </button>
+        </form>
+        
+    </body> 
+</html> 

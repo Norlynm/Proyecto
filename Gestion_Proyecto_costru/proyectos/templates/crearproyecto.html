@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'colocar la ruta del css aqui' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Crear Proyecto</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
+        </header>
+        <nav>
+            <a href="{% url 'projects:inicio' %}"><i class="fas fa-home"></i> Volver al inicio</a>
+        </nav>
+        <section class="form-container">
+            <form action="{% url 'projects:crearproyecto' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Guardar</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
