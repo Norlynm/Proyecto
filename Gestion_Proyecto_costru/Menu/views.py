@@ -66,3 +66,6 @@ def inicio_sesion(request):
             return redirect(principal)    
                  
      
+
+def usuario(request):
+    return render (request,'usuario.html')
