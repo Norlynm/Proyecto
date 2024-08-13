@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina base</title>
+</head>
+<body>
+    
+<nav>
+    <ul>
+       
+        <li>
+            <a href="/tareas">Tareas</a>
+
+        </li>
+        <li>
+            <a href="/principal">inicio</a>
+
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+            <a href="/Cerrar_Sesion">Cerrar Sesion</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="/registro">registrarse</a>
+
+        </li> 
+        <li>
+            <a href="/inicio_sesion">Inicio de Sesion</a>
+
+        </li>
+
+        {% endif %}
+    </ul>
+
+</nav>
+
+
+
+{% block content %}
+
+{% endblock %}
+
+
+</body>
+</html>
