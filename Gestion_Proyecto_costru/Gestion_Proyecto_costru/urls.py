@@ -25,4 +25,5 @@ urlpatterns = [
     path('proyecto/', include("proyectos.urls")),
     path('tareas/',views.tareas),
     path('Cerrar_Sesion',views.cerrar_sesion, name='Cerrar_sesion'),
+    path('inicio_sesion',views.inicio_sesion),
 ]
