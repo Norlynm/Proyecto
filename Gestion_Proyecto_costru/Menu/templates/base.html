@@ -11,20 +11,26 @@
     <ul>
        
         <li>
-            <a href="/tareas">Tareas</a>
+            <a href="/tareas">Tareas</a> 
+        
 
         </li>
+
         <li>
-            <a href="/principal">inicio</a>
+            <a href="/principal">Inicio</a>
 
         </li>
         {% if user.is_authenticated %}
         <li>
             <a href="/Cerrar_Sesion">Cerrar Sesion</a>
         </li>
+         <li>
+            <a href="">{{ user.username }}</a>
+
+        </li>
         {% else %}
         <li>
-            <a href="/registro">registrarse</a>
+            <a href="/registro">Registrarse</a>
 
         </li> 
         <li>
