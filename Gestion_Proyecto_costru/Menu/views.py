@@ -68,7 +68,9 @@ def inicio_sesion(request):
      
 
 def usuario(request):
-    return render (request,'usuario.html',{
-        'form': ProyectoForm
+    if request.method == "GET":
+        return render (request,'usuario.html',{
+            'form': ProyectoForm
 
     })
+    
