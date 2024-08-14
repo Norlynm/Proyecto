@@ -14,7 +14,7 @@ def inicio(request):
 class crearproyecto(CreateView):
      model  = Proyecto
      form_class = ProyectoForm
-     template_name = "projects/crearproyecto.html"
+     template_name = "proyectos/crearproyecto.html"
      success_url = reverse_lazy('projects:mostrarproyecto')
      
    
