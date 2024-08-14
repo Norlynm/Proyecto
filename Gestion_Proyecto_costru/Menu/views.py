@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User, AnonymousUser
+from django.http import HttpResponse
 from django.contrib.auth import login,logout,authenticate
 from django.db import IntegrityError
 from .form import FormularioPropio
+from proyectos.forms import ProyectoForm
 
 def principal(request):
     return render(request, 'principal.html')
-
 
 def registro(request):
     if request.method == 'GET':
@@ -32,7 +33,7 @@ def registro(request):
                 })
         
         return render(request, 'registro.html',{
-                'form':FormularioPropio,
+                'form': FormularioPropio,
                 'error': 'Contraseñas no coinciden'
             })
 
@@ -67,4 +68,7 @@ def inicio_sesion(request):
      
 
 def usuario(request):
-    return render (request,'usuario.html')
+    return render (request,'usuario.html',{
+        'form': ProyectoForm
+
+    })
