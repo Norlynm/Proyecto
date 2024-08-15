@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle de Tarea - Plataforma de Gestión de Proyectos</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/listartarea.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Detalle de Tarea</h1>
+        </header>
+        <nav>
+            <a href="{% url 'projects:inicio' %}"><i class="fas fa-home"></i> Volver al Inicio</a>
+            <a href="{% url 'tasks:listartareas' %}"><i class="fas fa-tasks"></i> Volver a la lista de tareas</a>
+        </nav>
+        <section class="task-details">
+            <p><strong>Nombre:</strong> {{ tarea.nombre }}</p>
+            <p><strong>Descripción:</strong> {{ tarea.descripcion }}</p>
+            <p><strong>Proyecto:</strong> {{ tarea.proyecto }}</p>
+            <p><strong>Asignado a:</strong> {{ tarea.asignado_a }}</p>
+            <p><strong>Fecha Inicio:</strong> {{ tarea.fecha_inicio }}</p>
+            <p><strong>Fecha Fin:</strong> {{ tarea.fecha_fin }}</p>
+            <p><strong>Prioridad:</strong> {{ tarea.prioridad }}</p>
+            <p><strong>Estado:</strong> {{ tarea.estado }}</p>
+        </section>
+    </div>
+</body>
+</html>

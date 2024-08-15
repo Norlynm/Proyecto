@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <link type='text/css' href='{% static "css/estilo.css" %}', rel='stylesheet'/>
+<head>
+    <title>Editar Tarea - Plataforma de Gestión de Proyectos</title>
+</head>
+<body>
+    <h1>Editar Tarea</h1>
+    <a href="{% url 'tasks:listartareas' %}">Volver a la lista de tareas</a>
+    <form action="{% url 'tasks:editartarea' pk=tarea.pk %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
