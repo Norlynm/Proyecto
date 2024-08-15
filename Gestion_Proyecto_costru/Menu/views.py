@@ -1,18 +1,19 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpResponse
 from django.contrib.auth import login,logout,authenticate
 from django.db import IntegrityError
-
+from .form import FormularioPropio
+from proyectos.forms import ProyectoForm
+from proyectos.models import MiembroEquipo
 
 def principal(request):
     return render(request, 'principal.html')
 
-
 def registro(request):
     if request.method == 'GET':
-        return render(request, 'registro.html', {'form': UserCreationForm()})
+        return render(request, 'registro.html', {'form':FormularioPropio()})
     else:
         # Aqui se compara las contraseñas
         if request.POST['password1'] == request.POST['password2']:
@@ -28,12 +29,12 @@ def registro(request):
     
             except IntegrityError:
                 return render(request, 'registro.html', {
-                    'form': UserCreationForm,
+                    'form': FormularioPropio,
                     'error': 'El usuario ya existe'
                 })
         
         return render(request, 'registro.html',{
-                'form': UserCreationForm,
+                'form': FormularioPropio,
                 'error': 'Contraseñas no coinciden'
             })
 
@@ -68,4 +69,14 @@ def inicio_sesion(request):
      
 
 def usuario(request):
-    return render (request,'usuario.html')
+    if request.method == "GET":
+        return render (request,'usuario.html',{
+            'form': ProyectoForm})
+  
+    else:
+        return render(request,"usuario.html",{
+            'form':MiembroEquipo
+        })
+
+
+        
