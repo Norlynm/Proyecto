@@ -6,6 +6,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.db import IntegrityError
 from .form import FormularioPropio
 from proyectos.forms import ProyectoForm
+from proyectos.models import MiembroEquipo
 
 def principal(request):
     return render(request, 'principal.html')
@@ -70,7 +71,12 @@ def inicio_sesion(request):
 def usuario(request):
     if request.method == "GET":
         return render (request,'usuario.html',{
-            'form': ProyectoForm
+            'form': ProyectoForm})
+  
+    else:
+        return render(request,"usuario.html",{
+            'form':MiembroEquipo
+        })
 
-    })
-    
+
+        
