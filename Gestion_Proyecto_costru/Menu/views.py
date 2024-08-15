@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from .form import FormularioPropio
 from proyectos.forms import ProyectoForm
 from proyectos.models import MiembroEquipo
+from tareas.forms import TareaForm
 
 def principal(request):
     return render(request, 'principal.html')
@@ -38,9 +39,11 @@ def registro(request):
                 'error': 'Contraseñas no coinciden'
             })
 
-#Funcion que lo que hace es que te lleva a la pagina de tareas
+#Funcion que lo que hace es que te lleva a la pagina de tareas y se crea el formulario de tareas
 def tareas(request):
-    return render(request, 'tareas.html')
+    return render(request, 'tareas.html',{
+        'form':TareaForm
+    })
 
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):
@@ -78,5 +81,3 @@ def usuario(request):
             'form':MiembroEquipo
         })
 
-
-        
