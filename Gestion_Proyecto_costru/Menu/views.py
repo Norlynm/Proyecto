@@ -77,7 +77,7 @@ def usuario(request):
             'form': ProyectoForm})
   
     else:
-        return render(request,"usuario.html",{
-            'form':MiembroEquipo
-        })
-
+        proyecto = ProyectoForm(request.POST)
+        proyecto.save()
+        return redirect(usuario) 
+      
