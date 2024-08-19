@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'Menu',
     'proyectos',
     'tareas',
+    'reporte',
+    'archivos',
+    'comentarios',
+    'notificaciones',
+    'calendario',
     
 ]
 

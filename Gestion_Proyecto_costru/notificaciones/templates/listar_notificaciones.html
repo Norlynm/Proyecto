@@ -1,0 +1,24 @@
+<h1>Mis Notificaciones</h1>
+
+<h2>Notificaciones No Leídas</h2>
+<ul>
+    {% for notificacion in notificaciones_no_leidas %}
+        <li>
+            {{ notificacion.mensaje }} - {{ notificacion.fecha_creacion }}
+            <a href="{% url 'notifications:marcar_como_leida' notificacion.pk %}">Marcar como leída</a>
+        </li>
+    {% empty %}
+        <li>No tienes notificaciones no leídas.</li>
+    {% endfor %}
+</ul>
+
+<h2>Notificaciones Leídas</h2>
+<ul>
+    {% for notificacion in notificaciones_leidas %}
+        <li>
+            {{ notificacion.mensaje }} - {{ notificacion.fecha_creacion }}
+        </li>
+    {% empty %}
+        <li>No tienes notificaciones leídas.</li>
+    {% endfor %}
+</ul>

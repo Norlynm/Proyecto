@@ -1,0 +1,9 @@
+<h1>Agregar Evento al Calendario</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Agregar Evento</button>
+</form>
+
+<a href="{% url 'calendar:listar_eventos' %}">Volver a la lista de eventos</a>

@@ -1,0 +1,6 @@
+<h1>Reportes Generados</h1>
+<ul>
+    {% for reporte in reportes %}
+        <li>{{ reporte.titulo }} - {{ reporte.fecha_creacion }}</li>
+    {% endfor %}
+</ul>

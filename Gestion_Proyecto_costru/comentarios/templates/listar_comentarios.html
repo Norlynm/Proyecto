@@ -1,0 +1,16 @@
+<h1>Comentarios sobre la tarea: {{ tarea.nombre }}</h1>
+
+<ul>
+    {% for comentario in comentarios %}
+        <li>
+            <strong>{{ comentario.usuario.username }}</strong> - 
+            {{ comentario.fecha_creacion }}: 
+            {{ comentario.comentario }}
+        </li>
+    {% empty %}
+        <li>No hay comentarios aún.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'comments:agregar_comentario' tarea.id %}">Agregar un comentario</a>
+<a href="{% url 'tareas:listartareas' %}">Volver a las tareas</a>
