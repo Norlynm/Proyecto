@@ -8,6 +8,7 @@ from .form import FormularioPropio
 from proyectos.forms import ProyectoForm
 from proyectos.models import MiembroEquipo
 from tareas.forms import TareaForm
+from proyectos.models import Proyecto
 
 def principal(request):
     return render(request, 'principal.html')
@@ -73,11 +74,19 @@ def inicio_sesion(request):
 
 def usuario(request):
     if request.method == "GET":
-        return render (request,'usuario.html',{
-            'form': ProyectoForm})
-  
+        return render(request, 'usuario.html', {
+            'form': ProyectoForm()
+        })
     else:
-        proyecto = ProyectoForm(request.POST)
-        proyecto.save()
-        return redirect(usuario) 
-      
+        form = ProyectoForm(request.POST)
+        if form.is_valid():
+            nuevo_form = form.save(commit=False)
+            nuevo_form.user = request.user  # Asigna el usuario actual al proyecto
+            nuevo_form.save()  # Guarda el proyecto con el usuario asignado
+            return redirect(tareas)  # Redirige a la vista 'tareas' después de guardar
+        else:
+            return render(request, 'usuario.html', {
+                'form': form,
+                'error': 'Hubo un error con el formulario'
+            })
+
