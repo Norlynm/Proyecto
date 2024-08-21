@@ -40,7 +40,9 @@ def registro(request):
 
 #Funcion que lo que hace es que te lleva a la pagina de tareas
 def tareas(request):
-    return render(request, 'tareas.html')
+    return render(request, 'tareas.html'{
+        'form':
+    })
 
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):
