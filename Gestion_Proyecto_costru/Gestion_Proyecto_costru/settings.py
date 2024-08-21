@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'comentarios',
     'notificaciones',
     'calendario',
+    'recursos',
+    'incidentes',
     
 ]
 

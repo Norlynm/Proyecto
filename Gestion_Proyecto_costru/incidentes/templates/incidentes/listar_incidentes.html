@@ -1,0 +1,28 @@
+<h1>Lista de Incidentes Reportados</h1>
+
+<div class="incident-list">
+    {% for incidente in incidentes %}
+        <div class="incident-item">
+            <h4>{{ incidente.proyecto.nombre }}</h4>
+            <p><strong>Descripción:</strong> {{ incidente.descripcion }}</p>
+            <p><strong>Fecha del Incidente:</strong> {{ incidente.fecha }}</p>
+            <p><strong>Estado:</strong> 
+                {% if incidente.estado == 'pendiente' %}
+                    <span class="badge badge-warning">Pendiente</span>
+                {% else %}
+                    <span class="badge badge-success">Resuelto</span>
+                {% endif %}
+            </p>
+            <p><strong>Reportado por:</strong> {{ incidente.responsable.username }}</p>
+            
+            {% if incidente.estado == 'pendiente' %}
+                <a href="{% url 'incidentes:resolver_incidente' incidente.pk %}" class="btn btn-primary">Marcar como Resuelto</a>
+            {% endif %}
+        </div>
+        <hr>
+    {% empty %}
+        <p>No hay incidentes reportados.</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'incidentes:reportar_incidente' %}" class="btn btn-success mt-3">Reportar un Nuevo Incidente</a>

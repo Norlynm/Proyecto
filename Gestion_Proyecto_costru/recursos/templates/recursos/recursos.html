@@ -1,0 +1,16 @@
+<h1>Recursos Asignados</h1>
+
+<ul>
+    {% for recurso in recursos %}
+        <li>
+            <strong>{{ recurso.nombre }}</strong> ({{ recurso.tipo }}) - 
+            Proyecto: {{ recurso.proyecto.nombre }} - 
+            Cantidad: {{ recurso.cantidad }} - 
+            Fecha Asignación: {{ recurso.fecha_asignacion }}
+        </li>
+    {% empty %}
+        <li>No hay recursos asignados aún.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'recursos:asignar_recurso' %}">Asignar Nuevo Recurso</a>

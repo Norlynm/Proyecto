@@ -1,0 +1,32 @@
+<h1>Resolver Incidente</h1>
+
+<div class="incident-details">
+    <h3>Detalles del Incidente:</h3>
+    <p><strong>Proyecto:</strong> {{ incidente.proyecto.nombre }}</p>
+    <p><strong>Descripción:</strong> {{ incidente.descripcion }}</p>
+    <p><strong>Fecha del Incidente:</strong> {{ incidente.fecha }}</p>
+    <p><strong>Estado Actual:</strong> {{ incidente.estado }}</p>
+    <p><strong>Reportado por:</strong> {{ incidente.responsable.username }}</p>
+</div>
+
+<hr>
+
+<form method="post" class="incident-resolution-form">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="resolucion">Resolución del Incidente:</label>
+        <textarea name="resolucion" id="resolucion" rows="4" class="form-control" placeholder="Describa cómo se ha resuelto el incidente..."></textarea>
+        <small class="form-text text-muted">Proporcione detalles sobre la solución aplicada.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="estado">Marcar como Resuelto:</label>
+        <select name="estado" class="form-control">
+            <option value="resuelto">Resuelto</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Marcar como Resuelto</button>
+    <a href="{% url 'incidentes:listar_incidentes' %}" class="btn btn-secondary">Cancelar</a>
+</form>
