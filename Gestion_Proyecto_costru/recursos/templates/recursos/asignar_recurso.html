@@ -1,9 +1,0 @@
-<h1>Asignar Nuevo Recurso</h1>
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Asignar Recurso</button>
-</form>
-
-<a href="{% url 'recursos:listar_recursos' %}">Volver a la lista de recursos</a>
