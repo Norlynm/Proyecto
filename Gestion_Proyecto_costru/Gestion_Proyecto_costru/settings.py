@@ -41,12 +41,7 @@ INSTALLED_APPS = [
     'proyectos',
     'tareas',
     'reporte',
-    'archivos',
-    'comentarios',
-    'notificaciones',
-    'calendario',
-
-    
+    'calendario', 
 ]
 
 MIDDLEWARE = [

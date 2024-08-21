@@ -1,9 +1,0 @@
-<h1>Agregar Comentario a la tarea: {{ tarea.nombre }}</h1>
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar Comentario</button>
-</form>
-
-<a href="{% url 'comments:listar_comentarios' tarea.id %}">Volver a los comentarios</a>
