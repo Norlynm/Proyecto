@@ -1,54 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina base</title>
-</head>
-<body>
-    
-<nav>
-    <ul>
-       
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='{% static "Menu/css/stile.css" %}' rel="stylesheet" />
+
+    <title>{% block titulo %} Pagina base {% endblock %}</title>
+  </head>
+  <body>
+    {% block barra %}
+    <nav>
+      <ul>
         <li>
-            <a href="/tareas">Tareas</a> 
+          <a href="{% url 'Menu:tareas'%}">Tareas</a>
         </li>
 
-            
         <li>
-            <a href="/principal">Inicio</a>
-
+          <a href="{% url 'Menu:principal'%}">Inicio</a>
         </li>
+
+
         {% if user.is_authenticated %}
         <li>
-            <a href="/Cerrar_Sesion">Cerrar Sesion</a>
+          <a href="{% url 'Menu:Cerrar_sesion'%}">Cerrar Sesion</a>
         </li>
-         <li>
-            <a href="/Usuario">{{ user.username }}</a>
+        <li>
+          <a href="/Usuario">{{ user.username }}</a>
+        </li>
 
-        </li>
-     
         {% else %}
         <li>
-            <a href="/registro">Registrarse</a>
-
-        </li> 
+          <a href="{% url 'Menu:registro'%}">Registrarse</a>
+        </li>
         <li>
-            <a href="/inicio_sesion">Inicio de Sesion</a>
-
+          <a href="{% url 'Menu:iniciar_sesion'%}">Inicio de Sesion</a>
         </li>
 
         {% endif %}
-    </ul>
+      </ul>
+    </nav>
 
-</nav>
-
-
-
-{% block content %}
-
-{% endblock %}
-
-
-</body>
+    {% endblock %} {% block content %} {% endblock %}
+  </body>
 </html>
