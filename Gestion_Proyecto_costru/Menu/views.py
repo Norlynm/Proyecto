@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from .form import FormularioPropio
 from proyectos.forms import ProyectoForm
 from proyectos.models import MiembroEquipo
+from tareas.forms import TareaForm
 
 def principal(request):
     return render(request, 'principal.html')
@@ -40,13 +41,15 @@ def registro(request):
 
 #Funcion que lo que hace es que te lleva a la pagina de tareas
 def tareas(request):
-    return render(request, 'tareas.html')
+    return render(request, 'tareas.html',{
+        'form':TareaForm
+    })
 
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):
     logout(request)
     return redirect (principal)
-#Aqui se inicia sesion usando un formulario de Authentification 
+
 def inicio_sesion(request):
     if request.method == 'GET':
         return render(request,'inicio_sesion.html', { 'form':AuthenticationForm})
@@ -64,7 +67,7 @@ def inicio_sesion(request):
         })       
         else:
             login(request, user)
-            return redirect(principal)    
+            return redirect(principal)     
                  
      
 
