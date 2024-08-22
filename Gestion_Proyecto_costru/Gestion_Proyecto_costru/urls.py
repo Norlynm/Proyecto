@@ -21,6 +21,10 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include("Menu.urls")),
     path('proyecto/', include("proyectos.urls")),
-    path('', include("Menu.urls"))
+    path('reporte/', include("reporte.urls")),
+    path('tarea/', include("tareas.urls")),
+    
+    
 ]

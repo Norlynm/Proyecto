@@ -11,10 +11,6 @@
         <header>
             <h1>Detalle de Tarea</h1>
         </header>
-        <nav>
-            <a href="{% url 'projects:inicio' %}"><i class="fas fa-home"></i> Volver al Inicio</a>
-            <a href="{% url 'tasks:listartareas' %}"><i class="fas fa-tasks"></i> Volver a la lista de tareas</a>
-        </nav>
         <section class="task-details">
             <p><strong>Nombre:</strong> {{ tarea.nombre }}</p>
             <p><strong>Descripción:</strong> {{ tarea.descripcion }}</p>

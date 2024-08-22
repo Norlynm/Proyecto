@@ -11,16 +11,18 @@
         <header>
             <h1>Crear Tarea</h1>
         </header>
-        <nav>
-            <a href="{% url 'proyectos:inicio' %}"><i class="fas fa-home"></i> Volver al Inicio</a>
-            <a href="{% url 'tareas:listartareas' %}"><i class="fas fa-tasks"></i> Volver a la lista de tareas</a>
-        </nav>
+    
         <section class="form-container">
             <form action="{% url 'tareas:creartarea' %}" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Guardar</button>
             </form>
+        </section>
+
+
+        <section>
+          
         </section>
     </div>
 </body>

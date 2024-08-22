@@ -8,31 +8,29 @@
 
     <title>{% block titulo %} Pagina base {% endblock %}</title>
   </head>
+
   <body>
     {% block barra %}
     <nav>
       <ul>
-      
-
         <li>
           <a href="{% url 'Menu:principal'%}">Inicio</a>
         </li>
-
 
         {% if user.is_authenticated %}
         <li>
           <a href="/Usuario">{{ user.username }}</a>
         </li>
-        
+
         <li>
           <a href="{% url 'Menu:tareas'%}">Tareas</a>
         </li>
-
+        <li>
+          <a href="{% url 'reporte:listar_reportes'%}">Reporte</a>
+        </li>
         <li>
           <a href="{% url 'Menu:Cerrar_sesion'%}">Cerrar Sesion</a>
         </li>
-     
-       
 
         {% else %}
         <li>
@@ -46,6 +44,9 @@
       </ul>
     </nav>
 
-    {% endblock %} {% block content %} {% endblock %}
+    {% endblock %} 
+    {% block content %}
+    <footer>&copy;Sistemas De Gestion De Proyecto</footer>
+     {% endblock %}
   </body>
 </html>

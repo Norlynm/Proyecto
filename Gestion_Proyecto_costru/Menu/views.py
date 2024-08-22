@@ -21,11 +21,14 @@ def registro(request):
             try:
               # Aqui se crea la clase usuario
                 user = User.objects.create_user(
-                    username=request.POST['username'], password=request.POST['password1'])
+                    username=request.POST['username'], 
+                    password=request.POST['password1'],
+                    email=request.POST["email"],
+                    )
                 user.save()
                 login(request,user)
                 #Aqui lo redirigira a otra pagina de la funcion tareas
-                return redirect(tareas)
+                return redirect('Menu:principal')
             # Aqui estan las condiciones por si el usuario existe y por si no
     
             except IntegrityError:
@@ -63,7 +66,6 @@ def inicio_sesion(request):
               return render(request,'inicio_sesion.html',{
             'form':AuthenticationForm,
             'error': 'Usuario o contraseña incorrectos'
-      
         })       
         else:
             login(request, user)
