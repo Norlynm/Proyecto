@@ -71,15 +71,25 @@ def inicio_sesion(request):
                  
      
 
+from django.shortcuts import render, redirect
+from proyectos.forms import ProyectoForm
+
 def usuario(request):
     if request.method == "GET":
-        return render (request,'usuario.html',{
-            'form': ProyectoForm})
-  
-    else:
-        return render(request,"usuario.html",{
-            'form':MiembroEquipo
+        return render(request, 'usuario.html', {
+            'form': ProyectoForm()
         })
-
-
+    #aqui se guardara el archivo cuando se envie
+    else:
+        form = ProyectoForm(request.POST)
+        if form.is_valid():
+            nuevo_form = form.save(commit=False)
+            nuevo_form.user = request.user  # Asigna el usuario actual al proyecto
+            nuevo_form.save()  # Guarda el proyecto con el usuario asignado
+            return redirect('Menu:tareas')  
+        else:
+            return render(request, 'usuario.html', {
+                'form': form,
+                'error': 'Hubo un error con el formulario'
+            })
         
