@@ -8,6 +8,7 @@ from .form import FormularioPropio
 from proyectos.forms import ProyectoForm
 from proyectos.models import MiembroEquipo
 from tareas.forms import TareaForm
+from tareas.models import Tarea
 
 def principal(request):
     return render(request, 'principal.html')
@@ -41,9 +42,16 @@ def registro(request):
 
 #Funcion que lo que hace es que te lleva a la pagina de tareas
 def tareas(request):
-    return render(request, 'tareas.html',{
-        'form':TareaForm
+        return render(request, 'tareas.html',{
+            'form':TareaForm
     })
+    
+     
+
+def listartareas(request):
+        Tareas=Tarea.objects.all()
+        return render(request,'tareas/listartareas.html', {'tareas': tareas})   
+
 
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):
@@ -71,8 +79,6 @@ def inicio_sesion(request):
                  
      
 
-from django.shortcuts import render, redirect
-from proyectos.forms import ProyectoForm
 
 def usuario(request):
     if request.method == "GET":
