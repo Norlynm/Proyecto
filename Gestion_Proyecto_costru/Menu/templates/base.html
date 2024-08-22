@@ -12,9 +12,7 @@
     {% block barra %}
     <nav>
       <ul>
-        <li>
-          <a href="{% url 'Menu:tareas'%}">Tareas</a>
-        </li>
+      
 
         <li>
           <a href="{% url 'Menu:principal'%}">Inicio</a>
@@ -23,11 +21,18 @@
 
         {% if user.is_authenticated %}
         <li>
-          <a href="{% url 'Menu:Cerrar_sesion'%}">Cerrar Sesion</a>
-        </li>
-        <li>
           <a href="/Usuario">{{ user.username }}</a>
         </li>
+        
+        <li>
+          <a href="{% url 'Menu:tareas'%}">Tareas</a>
+        </li>
+
+        <li>
+          <a href="{% url 'Menu:Cerrar_sesion'%}">Cerrar Sesion</a>
+        </li>
+     
+       
 
         {% else %}
         <li>

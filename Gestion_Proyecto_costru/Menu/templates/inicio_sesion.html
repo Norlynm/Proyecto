@@ -7,12 +7,12 @@
 
 <h1>incio de Sesion</h1>
     {{error}}
-<form action="inicio_sesion" method="post">
+<form action="{% url 'Menu:iniciar_sesion' %}" method="POST">
     
 
     {% csrf_token %}
     {{form.as_p}}
-<button>
+<button type="submit">
     Inciar Sesion
 </button>
 

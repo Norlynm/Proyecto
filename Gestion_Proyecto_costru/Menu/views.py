@@ -45,7 +45,7 @@ def tareas(request):
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):
     logout(request)
-    return redirect (principal)
+    return redirect ('Menu:principal')
 #Aqui se inicia sesion usando un formulario de Authentification 
 def inicio_sesion(request):
     if request.method == 'GET':
@@ -64,7 +64,7 @@ def inicio_sesion(request):
         })       
         else:
             login(request, user)
-            return redirect(principal)    
+            return redirect('Menu:principal')    
                  
      
 
