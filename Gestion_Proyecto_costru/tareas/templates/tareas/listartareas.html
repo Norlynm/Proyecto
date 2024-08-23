@@ -3,10 +3,15 @@
 {% block content %}
 
 
+
 <h2>Listado de Tareas</h2>
+
+        <h3> <a href="{% url 'tareas:tareaInicio' %}">volver</a>
+            </h3>
 <table border="2">
     <thead>
         <tr>
+            <th>Id</th>
             <th>nombre</th>
             <th>descripcion</th>
             <th>proyecto</th>
@@ -15,12 +20,14 @@
             <th>fecha_fin</th>
             <th>prioridad</th>
             <th>estado</th>
+            <th colspan="2">Opciones</th>
 
         </tr>
     </thead>
 
     {% for tarea in tareas %}
     <tr>
+        <td>{{ tarea.id }}</td>
         <td>{{ tarea.nombre }}</td>
         <td>{{ tarea.descripcion }}</td>
         <td>{{ tarea.proyecto }}</td>
@@ -29,7 +36,8 @@
         <td>{{ tarea.fecha_fin }}</td>
         <td>{{ tarea.prioridad }}</td>
         <td>{{ tarea.estado }}</td>
-
+        <td><a href="">Eliminar</a></td>
+        <td><a href="">Actualizar</a></td>
     </tr>
     {% endfor %}
 

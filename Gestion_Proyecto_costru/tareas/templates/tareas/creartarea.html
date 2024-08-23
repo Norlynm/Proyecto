@@ -13,6 +13,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Guardar</button>
+            <a href="{% url 'tareas:tareaInicio' %}">volver</a> 
         </form>
     </section>
     <section>
