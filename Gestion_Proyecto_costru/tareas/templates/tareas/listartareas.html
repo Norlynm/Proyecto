@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Gestion_Proyecto_costru/tareas/templates/tareas/listartareas.html
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -28,25 +29,24 @@
                     </tr>
                 </thead>
                 <tbody>
+=======
+
+{% block content %}
+
+       
+            <h2>Listado de Tareas</h2>   
+              
+>>>>>>> 40a19262626abf307dfc2324f540d718e8dfba90:Gestion_Proyecto_costru/tareas/templates/listartareas.html
                     {% for tarea in tareas %}
                     <tr>
-                        <td>{{ tarea.nombre }}</td>
-                        <td>{{ tarea.descripcion }}</td>
-                        <td>{{ tarea.proyecto }}</td>
+                        <td>{{ Tarea.nombre }}</td>
+                        <td>{{ Tarea.descripcion }}</td>
+                        <td>{{ Tarea.proyecto }}</td>
                         <td>{{ tarea.asignado_a }}</td>
                         <td>{{ tarea.fecha_inicio }}</td>
                         <td>{{ tarea.fecha_fin }}</td>
                         <td>{{ tarea.prioridad }}</td>
                         <td>{{ tarea.estado }}</td>
-                        <td>
-                            <a href="{% url 'tasks:editartarea' tarea.id %}" >Editar</a>
-                            <a href="{% url 'tasks:detalletarea' tarea.id %}">Detalle</a>
-                        </td>
                     </tr>
                     {% endfor %}
-                </tbody>
-            </table>
-        </section>
-    </div>
-</body>
-</html>
+           {% endblock %}
