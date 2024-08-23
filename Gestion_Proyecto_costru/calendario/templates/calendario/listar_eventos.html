@@ -1,0 +1,16 @@
+<h1>Eventos del Calendario</h1>
+
+<ul>
+    {% for evento in eventos %}
+        <li>
+            <strong>{{ evento.titulo }}</strong> - {{ evento.fecha }} 
+            <br> Proyecto: {{ evento.proyecto.nombre }} 
+            <br> Descripción: {{ evento.descripcion }}
+            <br> Creado por: {{ evento.usuario.username }} el {{ evento.fecha_creacion }}
+        </li>
+    {% empty %}
+        <li>No hay eventos programados.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'calendar:agregar_evento' %}">Agregar nuevo evento</a>

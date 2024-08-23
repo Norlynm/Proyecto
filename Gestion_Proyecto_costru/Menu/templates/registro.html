@@ -1,20 +1,20 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<h1> Registro</h1>
-
+{% extends 'base.html' %} 
+{% block titulo %} registro {% endblock %}
+ {% block barra %} {% endblock %} 
+ 
+ 
+ 
+ {% block content %}
+<h1>Registro</h1>
 {{error}}
 
-<form action="" method="POST"> 
-{% csrf_token %}
+<form action="{% url 'Menu:registro' %}" method="POST">
+  {% csrf_token %} {{form.as_p}}
+  <button type="submit">Registrarse</button>
+  <button><a href="{% url 'Menu:principal'%}">Cancelar</a></button>
+  <br />
 
-{{form.as_p}}
-
-<button>
-    registrarse
-</button>
-
-
+  <a href="{% url 'Menu:iniciar_sesion'%}">iniciar_sesion</a>
 </form>
 
 {% endblock %}

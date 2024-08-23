@@ -4,8 +4,8 @@
 
 <H1> Perfil del usuario </H1>
 
-<form action="">
-
+<form action="{% url 'Menu:usuario' %}" method="post">
+    {% csrf_token %}
     {{form.as_p}}
 
 <button>

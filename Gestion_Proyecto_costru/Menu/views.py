@@ -7,6 +7,8 @@ from django.db import IntegrityError
 from .form import FormularioPropio
 from proyectos.forms import ProyectoForm
 from proyectos.models import MiembroEquipo
+from tareas.forms import TareaForm
+from tareas.models import Tarea
 
 def principal(request):
     return render(request, 'principal.html')
@@ -20,11 +22,14 @@ def registro(request):
             try:
               # Aqui se crea la clase usuario
                 user = User.objects.create_user(
-                    username=request.POST['username'], password=request.POST['password1'])
+                    username=request.POST['username'], 
+                    password=request.POST['password1'],
+                    email=request.POST["email"],
+                    )
                 user.save()
                 login(request,user)
                 #Aqui lo redirigira a otra pagina de la funcion tareas
-                return redirect(tareas)
+                return redirect('Menu:principal')
             # Aqui estan las condiciones por si el usuario existe y por si no
     
             except IntegrityError:
@@ -40,12 +45,21 @@ def registro(request):
 
 #Funcion que lo que hace es que te lleva a la pagina de tareas
 def tareas(request):
-    return render(request, 'tareas.html')
+        return render(request, 'tareas.html',{
+            'form':TareaForm
+    })
+    
+     
+
+def listartareas(request):
+        Tareas=Tarea.objects.all()
+        return render(request,'tareas/listartareas.html', {'tareas': tareas})   
+
 
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):
     logout(request)
-    return redirect (principal)
+    return redirect ('Menu:principal')
 #Aqui se inicia sesion usando un formulario de Authentification 
 def inicio_sesion(request):
     if request.method == 'GET':
@@ -60,23 +74,30 @@ def inicio_sesion(request):
               return render(request,'inicio_sesion.html',{
             'form':AuthenticationForm,
             'error': 'Usuario o contraseña incorrectos'
-      
         })       
         else:
             login(request, user)
-            return redirect(principal)    
+            return redirect('Menu:principal')    
                  
      
 
+
 def usuario(request):
     if request.method == "GET":
-        return render (request,'usuario.html',{
-            'form': ProyectoForm})
-  
-    else:
-        return render(request,"usuario.html",{
-            'form':MiembroEquipo
+        return render(request, 'usuario.html', {
+            'form': ProyectoForm()
         })
-
-
+    #aqui se guardara el archivo cuando se envie
+    else:
+        form = ProyectoForm(request.POST)
+        if form.is_valid():
+            nuevo_form = form.save(commit=False)
+            nuevo_form.user = request.user  # Asigna el usuario actual al proyecto
+            nuevo_form.save()  # Guarda el proyecto con el usuario asignado
+            return redirect('Menu:tareas')  
+        else:
+            return render(request, 'usuario.html', {
+                'form': form,
+                'error': 'Hubo un error con el formulario'
+            })
         

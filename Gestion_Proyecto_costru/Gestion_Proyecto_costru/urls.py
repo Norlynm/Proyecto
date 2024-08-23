@@ -18,13 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from Menu import views
 from django.urls import path,include
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('principal/',views.principal),
-    path('registro/',views.registro),
+    path('', include("Menu.urls")),
     path('proyecto/', include("proyectos.urls")),
-    path('tareas/',views.tareas),
-    path('Cerrar_Sesion',views.cerrar_sesion, name='Cerrar_sesion'),
-    path('inicio_sesion',views.inicio_sesion),
-    path('Usuario',views.usuario),
+    path('reporte/', include("reporte.urls")),
+    path('tarea/', include("tareas.urls")),
+    
+    
 ]

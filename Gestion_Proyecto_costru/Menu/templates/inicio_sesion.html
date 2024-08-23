@@ -1,20 +1,23 @@
 
-
 {% extends 'base.html' %}
 
+{% block titulo %} inicio de sesion {% endblock %}
+{% block barra %}
 
+{% endblock %}
 {% block content %}
 
-<h1>incio de Sesion</h1>
     {{error}}
-<form action="inicio_sesion" method="post">
-    
 
+<form action="{% url 'Menu:iniciar_sesion' %}" method="POST">
     {% csrf_token %}
+    <h3>Iniciar Sesion</h3>
     {{form.as_p}}
-<button>
-    Inciar Sesion
-</button>
+<button type="submit">Inciar Sesion</button>
+<button><a href="{% url 'Menu:principal'%}">Cancelar</a></button>
+ <br>
+
+<a href="{% url 'Menu:registro'%}">Registro</a>
 
 </form>
 
