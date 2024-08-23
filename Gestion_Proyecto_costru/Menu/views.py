@@ -44,17 +44,8 @@ def registro(request):
             })
 
 #Funcion que lo que hace es que te lleva a la pagina de tareas
-def tareas(request):
-        return render(request, 'tareas.html',{
-            'form':TareaForm
-    })
-    
-     
-
-def listartareas(request):
-        Tareas=Tarea.objects.all()
-        return render(request,'tareas/listartareas.html', {'tareas': tareas})   
-
+      
+             
 
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):

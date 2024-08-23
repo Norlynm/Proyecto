@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Tareas
+{% endblock %}
+
+
+
+{% block content %}
+  <main>
+    <section>
+        <a href="{% url 'tareas:creartarea' %}">Crear tareas</a>
+        <a href="{% url 'tareas:listartareas' %}">listar tareas</a>
+        <a href="{% url 'tareas:editartarea' %}">buscar tareas</a>
+        <a href="{% url 'tareas:tareas_detalle' %}">Eliminar tareas</a>
+    </section>
+  </main>
+{% endblock %}
