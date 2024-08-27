@@ -9,16 +9,15 @@
 <body>
     <div class="container">
         <header>
-            <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
+            <h1>PLATAFORMA DE GESTION DE PROYECTOS <i class="fas fa-home"></i></h1>
         </header>
-        <nav>
-            <a href="{% url 'projects:inicio' %}"><i class="fas fa-home"></i> Volver al inicio</a>
-        </nav>
+     
         <section class="form-container">
-            <form action="{% url 'projects:crearproyecto' %}" method="POST">
+            <form action="{% url 'proyectos:crearproyecto' %}" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Guardar</button>
+                <button type="submit" ><a href="{% url 'proyectos:inicio' %}">Volver</a></button>
             </form>
         </section>
     </div>

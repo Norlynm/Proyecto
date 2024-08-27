@@ -11,10 +11,10 @@
             <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
         </header>
         <nav>
-            <a href="{% url 'projects:inicio' %}">Volver al inicio</a>
+            <a href="{% url 'proyectos:inicio' %}">Volver al inicio</a>
         </nav>
         <section>
-            <form action="{% url 'projects:editarproyecto' pk=proyecto.pk %}" method="POST">
+            <form action="{% url 'proyectos:editarproyecto' pk=proyecto.pk %}" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Guardar</button>

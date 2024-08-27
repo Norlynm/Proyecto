@@ -41,8 +41,8 @@
                             <td>{{ proy.fecha_fin }}</td>
                             <td>{{ proy.estado }}</td>
                             <td>{{ proy.equipo }}</td>
-                            <td><a href="{% url 'projects:editarproyecto' proy.id %}"><i class="fas fa-edit"></i> Editar</a></td>
-                            <td><a href="{% url 'projects:eliminarproyecto' proy.id %}"><i class="fas fa-trash-alt"></i> Eliminar</a></td>
+                            <td><a href="{% url 'proyectos:editarproyecto' proy.id %}"><i class="fas fa-edit"></i> Editar</a></td>
+                            <td><a href="{% url 'proyectos:eliminarproyecto' proy.id %}"><i class="fas fa-trash-alt"></i> Eliminar</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
