@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from django import forms
+from .models import Perfil
 #Este es el formulario personalizado
 class FormularioPropio(forms.ModelForm):
     username = forms.CharField(label="Usuario",max_length=10,required=True)
@@ -16,4 +17,9 @@ class FormularioPropio(forms.ModelForm):
         fields =[ 'username', 'email', 'first_name', 'last_name', 'password1', 'password2']
 
 
-   
+
+
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['bio', 'Tareas_usuario','fecha_ingreso','user']

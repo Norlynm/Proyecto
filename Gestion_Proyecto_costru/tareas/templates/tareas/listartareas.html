@@ -1,52 +1,47 @@
-<<<<<<< HEAD:Gestion_Proyecto_costru/tareas/templates/tareas/listartareas.html
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link type='text/css' href='{% static "css/listatarea.css" %}' rel='stylesheet'/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Lista de Tareas - Plataforma de Gestión de Proyectos</title>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
-        </header>
-        <section class="table-container">
-            <h2>Lista de Tareas</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Proyecto</th>
-                        <th>Asignado a</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Fin</th>
-                        <th>Prioridad</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-=======
+{% extends "base.html" %}
 
 {% block content %}
 
-       
-            <h2>Listado de Tareas</h2>   
-              
->>>>>>> 40a19262626abf307dfc2324f540d718e8dfba90:Gestion_Proyecto_costru/tareas/templates/listartareas.html
-                    {% for tarea in tareas %}
-                    <tr>
-                        <td>{{ Tarea.nombre }}</td>
-                        <td>{{ Tarea.descripcion }}</td>
-                        <td>{{ Tarea.proyecto }}</td>
-                        <td>{{ tarea.asignado_a }}</td>
-                        <td>{{ tarea.fecha_inicio }}</td>
-                        <td>{{ tarea.fecha_fin }}</td>
-                        <td>{{ tarea.prioridad }}</td>
-                        <td>{{ tarea.estado }}</td>
-                    </tr>
-                    {% endfor %}
-           {% endblock %}
+
+
+<h2>Listado de Tareas</h2>
+
+        <h3> <a href="{% url 'tareas:tareaInicio' %}">volver</a>
+            </h3>
+<table border="2">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>nombre</th>
+            <th>descripcion</th>
+            <th>proyecto</th>
+            <th>asignado_a</th>
+            <th>fecha_inicio</th>
+            <th>fecha_fin</th>
+            <th>prioridad</th>
+            <th>estado</th>
+            <th colspan="2">Opciones</th>
+
+        </tr>
+    </thead>
+
+    {% for tarea in tareas %}
+    <tr>
+        <td>{{ tarea.id }}</td>
+        <td>{{ tarea.nombre }}</td>
+        <td>{{ tarea.descripcion }}</td>
+        <td>{{ tarea.proyecto }}</td>
+        <td>{{ tarea.asignado_a }}</td>
+        <td>{{ tarea.fecha_inicio }}</td>
+        <td>{{ tarea.fecha_fin }}</td>
+        <td>{{ tarea.prioridad }}</td>
+        <td>{{ tarea.estado }}</td>
+        <td><a href="">Eliminar</a></td>
+        <td><a href="">Actualizar</a></td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+{% endblock %}

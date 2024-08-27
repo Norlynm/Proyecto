@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include("Menu.urls")),
     path('proyecto/', include("proyectos.urls")),
     path('reporte/', include("reporte.urls")),
-    path('tarea/', include("tareas.urls")),
+    path('tareas/', include("tareas.urls")),
     
     
 ]

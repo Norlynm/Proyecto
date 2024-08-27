@@ -7,8 +7,8 @@
 </head>
 <body>
     <h1>Editar Tarea</h1>
-    <a href="{% url 'tasks:listartareas' %}">Volver a la lista de tareas</a>
-    <form action="{% url 'tasks:editartarea' pk=tarea.pk %}" method="POST">
+    <a href="{% url 'tareas:listartareas' %}">Volver a la lista de tareas</a>
+    <form action="{% url 'tareas:editartarea' pk=tarea.pk %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Guardar</button>

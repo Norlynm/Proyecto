@@ -3,8 +3,11 @@ from .models import Tarea
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from .forms import TareaForm
-from django.views.generic import CreateView, ListView, UpdateView, DetailView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 
+
+def tarea(request):
+    return render(request,'tareas/tareas.html')
 
 class CrearTarea(CreateView):
     model = Tarea
@@ -14,7 +17,7 @@ class CrearTarea(CreateView):
 
 class ListarTareas(ListView):
     model = Tarea
-    template_name = 'tareas/tareas_detalle.html'
+    template_name = 'tareas/listartareas.html'
     context_object_name = 'tareas'
 
 class ActualizarTarea(UpdateView):
@@ -22,7 +25,8 @@ class ActualizarTarea(UpdateView):
     form_class = TareaForm
     template_name = 'tareas/editartarea.html'
     success_url = reverse_lazy('tareas:listartareas')
-    
+    context_object_name = 'tareas'
+
 
 class DetalleTarea(DetailView):
     model = Tarea

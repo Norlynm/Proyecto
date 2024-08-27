@@ -6,9 +6,9 @@ from django.contrib.auth import login,logout,authenticate
 from django.db import IntegrityError
 from .form import FormularioPropio
 from proyectos.forms import ProyectoForm
-from proyectos.models import MiembroEquipo
-from tareas.forms import TareaForm
-from tareas.models import Tarea
+from .models import Perfil
+from.form import PerfilForm
+
 
 def principal(request):
     return render(request, 'principal.html')
@@ -25,6 +25,9 @@ def registro(request):
                     username=request.POST['username'], 
                     password=request.POST['password1'],
                     email=request.POST["email"],
+                    first_name=request.POST["first_name"],
+                    last_name=request.POST["last_name"],
+                    
                     )
                 user.save()
                 login(request,user)
@@ -43,18 +46,9 @@ def registro(request):
                 'error': 'Contraseñas no coinciden'
             })
 
-#Funcion que lo que hace es que te lleva a la pagina de tareas
-def tareas(request):
-        return render(request, 'tareas.html',{
-            'form':TareaForm
-    })
-    
-     
 
-def listartareas(request):
-        Tareas=Tarea.objects.all()
-        return render(request,'tareas/listartareas.html', {'tareas': tareas})   
-
+      
+             
 
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):
@@ -85,7 +79,7 @@ def inicio_sesion(request):
 def usuario(request):
     if request.method == "GET":
         return render(request, 'usuario.html', {
-            'form': ProyectoForm()
+            'form': PerfilForm()
         })
     #aqui se guardara el archivo cuando se envie
     else:
@@ -101,3 +95,6 @@ def usuario(request):
                 'error': 'Hubo un error con el formulario'
             })
         
+
+
+
