@@ -36,8 +36,8 @@
         <td>{{ tarea.fecha_fin }}</td>
         <td>{{ tarea.prioridad }}</td>
         <td>{{ tarea.estado }}</td>
-        <td><a href="">Eliminar</a></td>
-        <td><a href="">Actualizar</a></td>
+        <td><a href="{% url 'tareas:eliminar_tareas' tarea.id %}">Eliminar</a></td>
+        <td><a href="{% url 'tareas:editartarea' tarea.id %}">Actualizar</a></td>
     </tr>
     {% endfor %}
 

@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link type='text/css' href='{% static "ruta/del/css/aqui.css" %}' rel='stylesheet'/>
+    <title>Eliminar Tarea</title>
+</head>
+<body>
+    <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
+
+    <a href="{% url 'tareas:tareaInicio' %}">Cancelar</a>
+
+    <form action="{% url 'tareas:eliminar_tareas' pk=tarea.pk %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Eliminar Tarea</button>
+    </form>
+</body>
+</html>

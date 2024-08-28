@@ -18,7 +18,7 @@ class Proyecto(models.Model):
     descripcion = models.TextField()
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    estado = models.CharField(max_length=20,default='pendiente' )
+    estado = models.CharField(max_length=20)
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE) # Relación con el equipo, borra el proyecto si el equipo se borra.
 
     

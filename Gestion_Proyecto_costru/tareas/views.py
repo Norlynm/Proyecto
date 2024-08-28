@@ -9,6 +9,12 @@ from django.views.generic import CreateView, ListView, UpdateView, DetailView, D
 def tarea(request):
     return render(request,'tareas/tareas.html')
 
+class eliminarTarea(DeleteView):
+    model = Tarea
+    template_name = 'tareas/eliminartareas.html'
+    success_url = reverse_lazy('tareas:listartareas')  # Redirige a la lista de tareas después de eliminar
+    context_object_name = 'tarea'
+
 class CrearTarea(CreateView):
     model = Tarea
     form_class = TareaForm
@@ -23,9 +29,9 @@ class ListarTareas(ListView):
 class ActualizarTarea(UpdateView):
     model = Tarea
     form_class = TareaForm
-    template_name = 'tareas/editartarea.html'
+    template_name = 'tareas/editar_tarea.html'
     success_url = reverse_lazy('tareas:listartareas')
-    context_object_name = 'tareas'
+    context_object_name = 'tarea'
 
 
 class DetalleTarea(DetailView):

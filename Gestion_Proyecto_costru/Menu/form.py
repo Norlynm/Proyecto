@@ -23,3 +23,7 @@ class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = ['bio', 'Tareas_usuario','fecha_ingreso','user']
+        widgets = {
+            'fecha_ingreso': forms.DateInput(attrs={'type': 'date'})
+            }
+        

@@ -81,20 +81,24 @@ def usuario(request):
         return render(request, 'usuario.html', {
             'form': PerfilForm()
         })
-    #aqui se guardara el archivo cuando se envie
     else:
-        form = ProyectoForm(request.POST)
+        form = PerfilForm(request.POST)
         if form.is_valid():
             nuevo_form = form.save(commit=False)
-            nuevo_form.user = request.user  # Asigna el usuario actual al proyecto
-            nuevo_form.save()  # Guarda el proyecto con el usuario asignado
-            return redirect('Menu:tareas')  
+            nuevo_form.user = request.user  # Asigna el usuario actual al perfil
+            nuevo_form.save()  # Guarda el perfil con el usuario asignado
+
+            # Añade el nuevo perfil al contexto para mostrarlo en el template
+            return render(request, 'usuario.html', {
+                'form': PerfilForm(),  # Para que se muestre un formulario vacío de nuevo
+                'perfil': nuevo_form,  # Perfil recién creado
+            })
         else:
             return render(request, 'usuario.html', {
                 'form': form,
                 'error': 'Hubo un error con el formulario'
             })
-        
 
+        
 
 
