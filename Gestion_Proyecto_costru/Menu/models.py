@@ -9,7 +9,7 @@ from tareas.models import Tarea
 class Perfil(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
-    Tareas_usuario = models.ForeignKey(Tarea, max_length=30, blank=True,on_delete=models.CASCADE)
+    Tareas_usuario = models.ForeignKey(Tarea, on_delete=models.SET_NULL, null=True)
     fecha_ingreso = models.DateField()
     
 

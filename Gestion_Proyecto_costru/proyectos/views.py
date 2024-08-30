@@ -4,9 +4,10 @@ from django.urls import reverse_lazy
 from .models import Proyecto
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import ProyectoForm 
-from .models import Proyecto
+from .forms import ProyectoForm,equiposForm
+from .models import Proyecto,Equipo
 from django.views.generic import CreateView,ListView, UpdateView, DeleteView
+
 
 
 def inicio(request):
@@ -36,3 +37,20 @@ class eliminarproyecto(DeleteView):
     template_name = 'proyectos/eliminar_proyecto.html'
     success_url = reverse_lazy('proyectos:mostrarproyecto')
     context_object_name = 'proyecto'   
+
+
+class crearequipo(CreateView):
+    model= Equipo
+    form_class=equiposForm
+    template_name= 'proyectos/equipos.html'
+    success_url= reverse_lazy('proyectos:crearequipos')
+
+
+class eliminarequipo(DeleteView):
+    model = Equipo
+    template_name= 'proyectos/eliminarequipos.html'
+    success_url = reverse_lazy('proyectos:crearequipos')
+    context_object_name = 'equipo'
+
+
+    

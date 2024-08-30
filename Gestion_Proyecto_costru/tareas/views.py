@@ -29,7 +29,7 @@ class ListarTareas(ListView):
 class ActualizarTarea(UpdateView):
     model = Tarea
     form_class = TareaForm
-    template_name = 'tareas/editar_tarea.html'
+    template_name = 'tareas/editartarea.html'
     success_url = reverse_lazy('tareas:listartareas')
     context_object_name = 'tarea'
 
