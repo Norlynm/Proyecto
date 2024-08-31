@@ -1,9 +1,46 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    font-family: 'Roboto', sans-serif; /* Fuente moderna y estilizada */
+    background-color: #f4f4f9; /* Fondo suave y neutral */
+    color: #333; /* Color del texto para buena legibilidad */
     margin: 0;
     padding: 0;
+    line-height: 1.6; /* Mejora la legibilidad del texto */
+    background-image: linear-gradient(135deg, #FFA500 25%, #FFD700 100%); /* Degradado moderno */
+}
+
+/* Añadir sombras suaves a los elementos */
+.container, .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-radius: 8px; /* Bordes redondeados para un look más suave */
+    background-color: #fff; /* Fondo blanco para el contenido */
+    padding: 20px;
+    margin: 20px; /* Añadir espacio alrededor de los elementos */
+}
+
+/* Mejorar el aspecto de los botones */
+button {
+    background-color: #FFA500; /* Naranja para los botones */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff7f00; /* Un tono más oscuro al pasar el ratón */
+}
+
+a {
+    color: #FFA500; /* Color naranja para los enlaces */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .container {
@@ -15,13 +52,13 @@ body {
 h1 {
     font-size: 3em;
     text-align: center;
-    color: red;
+    color: rgb(255, 255, 255);
     margin-bottom: 20px;
 }
 
 h2 {
     font-size: 2em;
-    color: #343a40;
+    color: #ffffff;
     margin-bottom: 15px;
     border-bottom: 2px solid #007bff;
     padding-bottom: 5px;
@@ -42,11 +79,11 @@ section {
 }
 
 footer {
+    background-color: #464543; /* Color de fondo del footer */
+    color: white; 
     text-align: center;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    padding: 10px 0;
+    position: fixed; /* Fija el footer en la parte inferior */
+    width: 100%; /* Asegura que el footer ocupe todo el ancho de la pantalla */
+    bottom: 0; /* Posiciónalo en la parte inferior */
 }
