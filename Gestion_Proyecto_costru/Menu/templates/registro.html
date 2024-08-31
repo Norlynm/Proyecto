@@ -1,20 +1,54 @@
 {% extends 'base.html' %} 
-{% block titulo %} registro {% endblock %}
- {% block barra %} {% endblock %} 
- 
- 
- 
- {% block content %}
-<h1>Registro</h1>
-{{error}}
+{% block titulo %} Registro {% endblock %}
 
-<form action="{% url 'Menu:registro' %}" method="POST">
-  {% csrf_token %} {{form.as_p}}
-  <button type="submit">Registrarse</button>
-  <button><a href="{% url 'Menu:principal'%}">Cancelar</a></button>
-  <br />
-
-  <a href="{% url 'Menu:iniciar_sesion'%}">iniciar_sesion</a>
-</form>
-
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white text-center">
+              <h2 style="color: white; border-bottom: 2px solid #FFA500;">Registrarse</h2>
+            </div>
+            <div class="card-body">
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                
+                <form action="{% url 'Menu:registro' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group mb-3">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group mb-3">
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group mb-3">
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name }}
+                    </div>
+                    <div class="form-group mb-3">
+                        {{ form.password1.label_tag }}
+                        {{ form.password1 }}
+                    </div>
+                    <div class="form-group mb-3">
+                        {{ form.password2.label_tag }}
+                        {{ form.password2 }}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <p>¿Ya tienes una cuenta? <a href="{% url 'Menu:iniciar_sesion' %}" class="text-warning">Iniciar Sesión</a></p>
+                <a href="{% url 'Menu:principal'%}" class="btn btn-secondary mt-2">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

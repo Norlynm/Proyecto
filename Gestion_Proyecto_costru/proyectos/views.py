@@ -10,29 +10,29 @@ from django.views.generic import CreateView,ListView, UpdateView, DeleteView
 
 
 def inicio(request):
-    return render(request, "principal.html", )
+    return render(request, "proyectos.html", )
 
 class crearproyecto(CreateView):
      model  = Proyecto
      form_class = ProyectoForm
-     template_name = "crearproyecto.html"
-     success_url = reverse_lazy('projects:mostrarproyecto')
+     template_name = "proyectos/crearproyecto.html"
+     success_url = reverse_lazy('proyectos:mostrarproyecto')
      
    
 class ListarProyecto(ListView):
      model  = Proyecto
-     template_name = "proyecto_detalle.html"
+     template_name = "proyectos/proyecto_detalle.html"
      context_object_name = "proyecto"
 
 class actulizarproyecto(UpdateView):
     model = Proyecto
     form_class = ProyectoForm
-    template_name = 'editar_proyecto.html'
-    success_url = reverse_lazy('projects:mostrarproyecto')
+    template_name = 'proyectos/editar_proyecto.html'
+    success_url = reverse_lazy('proyectos:mostrarproyecto')
     context_object_name = "proyecto"
     
 class eliminarproyecto(DeleteView):
     model = Proyecto
-    template_name = 'eliminar_proyecto.html'
-    success_url = reverse_lazy('projects:mostrarproyecto')
+    template_name = 'proyectos/eliminar_proyecto.html'
+    success_url = reverse_lazy('proyectos:mostrarproyecto')
     context_object_name = 'proyecto'   

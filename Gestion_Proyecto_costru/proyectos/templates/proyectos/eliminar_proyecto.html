@@ -6,9 +6,9 @@
         
         <h1> PLATAFORMA DE GESTION DE PROYECTOS</h1> 
 
-        <a href=" {% url 'projects:inicio'%}"> Cancelar </a> 
+        <a href=" {% url 'proyectos:inicio'%}"> Cancelar </a> 
 
-        <form action="{% url 'projects:eliminarproyecto' pk=proyecto.pk %}" method="POST">
+        <form action="{% url 'proyectos:eliminarproyecto' pk=proyecto.pk %}" method="POST">
              {% csrf_token %}
         {{form.as_p}}
         <br>
