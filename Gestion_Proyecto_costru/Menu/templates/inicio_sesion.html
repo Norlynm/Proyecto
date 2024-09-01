@@ -3,7 +3,7 @@
 {% load custom_filters %}  <!-- Cargar el filtro personalizado -->
 
 {% block titulo %}Inicio de Sesión{% endblock %}
-
+{% block barra %}{% endblock %}
 {% block content %}
 <div class="row justify-content-center mt-5">
     <div class="col-md-6">
@@ -12,7 +12,6 @@
                 <h2 style="color: white; border-bottom: 2px solid #FFA500;">Iniciar Sesión</h2>
             </div>
             
-                              
             <div class="card-body">
                 {% if error %}
                     <div class="alert alert-danger">
@@ -23,12 +22,18 @@
                 <form action="{% url 'Menu:iniciar_sesion' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group mb-3">
-                        {{ form.username.label_tag }}
-                        {{ form.username|add_class:"form-control" }}  <!-- Aplicar la clase Bootstrap al campo -->
+                        <label for="username"><i class="fas fa-user"> Usuario</i> </label>
+                        <div class="input-group">
+                         
+                            {{ form.username|add_class:"form-control" }}  
+                        </div>
                     </div>
                     <div class="form-group mb-3">
-                        {{ form.password.label_tag }}
-                        {{ form.password|add_class:"form-control" }}  <!-- Aplicar la clase Bootstrap al campo -->
+                        <label for="password"><i class="fas fa-lock"> Contraseña</i> </label>
+                        <div class="input-group">
+                        
+                            {{ form.password|add_class:"form-control" }}  
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-success w-100">Iniciar Sesión</button>
                 </form>
