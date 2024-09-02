@@ -2,19 +2,23 @@
 {% load static %}
 
 
-{% block titulo %}
-Reportes
-{% endblock %}
+
 
 
 
 {% block content %}
 <h1>Reportes Generados</h1>
 <ul>
-    {% for reporte in reportes %}
-        <li>{{ reporte.titulo }} - {{ reporte.fecha_creacion }}</li>
-    {% endfor %}
+
+   <form action="">
+    {{form.as_p}}
+   </form>
+   <button action="submit">
+
+    Subir archivo
+   </button>
 </ul> 
+
 
 {% endblock %}
 
