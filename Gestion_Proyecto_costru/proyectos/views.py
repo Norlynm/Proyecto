@@ -10,7 +10,8 @@ from django.views.generic import CreateView,ListView, UpdateView, DeleteView
 
 
 def inicio(request):
-    return render(request, "proyectos.html", )
+    return render(request, "proyectos/proyectos.html")
+
 
 class crearproyecto(CreateView):
      model  = Proyecto

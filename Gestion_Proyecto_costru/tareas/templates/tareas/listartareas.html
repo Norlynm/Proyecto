@@ -1,47 +1,59 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container mt-5">
+    <header class="text-center mb-4">
+        <h2 class="display-6">Listado de Tareas</h2>
+    </header>
 
+ 
 
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Proyecto</th>
+                    <th>Asignado a</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Finalización</th>
+                    <th>Prioridad</th>
+                    <th>Estado</th>
+                    <th colspan="2" class="text-center">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarea in tareas %}
+                <tr>
+                    <td>{{ tarea.id }}</td>
+                    <td>{{ tarea.nombre }}</td>
+                    <td>{{ tarea.descripcion }}</td>
+                    <td>{{ tarea.proyecto }}</td>
+                    <td>{{ tarea.asignado_a }}</td>
+                    <td>{{ tarea.fecha_inicio }}</td>
+                    <td>{{ tarea.fecha_fin }}</td>
+                    <td>{{ tarea.prioridad }}</td>
+                    <td>{{ tarea.estado }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'tareas:editartarea' tarea.id %}" class="btn btn-warning btn-sm">Actualizar</a>
+                    </td>
+                    <td class="text-center">
+                        <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</br>
+    <div class="text-center mt-4">
+        <a href="{% url 'tareas:creartarea' %}" class="btn btn-primary">Crear Nueva Tarea</a>
+    </div>
 
-<h2>Listado de Tareas</h2>
-
-        <h3> <a href="{% url 'tareas:tareaInicio' %}">volver</a>
-            </h3>
-<table border="2">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>nombre</th>
-            <th>descripcion</th>
-            <th>proyecto</th>
-            <th>asignado_a</th>
-            <th>fecha_inicio</th>
-            <th>fecha_fin</th>
-            <th>prioridad</th>
-            <th>estado</th>
-            <th colspan="2">Opciones</th>
-
-        </tr>
-    </thead>
-
-    {% for tarea in tareas %}
-    <tr>
-        <td>{{ tarea.id }}</td>
-        <td>{{ tarea.nombre }}</td>
-        <td>{{ tarea.descripcion }}</td>
-        <td>{{ tarea.proyecto }}</td>
-        <td>{{ tarea.asignado_a }}</td>
-        <td>{{ tarea.fecha_inicio }}</td>
-        <td>{{ tarea.fecha_fin }}</td>
-        <td>{{ tarea.prioridad }}</td>
-        <td>{{ tarea.estado }}</td>
-        <td><a href="">Eliminar</a></td>
-        <td><a href="">Actualizar</a></td>
-    </tr>
-    {% endfor %}
-
-</table>
-
-
+    <div class="text-center mt-4">
+        <a href="{% url 'tareas:tareaInicio' %}" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
 {% endblock %}

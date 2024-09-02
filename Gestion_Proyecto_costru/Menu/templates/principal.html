@@ -1,27 +1,68 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block titulo %}
-Pagina principal
+Dashboard
 {% endblock %}
 
-
-
 {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Barra lateral izquierda -->
+        <div class="col-md-2 bg-dark text-white">
+            <nav class="nav flex-column">
+                <a class="nav-link text-white" href="{% url 'tareas:tareaInicio' %}">Tareas</a>
+                <a class="nav-link text-white" href="{% url 'proyectos:inicio' %}">Proyectos</a>
+                <a class="nav-link text-white" href="{% url 'reporte:listar_reportes' %}">Reportes</a>
+                <a class="nav-link text-white" href="#">Fecha</a>
+            </nav>
+        </div>
 
-<h1>Pagina principal </h1>
-<h2> Por que deberias usar nuestro Producto?</h2>
-
-<p> "Facilitamos la gestión de proyectos de principio a fin, optimizando el trabajo en equipo y garantizando el éxito en cada tarea.".</p>
-
-
-<h2> Que ofrecemos?</h2>
-
-<p>Colaboración eficiente: "Una plataforma diseñada para que los equipos trabajen juntos de manera eficaz."
-    Gestión simplificada: "Organiza, asigna y monitoriza todas tus tareas y proyectos desde un solo lugar."
-    Control total: "Monitorea el progreso, cumple los plazos y mantén el control sobre cada etapa del proyecto."
-    Fácil de usar: "Una interfaz intuitiva que simplifica el trabajo diario, incluso en los proyectos más complejos."
-    .</p>
-
+        <!-- Contenido principal con tarjetas -->
+        <div class="col-md-10">
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <i class="fa fa-tasks fa-3x mb-3" style="color: #8B4513;"></i>
+                            <h5 class="card-title">Tareas</h5>
+                            <p class="card-text">Gestiona las tareas de tu proyecto en tiempo real.</p>
+                            <a href="{% url 'tareas:listartareas' %}" class="btn btn-outline-primary">Conoce más &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <i class="fa fa-calendar-check fa-3x mb-3" style="color: #4682B4;"></i>
+                            <h5 class="card-title">Proyectos</h5>
+                            <p class="card-text">Monitorea y gestiona tus proyectos eficientemente.</p>
+                            <a href="{% url 'proyectos:mostrarproyecto' %}" class="btn btn-outline-primary">Conoce más &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <i class="fa fa-file-alt fa-3x mb-3" style="color: #FF8C00;"></i>
+                            <h5 class="card-title">Reportes</h5>
+                            <p class="card-text">Visualiza y crea reportes detallados de tus proyectos.</p>
+                            <a href="{% url 'reporte:listar_reportes' %}" class="btn btn-outline-primary">Conoce más &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <i class="fa fa-clock fa-3x mb-3" style="color: #B22222;"></i>
+                            <h5 class="card-title">Fecha</h5>
+                            <p class="card-text">Consulta las fechas y plazos de los proyectos.</p>
+                            <a href="#" class="btn btn-outline-primary">Conoce más &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

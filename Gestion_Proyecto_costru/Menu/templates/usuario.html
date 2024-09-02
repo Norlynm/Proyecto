@@ -1,19 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<H1> Perfil del usuario </H1>
-
-<form action="{% url 'Menu:usuario' %}" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-
-<button>
-    Buscar
-</button>
-
-
-</form>
-
-
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ perfil.avatar.url }}" class="card-img-top" alt="Avatar">
+                <div class="card-body">
+                    <h5 class="card-title">{{ request.user.username }}</h5>
+                    <p class="card-text">{{ perfil.bio }}</p>
+                    <p><strong>Fecha de Ingreso:</strong> {{ perfil.fecha_ingreso }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h2>Proyectos Asignados</h2>
+            <ul class="list-group mb-4">
+                {% for proyecto in proyectos %}
+                    <li class="list-group-item">{{ proyecto.nombre }}</li>
+                {% endfor %}
+            </ul>
+            <h2>Tareas Asignadas</h2>
+            <ul class="list-group">
+                {% for tarea in tareas %}
+                    <li class="list-group-item">{{ tarea.nombre }} - {{ tarea.estado }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

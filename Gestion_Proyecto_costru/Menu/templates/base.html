@@ -24,21 +24,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'Menu:principal' %}">Inicio</a>
-            </li>
+        
             {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="/Usuario">{{ user.username }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'tareas:tareaInicio' %}">Tareas</a>
+              <a class="nav-link" href="{% url 'tareas:tareaInicio' %}"></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'reporte:listar_reportes' %}">Reporte</a>
+              <a class="nav-link" href="{% url 'reporte:listar_reportes' %}"></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'proyectos:inicio' %}">Proyectos</a>
+              <a class="nav-link" href="{% url 'proyectos:inicio' %}"></a>
             </li>
             <li class="nav-item">
             <a href="{% url 'Menu:Cerrar_sesion' %}" onclick="return confirmLogout()">Cerrar Sesión</a>

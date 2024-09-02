@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block titulo %}
-Tareas
+Proyectos
 {% endblock %}
 
 {% block content %}
 <div class="container mt-5">
     <header class="text-center mb-5">
-        <h1 class="display-4">Gestión de Tareas</h1>
-        <p class="lead">Organiza y administra tus tareas de manera eficiente</p>
+        <h1 class="display-4">Gestión de Proyectos</h1>
+        <p class="lead">Organiza y administra tus proyectos de manera eficiente</p>
     </header>
   
     <main>
@@ -18,11 +19,11 @@ Tareas
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <i class="fas fa-tasks fa-2x mb-3"></i><br>
-                            Crear Tarea
+                            <i class="fas fa-project-diagram fa-2x mb-3"></i><br>
+                            Crear Nuevo Proyecto
                         </h5>
-                        <p class="card-text">Añade una nueva tarea a tu proyecto</p>
-                        <a href="{% url 'tareas:creartarea' %}" class="btn btn-primary">Crear Tarea</a>
+                        <p class="card-text">Inicia un nuevo proyecto para tu equipo</p>
+                        <a href="{% url 'proyectos:crearproyecto' %}" class="btn btn-primary">Crear Proyecto</a>
                     </div>
                 </div>
             </div>
@@ -30,11 +31,11 @@ Tareas
                 <div class="card text-center shadow">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <i class="fas fa-list fa-2x mb-3"></i><br>
-                            Listar Tareas
+                            <i class="fas fa-list-alt fa-2x mb-3"></i><br>
+                            Lista de Proyectos
                         </h5>
-                        <p class="card-text">Consulta todas las tareas de tus proyectos</p>
-                        <a href="{% url 'tareas:listartareas' %}" class="btn btn-secondary">Listar Tareas</a>
+                        <p class="card-text">Consulta y administra todos tus proyectos</p>
+                        <a href="{% url 'proyectos:mostrarproyecto' %}" class="btn btn-secondary">Lista de Proyectos</a>
                     </div>
                 </div>
             </div>
