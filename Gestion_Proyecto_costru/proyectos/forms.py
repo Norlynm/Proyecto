@@ -1,5 +1,5 @@
 from django import forms
-from .models import Proyecto,Equipo
+from .models import Proyecto,Equipo,MiembroEquipo
 
 class ProyectoForm(forms.ModelForm):
     class Meta:
@@ -28,3 +28,8 @@ class equiposForm(forms.ModelForm):
             'nombre': 'Nombre del equipo',
             'descripcion': 'Descripción del equipo',
             }
+        
+class MiembroEquipoForm(forms.ModelForm):
+    class Meta:
+        model = MiembroEquipo
+        fields =['usuario','rol','proyecto']

@@ -12,7 +12,12 @@ def listar_reportes(request):
         reportes = Reporte.objects.all()
         reportes.save() #Aqui me vas a guardar el archivo que mandaron junto a una descripcion
         return render(request, 'reporte/listar_reportes.html', {'reportes': reportes})
+            
+
+
+
 
 def generar_reporte(request):
-   from django.db import models
-
+  if request.method =="POST":
+      return
+    
