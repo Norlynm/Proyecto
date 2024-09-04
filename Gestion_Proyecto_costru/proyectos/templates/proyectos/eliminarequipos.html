@@ -1,0 +1,8 @@
+<form action="{% url 'proyectos:eliminarequipo' equipo.pk %}" method="post">
+   
+   
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Eliminar equipo</button>
+</form>
+<a href="{% url 'proyectos:inicio' %}">Cancelar</a>

@@ -1,7 +1,7 @@
 from urllib import request
 from django import forms
 from django.urls import reverse_lazy
-from .models import Proyecto
+from .models import Proyecto, MiembroEquipo
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import ProyectoForm,equiposForm
@@ -10,6 +10,7 @@ from django.views.generic import CreateView,ListView, UpdateView, DeleteView
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import UserPassesTestMixin
+
 
 
 def inicio(request):
@@ -45,16 +46,23 @@ class crearequipo(CreateView,UserPassesTestMixin):
     model= Equipo
     form_class=equiposForm
     template_name= 'proyectos/equipos.html'
-    success_url= reverse_lazy('proyectos:crearequipos')
+    success_url= reverse_lazy('proyectos:inicio')
 
 
-class eliminarequipo(DeleteView,UserPassesTestMixin):
+class eliminarequipo(UserPassesTestMixin, DeleteView):
     model = Equipo
-    template_name= 'proyectos/eliminarequipos.html'
-    success_url = reverse_lazy('proyectos:crearequipos')
+    template_name = 'proyectos/eliminarequipos.html'
+    success_url = reverse_lazy('proyectos:inicio')
     context_object_name = 'equipo'
 
+def test_func(self):
+        # Aquí puedes poner la lógica para verificar si el usuario tiene permiso para eliminar el equipo
+        return self.request.user.is_superuser  # Ejemplo: solo un superusuario puede eliminar
 
+class mostrarequipo(UpdateView):
+    model = Equipo
+    template_name= 'proyectos/mostrarequipo.html'
+    context_object_name = "equipo"
 
 #Autentificacion de los proyectos
 

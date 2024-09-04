@@ -10,6 +10,8 @@ urlpatterns = [
   path('editarproyecto/<int:pk>', views.actulizarproyecto.as_view(), name="editarproyecto"),
   path('eliminarproyecto/<int:pk>', views.eliminarproyecto.as_view(), name="eliminarproyecto"),
   path('crearequipo/', views.crearequipo.as_view(), name='crearequipo'),
+  path('eliminarequipo/<int:pk>',views.eliminarequipo.as_view(),name='eliminarequipo'),
+  
   
   
 ]
