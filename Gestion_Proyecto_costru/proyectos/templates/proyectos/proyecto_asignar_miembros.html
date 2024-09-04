@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Asignar Miembros a Proyecto</h1>
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <form action="{% url 'proyectos:asignar_miembros' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="usuario">Miembro del Equipo:</label>
+                    {{ form.usuario|add_class:"form-control" }}
+                </div>
+                <div class="form-group mb-3">
+                    <label for="rol">Rol en el Proyecto:</label>
+                    {{ form.rol|add_class:"form-control" }}
+                </div>
+                <div class="form-group mb-3">
+                    <label for="proyecto">Proyecto:</label>
+                    {{ form.proyecto|add_class:"form-control" }}
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary">Volver</a>
+                    <button type="submit" class="btn btn-primary">Asignar Miembro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

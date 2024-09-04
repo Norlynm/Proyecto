@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    ¡Hasta pronto!
+{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="card shadow-lg p-5">
+        <div class="card-body">
+            <h1 class="display-4 text-success"><i class="fas fa-smile"></i> ¡Gracias por visitarnos!</h1>
+            <p class="lead">Esperamos verte de nuevo muy pronto.</p>
+            <p class="mb-4">Has cerrado tu sesión con éxito. ¡Vuelve pronto para continuar con la gestión de tus proyectos!</p>
+            <a href="{% url 'Menu:iniciar_sesion' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-home"></i> Regresar a Inicio Sesion
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

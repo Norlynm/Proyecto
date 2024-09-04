@@ -4,18 +4,19 @@ body {
     color: #333; /* Color del texto para buena legibilidad */
     margin: 0;
     padding: 0;
-    line-height: 1.6; /* Mejora la legibilidad del texto */
     background-image: linear-gradient(135deg, #FFA500 25%, #FFD700 100%); /* Degradado moderno */
 }
 
 /* Añadir sombras suaves a los elementos */
 .container, .card {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 25px 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     border-radius: 10px; /* Bordes redondeados para un look más suave */
-    background-color: #fff; /* Fondo blanco para el contenido */
-    padding: 20px;
-    margin: 20px; /* Añadir espacio alrededor de los elementos */
+    background-color: #ffffff; /* Fondo blanco para el contenido */
+    padding: 10px;
+    margin: 10px; /* Añadir espacio alrededor de los elementos */
 }
+
+
 
 /* Mejorar el aspecto de los botones */
 button {
@@ -31,7 +32,7 @@ button {
 
 button:hover {
     background-color: #ff7f00; /* Un tono más oscuro al pasar el ratón */
-    transform: translateY(-2px); /* Eleva ligeramente el botón al hacer hover */
+    transform: translateY(-5px); /* Eleva ligeramente el botón al hacer hover */
 }
 
 /* Diseño de enlaces */
@@ -95,10 +96,10 @@ section:hover {
 
 /* Footer estilizado */
 footer {
-    background-color: #464543; /* Color de fondo del footer */
-    color: white; 
+    background-color: #3a3938; /* Color de fondo del footer */
+    color: rgb(189, 148, 13); 
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0;
     position: fixed; /* Fija el footer en la parte inferior */
     width: 100%; /* Asegura que el footer ocupe todo el ancho de la pantalla */
     bottom: 0; /* Posiciónalo en la parte inferior */
@@ -111,7 +112,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
     border-radius: 40px;
     padding: 10px;
     width: 100%;
-    box-sizing: border-box; /* Asegura que el padding no rompa el diseño */
+    box-sizing: border-box; 
     margin-bottom: 0px;
     font-size: 1rem;
 }
@@ -131,6 +132,11 @@ select, input[type="date"] {
     margin-bottom: 15px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease-in-out;
+}
+
+img{
+    border: 2px solid rgb(255, 251, 8);
+    border-radius: 90px;
 }
 
 select:hover, input[type="date"]:hover {

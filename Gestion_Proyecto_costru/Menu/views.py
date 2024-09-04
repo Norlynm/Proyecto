@@ -53,7 +53,7 @@ def registro(request):
 #Esta funcion cierra el usuario
 def cerrar_sesion(request):
     logout(request)
-    return redirect ('Menu:principal')
+    return render(request, 'cerrar_sesion.html')
 #Aqui se inicia sesion usando un formulario de Authentification 
 def inicio_sesion(request):
     if request.method == 'GET':

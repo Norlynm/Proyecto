@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from proyectos.models import Proyecto
 
+
+
 class Tarea(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
@@ -23,3 +25,4 @@ class ComentarioTarea(models.Model):
 
     def __str__(self):
         return f"Comentario de {self.usuario} en {self.tarea}"
+
