@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>equipos</title>
+    <title>Equipos</title>
 </head>
 <body>
-    
 
-<form action="{% url 'proyectos:crearequipo' %}">
+<form action="{% url 'proyectos:crearequipo' %}" method="POST">
     {% csrf_token %}    
     {{ form.as_p }}  
     <button type="submit">Crear</button>
     <button><a href="{% url 'proyectos:inicio' %}">Volver</a> </button>
-    
-
-
 </form>
 
 </body>
