@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import ProyectoForm,equiposForm
 from .models import Proyecto,Equipo
-from django.views.generic import CreateView,ListView, UpdateView, DeleteView
+from django.views.generic import CreateView,ListView, UpdateView, DeleteView,DetailView
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 def inicio(request):
-    return render(request, "proyectos/proyectos.html", )
+    return render(request, "proyectos/proyectos.html" )
 
 class crearproyecto(CreateView,UserPassesTestMixin):
      model  = Proyecto
@@ -49,20 +49,31 @@ class crearequipo(CreateView,UserPassesTestMixin):
     success_url= reverse_lazy('proyectos:inicio')
 
 
-class eliminarequipo(UserPassesTestMixin, DeleteView):
+class eliminarequipo(DeleteView, UserPassesTestMixin):
     model = Equipo
     template_name = 'proyectos/eliminarequipos.html'
-    success_url = reverse_lazy('proyectos:mostrarproyecto')
+    success_url = reverse_lazy('proyectos:inicio')
     context_object_name = 'equipo'
 
-def test_func(self):
-        # Aquí puedes poner la lógica para verificar si el usuario tiene permiso para eliminar el equipo
-        return self.request.user.is_superuser  # Ejemplo: solo un superusuario puede eliminar
+    # Método para verificar si el usuario tiene permiso
+    def test_func(self):
+        # Solo permitir al administrador o al superusuario eliminar equipos
+        return self.request.user.is_superuser
 
-class mostrarequipo(UpdateView):
+
+class ListarEquipos(ListView):
     model = Equipo
-    template_name= 'proyectos/mostrarequipo.html'
-    context_object_name = "equipo"
+    template_name = 'proyectos/mostrarequipo.html'
+    context_object_name = 'equipos'
+
+class editarequipo(UpdateView, UserPassesTestMixin):
+    model = Equipo
+    form_class = equiposForm
+    template_name = 'proyectos/editar_equipo.html'
+    success_url = reverse_lazy('proyectos:mostrarequipo')
+
+
+
 
 #Autentificacion de los proyectos
 

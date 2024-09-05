@@ -1,5 +1,5 @@
 <form action="{% url 'proyectos:eliminarequipo' equipo.pk %}" method="post">
-   
+   <h2>Seguro que quieres eliminar el equipo?</h2>
    
     {% csrf_token %}
     {{ form.as_p }}
