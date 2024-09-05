@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Equipo(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
+    usuarios = models.ManyToManyField(User)
     
     def __str__(self) :
         return f"{self.nombre}" # Devuelve el nombre del equipo cuando se imprime el objeto.

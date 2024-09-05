@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'ruta/del/archivo.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'colocar la ruta del css aqui' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Lista de Equipos</title>
 </head>
@@ -12,52 +12,48 @@
     <div class="container">
         <header>
             <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
-            <h2>Lista de Equipos</h2>
+            <button><a href="{% url 'proyectos:inicio' %}"><i class="fas fa-home"></i> Volver al inicio</a></button>
         </header>
 
-        <!-- Tabla para mostrar la lista de equipos -->
+        <section class="form-container">
+            <form method="post">
+                {% csrf_token %}
+            </form>
+        </section>
+
         <section class="table-container">
+            <h2>Equipos</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
+                        <th>Usuarios</th>
                         <th colspan="2">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Iterar sobre la lista de equipos -->
                     {% for equipo in equipos %}
                     <tr>
                         <td>{{ equipo.id }}</td>
                         <td>{{ equipo.nombre }}</td>
                         <td>{{ equipo.descripcion }}</td>
                         <td>
-                            <a href="{% url 'proyectos:editarequipo' equipo.pk %}">
-                                <i class="fas fa-edit"></i> Editar
-                            </a>
+                            <ul>
+                                {% for usuario in equipo.usuarios.all %}
+                                <li><i class="fas fa-user"></i> {{ usuario.username }}</li>
+                                {% endfor %}
+                            </ul>
                         </td>
-                        <td>
-                            <a href="{% url 'proyectos:eliminarequipo' equipo.pk %}">
-                                <i class="fas fa-trash-alt"></i> Eliminar
-                            </a>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="5">No hay equipos disponibles.</td>
+                        <td><a href="{% url 'proyectos:editarequipo' equipo.id %}"><i class="fas fa-edit"></i>
+                                Editar</a></td>
+                        <td><a href="{% url 'proyectos:eliminarequipo' equipo.id %}"><i class="fas fa-trash-alt"></i>
+                                Eliminar</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </section>
-
-        <!-- Opcional: enlace para volver -->
-        <section class="volver">
-            <a href="{% url 'proyectos:inicio' %}" class="btn-back">
-                <i class="fas fa-arrow-left"></i> Volver a la página principal
-            </a>
         </section>
     </div>
 </body>
