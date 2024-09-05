@@ -52,7 +52,7 @@ class crearequipo(CreateView,UserPassesTestMixin):
 class eliminarequipo(UserPassesTestMixin, DeleteView):
     model = Equipo
     template_name = 'proyectos/eliminarequipos.html'
-    success_url = reverse_lazy('proyectos:inicio')
+    success_url = reverse_lazy('proyectos:mostrarproyecto')
     context_object_name = 'equipo'
 
 def test_func(self):

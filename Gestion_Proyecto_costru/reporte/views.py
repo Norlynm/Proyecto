@@ -1,23 +1,24 @@
 from django.shortcuts import render
 from .models import Reporte
 from.form import ReporteForm
+from django.shortcuts import redirect
 
-
-def listar_reportes(request):
-    if  request.method =="GET":
-        return render(request,'reporte/listar_reportes.html',{
-            'form': ReporteForm
-        })
+def crear_reporte(request):
+    if request.method == 'POST':
+        form = ReporteForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('listar')
     else:
-        reportes = Reporte.objects.all()
-        reportes.save() #Aqui me vas a guardar el archivo que mandaron junto a una descripcion
-        return render(request, 'reporte/listar_reportes.html', {'reportes': reportes})
-            
-
-
+        form = ReporteForm()
+    return render(request, 'reporte/listar_reportes.html', {'form': form})
 
 
 def generar_reporte(request):
-  if request.method =="POST":
-      return
+    return render(request,'reporte/listar_reportes.html')
     
+
+
+def listar_reportes(request):
+    reportes = Reporte.objects.all()  # Obtener todos los reportes
+    return render(request, 'listar_reportes.html', {'reportes': reportes})
