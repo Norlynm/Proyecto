@@ -1,20 +1,72 @@
-{% extends 'base.html' %} 
-{% block titulo %} registro {% endblock %}
- {% block barra %} {% endblock %} 
- 
- 
- 
- {% block content %}
-<h1>Registro</h1>
-{{error}}
+{% extends 'base.html' %}
 
-<form action="{% url 'Menu:registro' %}" method="POST">
-  {% csrf_token %} {{form.as_p}}
-  <button type="submit">Registrarse</button>
-  <button><a href="{% url 'Menu:principal'%}">Cancelar</a></button>
-  <br />
+{% load custom_filters %}  <!-- Cargar el filtro personalizado -->
 
-  <a href="{% url 'Menu:iniciar_sesion'%}">iniciar_sesion</a>
-</form>
+{% block titulo %}Registro{% endblock %}
 
+{% block barra %}{% endblock %}  <!-- Se omite la barra de navegación -->
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-dark text-center">
+                <h2 style="color: white; border-bottom: 2px solid #FFA500;">Registrarse</h2>
+            </div>
+            <div class="card-body p-4">
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                
+                <form action="{% url 'Menu:registro' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"> Usuario</i></span>
+                            {{ form.username|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"> Correo</i></span>
+                            {{ form.email|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user-tag"> Nombre</i></span>
+                            {{ form.first_name|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user-tag"> Apellido</i></span>
+                            {{ form.last_name|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"> Contraseña</i></span>
+                            {{ form.password1|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"> Confirmar</i></span>
+                            {{ form.password2|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mb-3">Registrarse</button>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'Menu:principal'%}" class="btn btn-secondary w-100 mt-2">Cancelar</a>
+                <br />
+                <a href="{% url 'Menu:iniciar_sesion'%}" class="text-decoration-none mt-3 d-block">Iniciar Sesión</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

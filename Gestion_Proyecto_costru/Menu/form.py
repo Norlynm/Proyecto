@@ -4,17 +4,19 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import Perfil
 #Este es el formulario personalizado
+
 class FormularioPropio(forms.ModelForm):
-    username = forms.CharField(label="Usuario",max_length=10,required=True)
-    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput)
-    email = forms.EmailField(required=True)
-    first_name = forms.CharField( label='Nombre',max_length=30, required=True)
-    last_name = forms.CharField( label='Apellido', max_length=30, required=True)
+    username = forms.CharField(label="Usuario", max_length=10, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(label='Nombre', max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(label='Apellido', max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
-        fields =[ 'username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+
 
 
 
