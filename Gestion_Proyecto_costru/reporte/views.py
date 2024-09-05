@@ -12,7 +12,7 @@ def crear_reporte(request):
     else:
         form = ReporteForm()
     return render(request, 'reporte/listar_reportes.html', {'form': form})
-
+    
 
 def generar_reporte(request):
     return render(request,'reporte/listar_reportes.html')

@@ -1,7 +1,7 @@
 from urllib import request
 from django import forms
 from django.urls import reverse_lazy
-from .models import Proyecto, MiembroEquipo
+from .models import Proyecto
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import ProyectoForm,equiposForm
