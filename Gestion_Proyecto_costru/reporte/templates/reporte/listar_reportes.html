@@ -1,21 +1,46 @@
-{% extends 'base.html' %}
-{% load static %}
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Reportes</title>
+    
+</head>
+<body>
 
-{% block titulo %}
-Reportes
-{% endblock %}
+    <h1>Listado de Reportes</h1>
 
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Tipo</th>
+                <th>Fecha de Creación</th>
+                <th>Descripción</th>
+                <th>Archivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reporte in reportes %}
+            <tr>
+                <td>{{ reporte.titulo }}</td>
+                <td>{{ reporte.tipo }}</td>
+                <td>{{ reporte.fecha_creacion }}</td>
+                <td>{{ reporte.descripcion }}</td>
+                <td>
+                    {% if reporte.archivo %}
+                        <a href="{{ reporte.archivo.url }}">Ver Archivo</a>
+                    {% else %}
+                        No disponible
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
+    <a href="">Crear nuevo reporte</a>
 
-{% block content %}
-<h1>Reportes Generados</h1>
-<ul>
-    {% for reporte in reportes %}
-        <li>{{ reporte.titulo }} - {{ reporte.fecha_creacion }}</li>
-    {% endfor %}
-</ul> 
-
-{% endblock %}
-
-
+</body>
+</html>

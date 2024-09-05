@@ -4,6 +4,6 @@ from . import views
 app_name = 'reporte'
 
 urlpatterns = [
-    path('listar/', views.listar_reportes, name='listar_reportes'),
-    path('generar/', views.generar_reporte, name='generar_reporte'),
+    path('listar/', views.generar_reporte, name='listar_reportes'),
+    path('generar/', views.crear_reporte, name='generar_reporte'),
 ]

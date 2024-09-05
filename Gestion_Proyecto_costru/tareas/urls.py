@@ -10,5 +10,5 @@ urlpatterns = [
     path('listartareas/', views.ListarTareas.as_view(), name='listartareas'),
     path('editartarea/<int:pk>', views.ActualizarTarea.as_view(), name='editartarea'),
     path('tareas_detalle/<int:pk>', views.DetalleTarea.as_view(), name='tareas_detalle'),
-   
+    path('eliminartareas/<int:pk>', views.eliminarTarea.as_view(), name='eliminar_tareas'),
 ]

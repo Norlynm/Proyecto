@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Equipo(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
+    usuarios = models.ManyToManyField(User)
     
     def __str__(self) :
         return f"{self.nombre}" # Devuelve el nombre del equipo cuando se imprime el objeto.
@@ -18,7 +19,11 @@ class Proyecto(models.Model):
     descripcion = models.TextField()
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    estado = models.CharField(max_length=20,default='pendiente' )
+    ESTADOS =  [  ('P','Pendiente'),
+             ('E','En progreso'),        
+            ('C','Completado'),
+            ]
+    estado=models.CharField(max_length=1,choices=ESTADOS,default='P')
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE) # Relación con el equipo, borra el proyecto si el equipo se borra.
 
     

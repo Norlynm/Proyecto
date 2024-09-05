@@ -59,7 +59,7 @@ def inicio_sesion(request):
     if request.method == 'GET':
         return render(request,'inicio_sesion.html', { 'form':AuthenticationForm})
        
-         #Esta son condiciones para saber si el usuario o contraseñas son correcots        
+         #Esta son condiciones para saber si el usuario o contraseñas son correctos        
     else:
         user = authenticate(username=request.POST['username'], password=request.POST['password']) 
         print(request.POST) 
@@ -75,26 +75,44 @@ def inicio_sesion(request):
                  
      
 
+from django.shortcuts import redirect
 
 def usuario(request):
-    if request.method == "GET":
+    if request.method == "POST" and 'cambiar' in request.POST:
+        # Mostrar formulario editable
+        usuario_form = FormularioPropio(instance=request.user)
         return render(request, 'usuario.html', {
-            'form': PerfilForm()
+            'form': usuario_form,
+            'cambiar': True
         })
-    #aqui se guardara el archivo cuando se envie
-    else:
-        form = ProyectoForm(request.POST)
-        if form.is_valid():
-            nuevo_form = form.save(commit=False)
-            nuevo_form.user = request.user  # Asigna el usuario actual al proyecto
-            nuevo_form.save()  # Guarda el proyecto con el usuario asignado
-            return redirect('Menu:tareas')  
+
+    elif request.method == "POST" and 'guardar' in request.POST:
+        # Guardar cambios
+        usuario_form = FormularioPropio(request.POST, instance=request.user)
+        if usuario_form.is_valid():
+            usuario_form.save()  # Guarda los cambios en el usuario
+            return render(request, 'usuario.html', {
+                'form': usuario_form,
+                'mensaje': 'Los datos han sido actualizados correctamente',
+                'cambiar': False  # Volver a la vista sin edición
+            })
         else:
             return render(request, 'usuario.html', {
-                'form': form,
-                'error': 'Hubo un error con el formulario'
+                'form': usuario_form,
+                'error': 'Hubo un error con el formulario',
+                'cambiar': True
             })
-        
 
+    elif request.method == "POST" and 'cancelar' in request.POST:
+        # Redirigir a la página principal al cancelar
+        return redirect('usuario.html')
 
+    else:  # Método GET, solo mostrar los datos sin permitir edición
+        usuario_form = FormularioPropio(instance=request.user)
+        for field in usuario_form.fields.values():
+            field.widget.attrs['readonly'] = True  # Hacer que todos los campos sean de solo lectura
+        return render(request, 'usuario.html', {
+            'form': usuario_form,
+            'cambiar': False
+        })
 

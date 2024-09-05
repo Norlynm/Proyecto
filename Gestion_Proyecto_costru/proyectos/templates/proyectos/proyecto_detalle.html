@@ -9,12 +9,13 @@
     <div class="container">
         <header>
             <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
+            <button><a href="{% url 'proyectos:inicio' %}">Volver</a></button>
         </header>
    
         <section class="form-container">
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {% csrf_token %}
             </form>
         </section>
         <section class="table-container">

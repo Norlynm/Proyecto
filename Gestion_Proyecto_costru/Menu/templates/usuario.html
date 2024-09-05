@@ -1,19 +1,33 @@
 {% extends 'base.html' %}
-
 {% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil de Usuario</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <h1>Perfil de {{ user.username }}</h1>
+    {% endif %}
 
-<H1> Perfil del usuario </H1>
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
 
-<form action="{% url 'Menu:usuario' %}" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
 
-<button>
-    Buscar
-</button>
-
-
-</form>
-
-
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if cambiar %}
+            <button type="submit" name="guardar">Guardar Cambios</button>
+            <button  href="{% url 'Menu:usuario'%}" type="submit" name="cancelar">Cancelar Cambios</button>
+        {% else %}
+            <button type="submit" name="cambiar">Cambiar datos</button>
+        {% endif %}
+    </form>
+</body>
+</html>
 {% endblock %}

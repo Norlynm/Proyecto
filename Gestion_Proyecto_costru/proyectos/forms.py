@@ -1,5 +1,5 @@
 from django import forms
-from .models import Proyecto
+from .models import Proyecto,Equipo,MiembroEquipo
 
 class ProyectoForm(forms.ModelForm):
     class Meta:
@@ -18,3 +18,18 @@ class ProyectoForm(forms.ModelForm):
             'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
             'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
         }
+
+    
+class equiposForm(forms.ModelForm):
+    class Meta:
+        model = Equipo
+        fields = ['nombre', 'descripcion']
+        labels = {
+            'nombre': 'Nombre del equipo',
+            'descripcion': 'Descripción del equipo',
+            }
+        
+class MiembroEquipoForm(forms.ModelForm):
+    class Meta:
+        model = MiembroEquipo
+        fields =['usuario','rol','proyecto']
