@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
+    <title>Detalle del Reporte</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Detalles del Reporte</h1>
+            <a href="{% url 'reportes:listar_reportes' %}">Volver a Reportes</a>
+        </header>
+        <section class="reporte-detalles">
+            <h2>{{ reporte.titulo }}</h2>
+            <p><strong>Fecha de Creación:</strong> {{ reporte.fecha_creacion }}</p>
+            <p><strong>Tipo de Reporte:</strong> {{ reporte.tipo }}</p>
+            <p><strong>Descripción:</strong> {{ reporte.descripcion }}</p>
+            <h3>Tareas Asociadas</h3>
+            <ul>
+                {% for tarea in tareas %}
+                <li>{{ tarea.nombre }} - Estado: {{ tarea.estado }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Proyectos Asociados</h3>
+            <ul>
+                {% for proyecto in proyectos %}
+                <li>{{ proyecto.nombre }} - Equipo: {{ proyecto.equipo.nombre }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="comentarios">
+            <h3>Comentarios</h3>
+            <ul>
+                {% for comentario in comentarios %}
+                <li><strong>{{ comentario.usuario }}:</strong> {{ comentario.contenido }} - {{ comentario.fecha }}</li>
+                {% endfor %}
+            </ul>
+            <form action="{% url 'reportes:agregar_comentario' reporte.id %}" method="POST">
+                {% csrf_token %}
+                {{ comentario_form.as_p }}
+                <button type="submit">Agregar Comentario</button>
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>

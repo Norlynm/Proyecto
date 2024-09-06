@@ -19,15 +19,16 @@ class ProyectoForm(forms.ModelForm):
             'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
         }
 
-    
+
 class equiposForm(forms.ModelForm):
     class Meta:
         model = Equipo
-        fields = ['nombre', 'descripcion']
-        labels = {
-            'nombre': 'Nombre del equipo',
-            'descripcion': 'Descripción del equipo',
-            }
+        fields = ['nombre', 'descripcion', 'usuarios']
+        widgets = {
+            'usuarios': forms.CheckboxSelectMultiple,  # Para mostrar una lista de selección múltiple con checkboxes.
+        }
+
+    
         
 class MiembroEquipoForm(forms.ModelForm):
     class Meta:

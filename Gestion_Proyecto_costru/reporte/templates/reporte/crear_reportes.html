@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
+    <title>Crear Reporte</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>PLATAFORMA DE GESTIÓN DE PROYECTOS</h1>
+        </header>
+        <nav>
+            <a href="{% url 'reporte:listar_reportes' %}">Volver a Reportes</a>
+        </nav>
+        <section class="form-container">
+            <form action="{% url 'reporte:crear_reporte' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Guardar Reporte</button>
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>
