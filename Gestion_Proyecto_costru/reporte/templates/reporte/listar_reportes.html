@@ -1,19 +1,43 @@
 
-
-
 <h1>Lista de Reportes</h1>
-<ul>
-    {% for reportes in reportes %}
-    <li><a href="{% url 'reporte:listar_reportes' %}">{{ reportes.titulo }}</a></li>
 
-</ul>
-<h1>{{ reportes.titulo }}</h1>
-<p>{{ reportes.descripcion }}</p>
-<p>{{reportes.archivo}} </p>
-<h2>Comentarios</h2>
-<ul>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Tarea</th>
+            <th>Proyectos</th>
+            <th>Archivo</th>
+            <th>Opciones</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        {% for reporte in reportes %}
+        <tr>
+            <td>{{ reporte.titulo }}</td>
+            <td>{{ reporte.descripcion }}</td>
+            <th>{{ reporte.fecha_creacion}}</th>
+            <th>{{ reporte.tarea}}</th>
+            <td><a href="{{ reporte.archivo.url }}">Ver Archivo</a></td>
+            <td>
+                
+                <a href="{% url 'reporte:actualizar_reporte' reporte.pk %}" class="btn">Actualizar</a>
 
-    
-{% endfor %}
+                <a href="{% url 'reporte:eliminar_reporte' reporte.pk %}" class="btn" 
+                   onclick="return confirm('¿Estás seguro de que deseas eliminar este reporte?');">Eliminar</a>
+
+                   
+               
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
+
+
+<!-- Botón para volver a la página de inicio -->
 <button><a href="{% url 'reporte:inicio' %}">Volver</a></button>
-  

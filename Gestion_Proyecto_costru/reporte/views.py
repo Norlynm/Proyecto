@@ -49,6 +49,31 @@ def detalle_reporte(request, pk):
 
 
 def listar_reportes(request):
-        reportes = Reporte.objects.all()  # Obtener todos los reportes
+        reportes = Reporte.objects.all()  
         return render(request, 'reporte/listar_reportes.html', {'reportes': reportes})
     
+
+def actualizar_reporte(request, pk):
+    reporte = get_object_or_404(Reporte, pk=pk)
+    if request.method == 'POST':
+        form = ReporteForm(request.POST, request.FILES, instance=reporte)
+        if form.is_valid():
+            form.save()
+            return redirect('reporte:listar_reportes')
+    else:
+        form = ReporteForm(instance=reporte)
+    return render(request, 'reporte/actualizar_reporte.html', {'form': form, 'reporte': reporte})
+
+
+
+
+def eliminar_reporte(request, pk):
+    # Obtiene el reporte que se desea eliminar
+    reporte = get_object_or_404(Reporte, pk=pk)
+
+    if request.method == 'POST':
+        # Si se confirma la eliminación, se elimina el reporte
+        reporte.delete()
+        return redirect('reporte:listar_reportes')
+    
+    return render(request, 'reporte/eliminar_reporte.html', {'reporte': reporte})
