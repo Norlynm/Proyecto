@@ -13,7 +13,6 @@ class Equipo(models.Model):
 
      
 class Proyecto(models.Model):
-  
 
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()

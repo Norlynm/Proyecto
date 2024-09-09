@@ -1,27 +1,19 @@
 
 
 
-
-
 <h1>Lista de Reportes</h1>
 <ul>
-    {% for reporte in Reportes %}
-    <li><a href="{% url 'reporte:detalle_reporte' reporte.pk %}">{{ reporte.titulo }}</a></li>
-    {% endfor %}
+    {% for reportes in reportes %}
+    <li><a href="{% url 'reporte:listar_reportes' %}">{{ reportes.titulo }}</a></li>
+
 </ul>
-
-
-<h1>{{ reporte.titulo }}</h1>
-<p>{{ reporte.descripcion }}</p>
+<h1>{{ reportes.titulo }}</h1>
+<p>{{ reportes.descripcion }}</p>
+<p>{{reportes.archivo}} </p>
 <h2>Comentarios</h2>
 <ul>
-    {% for comentario in comentarios %}
-    <li>{{ comentario.texto }} - {{ comentario.usuario.username }}</li>
-    {% endfor %}
-</ul>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ comentario_form.as_p }}
-    <button type="submit">Agregar Comentario</button>
-</form>
+    
+{% endfor %}
+<button><a href="{% url 'reporte:inicio' %}">Volver</a></button>
+  
