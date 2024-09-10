@@ -1,1 +1,15 @@
 {% extends 'base.html' %}
+
+
+{% block content %}
+
+<main>
+    <section>
+        <a href="{% url 'reporte:crear_reporte' %}">Crear reporte</a>
+        <a href="{% url 'reporte:listar_reportes' %}">Ver reportes</a>
+    </section>
+</main>
+
+
+
+{% endblock %}
