@@ -15,4 +15,4 @@ class ReporteForm(forms.ModelForm):
 class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentario
-        fields = ['texto']
+        fields = ['texto', 'reporte','usuario',]

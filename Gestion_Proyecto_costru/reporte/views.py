@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Reporte,Comentario
+from .models import Reporte
 from.form import ReporteForm,ComentarioForm
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -11,12 +11,12 @@ def inicio (request):
 
 def crear_reporte(request):
     if request.method == 'POST':
-        form = ReporteForm(request.POST, request.FILES)  # Asegúrate de pasar request.FILES para manejar los archivos
+        form = ReporteForm(request.POST, request.FILES)  
         if form.is_valid():
             reporte = form.save(commit=False)
-            reporte.usuario = request.user  # Asegúrate de tener un campo usuario si lo necesitas
+            reporte.usuario = request.user  
             reporte.save()
-            form.save_m2m()  # Guarda las relaciones ManyToMany
+            form.save_m2m()  
             return redirect('reporte:listar_reportes')
     else:
         form = ReporteForm()
@@ -28,7 +28,9 @@ def crear_reporte(request):
 
 def detalle_reporte(request, pk):
     reporte = get_object_or_404(Reporte, pk=pk)
-    comentarios = reporte.comentario.all()
+    tareas = reporte.tareas.all()  
+    proyecto = reporte.proyecto  
+    comentarios = reporte.comentarios.all()
 
     if request.method == "POST":
         comentario_form = ComentarioForm(request.POST)
@@ -43,6 +45,8 @@ def detalle_reporte(request, pk):
 
     return render(request, 'reporte/detalle_reporte.html', {
         'reporte': reporte,
+        'tareas': tareas,
+        'proyecto': proyecto,
         'comentarios': comentarios,
         'comentario_form': comentario_form,
     })

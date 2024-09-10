@@ -7,11 +7,10 @@
             <th>Título</th>
             <th>Descripción</th>
             <th>Fecha</th>
-            <th>Tarea</th>
-            <th>Proyectos</th>
-            <th>Archivo</th>
+            
+         
+            
             <th>Opciones</th>
-           
         </tr>
     </thead>
     <tbody>
@@ -20,15 +19,14 @@
             <td>{{ reporte.titulo }}</td>
             <td>{{ reporte.descripcion }}</td>
             <th>{{ reporte.fecha_creacion}}</th>
-            <th>{{ reporte.tarea}}</th>
-            <td><a href="{{ reporte.archivo.url }}">Ver Archivo</a></td>
+            
+                
             <td>
                 
                 <a href="{% url 'reporte:actualizar_reporte' reporte.pk %}" class="btn">Actualizar</a>
 
-                <a href="{% url 'reporte:eliminar_reporte' reporte.pk %}" class="btn" 
-                   onclick="return confirm('¿Estás seguro de que deseas eliminar este reporte?');">Eliminar</a>
-
+                <a href="{% url 'reporte:eliminar_reporte' reporte.pk %}" class="btn">Eliminar</a>
+                <a href="{% url 'reporte:detalle_reporte' reporte.pk %}">Detalles</a>
                    
                
             </td>
