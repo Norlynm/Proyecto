@@ -1,27 +1,41 @@
 
-
-
-
-
 <h1>Lista de Reportes</h1>
-<ul>
-    {% for reporte in Reportes %}
-    <li><a href="{% url 'reporte:detalle_reporte' reporte.pk %}">{{ reporte.titulo }}</a></li>
-    {% endfor %}
-</ul>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            
+         
+            
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reporte in reportes %}
+        <tr>
+            <td>{{ reporte.titulo }}</td>
+            <td>{{ reporte.descripcion }}</td>
+            <th>{{ reporte.fecha_creacion}}</th>
+            
+                
+            <td>
+                
+                <a href="{% url 'reporte:actualizar_reporte' reporte.pk %}" class="btn">Actualizar</a>
+
+                <a href="{% url 'reporte:eliminar_reporte' reporte.pk %}" class="btn">Eliminar</a>
+                <a href="{% url 'reporte:detalle_reporte' reporte.pk %}">Detalles</a>
+                   
+               
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
 
 
-<h1>{{ reporte.titulo }}</h1>
-<p>{{ reporte.descripcion }}</p>
-<h2>Comentarios</h2>
-<ul>
-    {% for comentario in comentarios %}
-    <li>{{ comentario.texto }} - {{ comentario.usuario.username }}</li>
-    {% endfor %}
-</ul>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ comentario_form.as_p }}
-    <button type="submit">Agregar Comentario</button>
-</form>
+<!-- Botón para volver a la página de inicio -->
+<button><a href="{% url 'reporte:inicio' %}">Volver</a></button>

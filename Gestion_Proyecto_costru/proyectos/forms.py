@@ -14,8 +14,8 @@ class ProyectoForm(forms.ModelForm):
         }
 
         widgets = {
-         'fecha_inicio': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'fecha_fin': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
         }
 
     fecha_inicio = forms.DateTimeField(

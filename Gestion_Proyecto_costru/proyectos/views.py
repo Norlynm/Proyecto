@@ -10,7 +10,7 @@ from django.views.generic import CreateView,ListView, UpdateView, DeleteView,Det
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.urls import reverse_lazy
+
 
 
 def inicio(request):
@@ -21,10 +21,7 @@ class crearproyecto(CreateView,UserPassesTestMixin):
      form_class = ProyectoForm
      template_name = "proyectos/crearproyecto.html"
      success_url = reverse_lazy('proyectos:mostrarproyecto')
-      # Esta función define la lógica para verificar si el usuario tiene acceso a la vista
-def test_func(self):
-        # Solo permitir al superusuario o administrador acceder a esta vista
-        return self.request.user.is_superuser
+     
    
 from django.shortcuts import redirect
 from django.views.generic import ListView
@@ -68,7 +65,6 @@ class eliminarproyecto(DeleteView,UserPassesTestMixin):
     template_name = 'proyectos/eliminar_proyecto.html'
     success_url = reverse_lazy('proyectos:mostrarproyecto')
     context_object_name = 'proyecto'   
-    
 
 
 class crearequipo(CreateView,UserPassesTestMixin):
@@ -121,19 +117,3 @@ def asignar_proyectos(request):
         form = ProyectoForm()
 
     return render(request, 'proyectos/crearproyecto.html', {'form': form})
-
-from django.shortcuts import render
-from Menu.models import Perfil
-from proyectos.models import Proyecto
-from tareas.models import Tarea
-
-def perfil_usuario(request):
-    perfil = Perfil.objects.get(user=request.user)
-    proyectos = Proyecto.objects.filter(equipo=request.user)
-    tareas = Tarea.objects.filter(asignado_a=request.user)
-
-    return render(request, 'usuario/perfil.html', {
-        'perfil': perfil,
-        'proyectos': proyectos,
-        'tareas': tareas,
-    })

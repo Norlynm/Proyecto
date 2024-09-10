@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone 
+
 # Modelo para representar un equipo.
 class Equipo(models.Model):
     nombre = models.CharField(max_length=50)
@@ -15,18 +15,20 @@ class Equipo(models.Model):
 # proyectos/models.py
 
 class Proyecto(models.Model):
+
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
-    fecha_inicio = models.DateField()
+    fecha_inicio = models.DateField(default=timezone.now)
     fecha_fin = models.DateField()
-    ESTADOS = [
-        ('P', 'Pendiente'),
-        ('E', 'En progreso'),
-        ('C', 'Completado'),
-    ]
+    ESTADOS = [ 
+            ('P','Pendiente'),
+            ('E','En progreso'),        
+            ('C','Completado'),
+            ]
+    estado=models.CharField(max_length=1,choices=ESTADOS,default='P')
     equipo = models.ForeignKey('Equipo', on_delete=models.CASCADE) # Relación con el equipo, borra el proyecto si el equipo se borra.
-    estado = models.CharField(max_length=1, choices=ESTADOS, default='P')  # Valor por defecto
-
+    equipo = models.ManyToManyField(User, related_name='proyectos')
+    
     def __str__(self):
         return self.nombre
 
@@ -41,5 +43,3 @@ class MiembroEquipo(models.Model):
     
     def __str__(self):
         return f"{self.usuario.username} - {self.rol} en {self.proyecto.nombre}"
-    
-    
