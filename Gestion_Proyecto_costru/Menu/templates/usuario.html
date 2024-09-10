@@ -1,33 +1,42 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Perfil de Usuario</title>
-</head>
-<body>
-    {% if user.is_authenticated %}
-    <h1>Perfil de {{ user.username }}</h1>
-    {% endif %}
+<h1>Perfil de {{ user.username }}</h1>
 
-    {% if mensaje %}
-        <p>{{ mensaje }}</p>
-    {% endif %}
-
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
-
+<!-- Formulario para editar datos del usuario -->
+{% if form %}
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         {% if cambiar %}
             <button type="submit" name="guardar">Guardar Cambios</button>
-            <button  href="{% url 'Menu:usuario'%}" type="submit" name="cancelar">Cancelar Cambios</button>
+            <button type="submit" name="cancelar">Cancelar Cambios</button>
         {% else %}
             <button type="submit" name="cambiar">Cambiar datos</button>
         {% endif %}
     </form>
-</body>
-</html>
+{% endif %}
+
+<h2>Proyectos en los que participas</h2>
+<ul>
+    {% if proyectos_asignados %}
+        {% for proyecto in proyectos_asignados %}
+            <li>{{ proyecto.nombre }} - {{ proyecto.descripcion }}</li>
+        {% endfor %}
+    {% else %}
+        <li>No tienes proyectos asignados</li>
+    {% endif %}
+</ul>
+
+<h2>Tareas asignadas</h2>
+<ul>
+    {% if tareas_asignadas %}
+        {% for tarea in tareas_asignadas %}
+            <li>{{ tarea.nombre }} - {{ tarea.descripcion }}</li>
+        {% endfor %}
+    {% else %}
+        <li>No tienes tareas asignadas</li>
+    {% endif %}
+</ul>
+
 {% endblock %}

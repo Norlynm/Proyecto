@@ -2,46 +2,61 @@
 
 {% block content %}
 
-
-
+<form method="GET" action="{% url 'tareas:listartareas' %}">
+    <input type="text" name="q" placeholder="Buscar tarea..." value="{{ request.GET.q }}"> <!-- Mostrar valor buscado -->
+    <button type="submit">Buscar</button>
+</form>
 <h2>Listado de Tareas</h2>
 
-        <h3> <a href="{% url 'tareas:tareaInicio' %}">volver</a>
-            </h3>
+<h3><a href="{% url 'tareas:tareaInicio' %}">volver</a></h3>
+
 <table border="2">
     <thead>
         <tr>
             <th>Id</th>
-            <th>nombre</th>
-            <th>descripcion</th>
-            <th>proyecto</th>
-            <th>asignado_a</th>
-            <th>fecha_inicio</th>
-            <th>fecha_fin</th>
-            <th>prioridad</th>
-            <th>estado</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Proyecto</th>
+            <th>Asignado a</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Prioridad</th>
+            <th>Estado</th>
+            <th>Cambiar Estado</th>
             <th colspan="2">Opciones</th>
-
         </tr>
     </thead>
 
-    {% for tarea in tareas %}
-    <tr>
-        <td>{{ tarea.id }}</td>
-        <td>{{ tarea.nombre }}</td>
-        <td>{{ tarea.descripcion }}</td>
-        <td>{{ tarea.proyecto }}</td>
-        <td>{{ tarea.asignado_a }}</td>
-        <td>{{ tarea.fecha_inicio }}</td>
-        <td>{{ tarea.fecha_fin }}</td>
-        <td>{{ tarea.prioridad }}</td>
-        <td>{{ tarea.estado }}</td>
-        <td><a href="{% url 'tareas:eliminar_tareas' tarea.id %}">Eliminar</a></td>
-        <td><a href="{% url 'tareas:editartarea' tarea.id %}">Actualizar</a></td>
-    </tr>
-    {% endfor %}
-
+    <tbody>
+        {% for tarea in tareas %}
+        <tr>
+            <td>{{ tarea.id }}</td>
+            <td>{{ tarea.nombre }}</td>
+            <td>{{ tarea.descripcion }}</td>
+            <td>{{ tarea.proyecto }}</td>
+            <td>{{ tarea.asignado_a }}</td>
+            <td>{{ tarea.fecha_inicio }}</td>
+            <td>{{ tarea.fecha_fin }}</td>
+            <!-- Mostrar la representación legible de prioridad y estado -->
+            <td>{{ tarea.get_prioridad_display }}</td>
+            <td>{{ tarea.get_estado_display }}</td>
+            <td>
+                <form method="POST" action="{% url 'tareas:listartareas' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="tarea_id" value="{{ tarea.id }}">
+                    <select name="estado">
+                        <option value="P" {% if tarea.estado == 'P' %}selected{% endif %}>Pendiente</option>
+                        <option value="E" {% if tarea.estado == 'E' %}selected{% endif %}>En progreso</option>
+                        <option value="C" {% if tarea.estado == 'C' %}selected{% endif %}>Completada</option>
+                    </select>
+                    <button type="submit">Actualizar</button>
+                </form>
+            </td>
+            <td><a href="{% url 'tareas:eliminar_tareas' tarea.id %}">Eliminar</a></td>
+            <td><a href="{% url 'tareas:editartarea' tarea.id %}">Actualizar</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
-
 
 {% endblock %}

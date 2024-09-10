@@ -1,24 +1,32 @@
 from django import forms
 from .models import Proyecto,Equipo,MiembroEquipo
 
+
 class ProyectoForm(forms.ModelForm):
     class Meta:
         model = Proyecto
-        fields = ['nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'estado', 'equipo']
+        fields = ['nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'equipo']  # Excluir 'estado'
         labels = {
             'nombre': 'Nombre del proyecto',
             'descripcion': 'Descripción del proyecto',
             'fecha_inicio': 'Fecha de inicio del proyecto',
             'fecha_fin': 'Fecha de finalización del proyecto',
-            'estado': 'Estado del proyecto',
             'equipo': 'Equipo'
         }
-
         widgets = {
-            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
-            'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
+           'fecha_inicio': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'fecha_fin': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
 
+    # Aceptar varios formatos de fecha y hora
+    fecha_inicio = forms.DateTimeField(
+        input_formats=['%d/%m/%Y %I:%M %p', '%Y-%m-%dT%H:%M'],  # Formatos permitidos
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
+    )
+    fecha_fin = forms.DateTimeField(
+        input_formats=['%d/%m/%Y %I:%M %p', '%Y-%m-%dT%H:%M'],  # Formatos permitidos
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
+    )
 
 class equiposForm(forms.ModelForm):
     class Meta:

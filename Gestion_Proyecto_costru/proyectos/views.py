@@ -10,7 +10,10 @@ from django.views.generic import CreateView,ListView, UpdateView, DeleteView,Det
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import UserPassesTestMixin
-
+from django.db.models import Q
+from django.shortcuts import redirect
+from django.views.generic import ListView
+from django.contrib import messages
 
 
 def inicio(request):
@@ -22,11 +25,36 @@ class crearproyecto(CreateView,UserPassesTestMixin):
      template_name = "proyectos/crearproyecto.html"
      success_url = reverse_lazy('proyectos:mostrarproyecto')
      
+def form_valid(self, form):
+        messages.success(self.request, 'El proyecto se ha creado exitosamente.')
+        return super().form_valid(form)  
    
-class ListarProyecto(ListView,UserPassesTestMixin):
-     model  = Proyecto
-     template_name = "proyectos/proyecto_detalle.html"
-     context_object_name = "proyecto"
+
+
+class ListarProyecto(ListView):
+    model = Proyecto
+    template_name = 'proyectos/proyecto_detalle.html'
+    context_object_name = 'proyectos'
+
+    def post(self, request, *args, **kwargs):
+        proyecto_id = request.POST.get('proyecto_id')
+        nuevo_estado = request.POST.get('estado')
+        proyecto = Proyecto.objects.get(id=proyecto_id)
+        proyecto.estado = nuevo_estado 
+        proyecto.save(update_fields=['estado'])
+        return redirect('proyectos:mostrarproyecto')
+
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Proyecto.objects.filter(
+                Q(nombre__icontains=query) | 
+                Q(descripcion__icontains=query) |
+                Q(equipo__nombre__icontains=query)  
+            )
+        return Proyecto.objects.all()
+
 
 class actulizarproyecto(UpdateView,UserPassesTestMixin):
     model = Proyecto
