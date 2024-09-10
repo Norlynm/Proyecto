@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Reporte(models.Model):
     titulo = models.CharField(max_length=100)
     fecha_creacion = models.DateField(auto_now_add=True)
-    tipo = models.CharField(max_length=50)
+    
     descripcion = models.TextField()
     archivo = models.FileField(upload_to='Reporte/Media')
     tareas = models.ManyToManyField(Tarea, blank=True)
