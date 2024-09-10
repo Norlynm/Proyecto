@@ -18,7 +18,7 @@ class Proyecto(models.Model):
 
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
-    fecha_inicio = models.DateField(default=timezone.now)
+    fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     ESTADOS = [ 
             ('P','Pendiente'),
