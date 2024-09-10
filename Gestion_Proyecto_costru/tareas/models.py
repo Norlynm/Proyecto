@@ -3,18 +3,6 @@ from django.contrib.auth.models import User
 from proyectos.models import Proyecto
 
 class Tarea(models.Model):
-    PRIORIDADES_TAREA = [
-        ('B', 'Baja'),
-        ('M', 'Media'),
-        ('A', 'Alta'),
-    ]
-
-    ESTADOS_TAREA = [
-        ('P', 'Pendiente'),
-        ('E', 'En progreso'),
-        ('C', 'Completada'),
-    ]
-
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
@@ -22,12 +10,14 @@ class Tarea(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     prioridad = models.CharField(max_length=50)
-    estado = models.CharField(max_length=50)
+    ESTADOS =  [  ('P','Pendiente'),
+             ('E','En progreso'),        
+            ('C','Completado'),
+            ]
+    estado=models.CharField(max_length=1,choices=ESTADOS,default='P')
 
     def __str__(self):
         return self.nombre
-
-
 
 class ComentarioTarea(models.Model):
     tarea = models.ForeignKey(Tarea, on_delete=models.CASCADE)
@@ -37,4 +27,3 @@ class ComentarioTarea(models.Model):
 
     def __str__(self):
         return f"Comentario de {self.usuario} en {self.tarea}"
-
