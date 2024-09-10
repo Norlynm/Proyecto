@@ -25,6 +25,25 @@ class ListarTareas(ListView):
     model = Tarea
     template_name = 'tareas/listartareas.html'
     context_object_name = 'tareas'
+    
+from django.db.models import Q
+
+class ListarTareas(ListView):
+    model = Tarea
+    template_name = "tareas/listartareas.html"
+    context_object_name = "tareas"
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Tarea.objects.filter(
+                Q(nombre__icontains=query) | 
+                Q(descripcion__icontains=query) |
+                Q(proyecto__nombre__icontains=query) |
+                Q(asignado_a__username__icontains=query)
+            )
+        return Tarea.objects.all()
+
 
 class ActualizarTarea(UpdateView):
     model = Tarea
@@ -32,6 +51,7 @@ class ActualizarTarea(UpdateView):
     template_name = 'tareas/editartarea.html'
     success_url = reverse_lazy('tareas:listartareas')
     context_object_name = 'tarea'
+
 
 
 class DetalleTarea(DetailView):

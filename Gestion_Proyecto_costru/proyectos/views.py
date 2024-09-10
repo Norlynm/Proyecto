@@ -31,6 +31,24 @@ class ListarProyecto(ListView,UserPassesTestMixin):
      template_name = "proyectos/proyecto_detalle.html"
      context_object_name = "proyecto"
      success_url = reverse_lazy('proyectos:listarproyecto')
+     
+from django.db.models import Q
+
+class ListarProyecto(ListView):
+    model = Proyecto
+    template_name = "proyectos/proyecto_detalle.html"
+    context_object_name = "proyecto"
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Proyecto.objects.filter(
+                Q(nombre__icontains=query) | 
+                Q(descripcion__icontains=query) |
+                Q(equipo__nombre__icontains=query)  
+            )
+        return Proyecto.objects.all()
+
 
 class actulizarproyecto(UpdateView,UserPassesTestMixin):
     model = Proyecto
