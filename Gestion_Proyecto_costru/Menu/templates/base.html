@@ -4,84 +4,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href='{% static "Menu/css/stile.css" %}' rel="stylesheet" />
+    
+    <!-- Font Awesome (opcional, para iconos) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     
     <!-- FullCalendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" />
+
+    <link href='{% static "Menu/css/stile.css" %}' rel="stylesheet" />
     
     <title>{% block titulo %}Página base{% endblock %}</title>
+
+    <style>
+      body {
+          font-family: 'Roboto', sans-serif;
+      }
+
+      .sidebar {
+          height: 100vh;
+          width: 250px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: #343a40;
+          padding-top: 20px;
+      }
+
+      .sidebar a {
+          padding: 15px;
+          text-align: left;
+          font-size: 18px;
+          color: #fff;
+          display: block;
+          text-decoration: none;
+      }
+
+      .sidebar a:hover {
+          background-color: #007bff;
+      }
+
+      .content {
+          margin-left: 260px;  /* Espacio para que el contenido no quede debajo del sidebar */
+          padding: 20px;
+      }
+
+      .nav-link {
+          color: white;
+      }
+    </style>
   </head>
 
   <body>
-    
-    <!-- Barra de Navegación -->
-    {% block barra %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'Menu:principal' %}">
-          <img src="{% static 'img/logo.png' %}" alt="Logo" style="height: 40px; width: auto;">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'Menu:principal' %}">Inicio</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="/Usuario">{{ user.username }}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'tareas:tareaInicio' %}">Tareas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'reporte:inicio' %}">Reporte</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'proyectos:inicio' %}">Proyectos</a>
-            </li>
-            <li class="nav-item">
-            <a href="{% url 'Menu:Cerrar_sesion' %}" onclick="return confirmLogout()">Cerrar Sesión</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'Menu:registro' %}">Registrarse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'Menu:iniciar_sesion' %}">Inicio de Sesión</a>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    {% endblock %}
+    <!-- Barra Lateral -->
+    <div class="sidebar">
+      <a href="{% url 'Menu:principal' %}">
+        <img src="{% static 'Menu/img/logo.png' %}" alt="Logo" style="height: 40px; width: auto;">
+      </a>
+      <a href="{% url 'Menu:principal' %}">Inicio</a>
+
+      {% if user.is_authenticated %}
+        <a href="/Usuario">{{ user.username }}</a>
+        <a href="{% url 'tareas:tareaInicio' %}">Tareas</a>
+        <a href="{% url 'reporte:inicio' %}">Reporte</a>
+        <a href="{% url 'proyectos:inicio' %}">Proyectos</a>
+        <a href="{% url 'Menu:mostrar_calendario' %}">Calendario</a>
+        <a href="{% url 'Menu:Cerrar_sesion' %}" onclick="return confirmLogout()">Cerrar Sesión</a>
+      {% else %}
+        <a href="{% url 'Menu:registro' %}">Registrarse</a>
+        <a href="{% url 'Menu:iniciar_sesion' %}">Inicio de Sesión</a>
+      {% endif %}
+    </div>
 
     <!-- Contenido Principal -->
-    <div class="container mt-4">
+    <div class="content">
       {% block content %}
       {% endblock %}
     </div>
 
-    <!-- Pie de Página -->
-   
+    <!-- Confirmación para cerrar sesión -->
     <script>
       function confirmLogout() {
           return confirm("¿Estás seguro de que deseas cerrar la sesión?");
       }
     </script>
-  
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+AMVrFdI8M7s3G/A+Pp9OPCOy+moA" crossorigin="anonymous"></script>
 
     <!-- FullCalendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
-    <!-- Bloque para scripts adicionales (por ejemplo, para usar FullCalendar en páginas específicas) -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+AMVrFdI8M7s3G/A+Pp9OPCOy+moA" crossorigin="anonymous"></script>
+
+    <!-- Scripts adicionales -->
     {% block extra_scripts %}{% endblock %}
   </body>
 </html>

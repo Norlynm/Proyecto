@@ -130,3 +130,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = 'reporte/Media/'  # URL base para servir archivos de medios
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')  
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # O el servidor SMTP que estés usando
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'jorgitodisla76@gmail.com'
+EMAIL_HOST_PASSWORD = 'jorgito36455'

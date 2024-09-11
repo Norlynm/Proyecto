@@ -44,3 +44,20 @@ class ComentarioTarea(models.Model):
 
     def __str__(self):
         return f"Comentario de {self.usuario} en {self.tarea}"
+
+#notificaciones
+from django.core.mail import send_mail
+from django.utils import timezone
+from .models import Tarea
+
+def enviar_notificaciones():
+    tareas_atrasadas = Tarea.objects.filter(fecha_fin__lt=timezone.now(), estado=False)
+    
+    for tarea in tareas_atrasadas:
+        send_mail(
+            'Tarea Atrasada',
+            f'La tarea {tarea.nombre} está atrasada. Por favor, revísala.',
+            'admin@tuweb.com',
+            [tarea.asignado_a.email],
+            fail_silently=False,
+        )

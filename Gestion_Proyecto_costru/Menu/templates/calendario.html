@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block titulo %}Calendario{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="text-center" style="font-size: 36px; font-weight: bold; color: #2C3E50;">Calendario de Tareas y Proyectos</h2>
+        <div id="calendar" class="shadow p-4 mt-4" style="background-color: white; border-radius: 15px;"></div>
+    </div>
+{% endblock %}
+
+{% block extra_styles %}
+    <style>
+        /* Fondo gradiente para toda la página */
+        body {
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Calendario - fondo blanco y bordes redondeados */
+        #calendar {
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Título del calendario */
+        h2 {
+            color: #333;
+        }
+
+        /* Personalización de eventos */
+        .fc-event {
+            background-color: #FF5733; /* Color llamativo para los eventos */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Hover en los eventos para resaltar */
+        .fc-event:hover {
+            background-color: #C70039; /* Cambia el color al pasar el mouse */
+            cursor: pointer;
+        }
+
+        /* Personalización del toolbar (encabezado) */
+        .fc-toolbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .fc-button {
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .fc-button:hover {
+            background-color: #C70039;
+            border: none;
+        }
+
+        /* Estilos para los días */
+        .fc-daygrid-day {
+            transition: background-color 0.3s ease;
+        }
+
+        .fc-daygrid-day:hover {
+            background-color: rgba(255, 87, 51, 0.1);
+            cursor: pointer;
+        }
+
+    </style>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',  // Muestra el calendario mensual
+                events: '/calendario/',  // URL que devuelve los eventos en JSON
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                themeSystem: 'bootstrap',  // Usar tema bootstrap para botones y headers
+                eventColor: '#FF5733',  // Color predeterminado para eventos
+                editable: true,  // Permitir mover eventos (si lo deseas)
+                eventTimeFormat: { // Personalizar formato de hora
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                },
+                height: 'auto'  // Ajustar el tamaño automáticamente
+            });
+
+            calendar.render();
+        });
+    </script>
+{% endblock %}

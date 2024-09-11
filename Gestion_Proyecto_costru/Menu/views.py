@@ -54,6 +54,7 @@ def registro(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect ('Menu:principal')
+
 #Aqui se inicia sesion usando un formulario de Authentification 
 def inicio_sesion(request):
     if request.method == 'GET':
@@ -133,3 +134,37 @@ def usuario(request):
             'tareas_asignadas': tareas_asignadas,
         })
 
+# calendario
+from django.http import JsonResponse
+from proyectos.models import Proyecto  # Cambia 'Menu.models' por 'proyectos.models'
+from tareas.models import Tarea 
+
+def calendario(request):
+    # Recoger las tareas y proyectos con sus fechas
+    tareas = Tarea.objects.all()
+    proyectos = Proyecto.objects.all()
+
+    eventos = []
+
+    # Agregar las fechas de las tareas
+    for tarea in tareas:
+        eventos.append({
+            'title': tarea.nombre,
+            'start': tarea.fecha_inicio.strftime('%Y-%m-%d'),
+            'end': tarea.fecha_fin.strftime('%Y-%m-%d'),
+            'color': 'blue'  # Puedes cambiar el color de las tareas
+        })
+
+    # Agregar las fechas de los proyectos
+    for proyecto in proyectos:
+        eventos.append({
+            'title': proyecto.nombre,
+            'start': proyecto.fecha_inicio.strftime('%Y-%m-%d'),
+            'end': proyecto.fecha_fin.strftime('%Y-%m-%d'),
+            'color': 'green'  # Puedes cambiar el color de los proyectos
+        })
+
+    return JsonResponse(eventos, safe=False)
+
+def mostrar_calendario(request):
+    return render(request, 'calendario.html')

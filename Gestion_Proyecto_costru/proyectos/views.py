@@ -120,3 +120,4 @@ def asignar_proyectos(request):
         form = ProyectoForm()
 
     return render(request, 'proyectos/crearproyecto.html', {'form': form})
+
