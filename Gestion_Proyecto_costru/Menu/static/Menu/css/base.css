@@ -1,0 +1,229 @@
+/* General */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 2rem;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #2C3E50;
+}
+
+a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3498db;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #2C3E50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #ecf0f1;
+    padding: 0.75rem;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #3498db;
+}
+
+/* Botones */
+button, .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #E74C3C;
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #c0392b;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    border: none;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.75rem;
+    width: 100%;
+    box-shadow: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #2980b9;
+    outline: none;
+}
+
+.input-group-text {
+    background-color: #ecf0f1;
+    border: 1px solid #ddd;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+table th, table td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #ecf0f1;
+    color: #333;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+
+/* Calendar */
+#calendar {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cards */
+.card {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    background-color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        padding: 0.5rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden; /* Para que el borde redondeado también afecte a las celdas internas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+table th, table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #2C3E50; /* Fondo oscuro para el encabezado */
+    color: #ecf0f1; /* Texto claro para el encabezado */
+    text-transform: uppercase; /* Mayúsculas para el encabezado */
+    letter-spacing: 0.05em;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo alterno para las filas pares */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Efecto hover para las filas */
+}
+
+table tr td:first-child {
+    border-left: none; /* Eliminar el borde izquierdo para la primera columna */
+}
+
+table tr td:last-child {
+    border-right: none; /* Eliminar el borde derecho para la última columna */
+}
+
+/* Botones dentro de las tablas (como actualizar o eliminar) */
+.table-button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.table-button.update {
+    background-color: #27ae60;
+    color: white;
+}
+
+.table-button.update:hover {
+    background-color: #2ecc71;
+}
+
+.table-button.delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.table-button.delete:hover {
+    background-color: #c0392b;
+}
