@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load custom_filters %} 
+{% load custom_filters %}
 {% block titulo %}Inicio de Sesión{% endblock %}
 {% block barra %}{% endblock %}
-<link href='{% static "Menu/css/login.css" %}' rel="stylesheet">
+
 {% block content %}
 
-<!-- Fondo geométrico con estilo inspirado en la imagen -->
-<div class="login-page" style="position: relative; height: 100vh; background-color: #F2F5F7;">
+<!-- Fondo geométrico con estilo moderno -->
+<div class="login-page" style="position: relative; height: 100vh; background-color: #F7F8FA;">
     <!-- Estilos geométricos -->
     <div class="background-shapes" style="position: absolute; width: 100%; height: 100%; overflow: hidden;">
-        <div class="shape" style="position: absolute; background-color: #E74C3C; top: 0; left: 0; width: 60%; height: 50%; transform: skewY(-20deg);"></div>
+        <div class="shape" style="position: absolute; background-color: #FF5733; top: 0; left: 0; width: 60%; height: 50%; transform: skewY(-20deg);"></div>
         <div class="shape" style="position: absolute; background-color: #2C3E50; top: 50%; left: 40%; width: 100%; height: 50%; transform: skewY(-10deg);"></div>
     </div>
     
@@ -18,37 +18,37 @@
     <div class="login-container d-flex justify-content-center align-items-center" style="height: 100%; z-index: 1; position: relative;">
         
         <!-- Tarjeta de inicio de sesión -->
-        <div class="card text-center p-4 shadow-lg" style="border-radius: 15px; width: 350px; background-color: white;">
+        <div class="card text-center p-4 shadow-lg" style="border-radius: 15px; width: 400px; background-color: white;">
             
             <!-- Encabezado con imagen de usuario -->
             <div class="user-avatar mb-4">
-                <img src="{% static 'Menu/img/logo.png' %}" alt="Avatar de Usuario" class="rounded-circle" style="width: 80px;">
+                <img src="{% static 'Menu/img/logo.png' %}" alt="Avatar de Usuario" class="rounded-circle" style="width: 100px; border: 3px solid #E74C3C;">
             </div>
-            <h3 class="mb-4" style="font-weight: bold; color: #2C3E50;">Mi Cuenta</h3>
+            <h3 class="mb-4" style="font-weight: bold; color: #2C3E50;">Inicia Sesión</h3>
             
             <!-- Formulario de inicio de sesión -->
             <form action="{% url 'Menu:iniciar_sesion' %}" method="POST">
                 {% csrf_token %}
                 
                 <!-- Campo de Usuario -->
-                <div class="form-group mb-3">
+                <div class="form-group mb-4">
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <span class="input-group-text" style="background-color: #FF5733; color: white;"><i class="fas fa-user"></i></span>
                         {{ form.username|add_class:"form-control" }}  
                     </div>
                 </div>
                 
                 <!-- Campo de Contraseña -->
-                <div class="form-group mb-3">
+                <div class="form-group mb-4">
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <span class="input-group-text" style="background-color: #FF5733; color: white;"><i class="fas fa-lock"></i></span>
                         {{ form.password|add_class:"form-control" }}  
                     </div>
                 </div>
                 
                 <!-- Botón de inicio de sesión -->
-                <div class="d-grid mb-3">
-                    <button type="submit" class="btn btn-primary" style="background-color: #E74C3C; border-color: #E74C3C;">Iniciar Sesión</button>
+                <div class="d-grid mb-4">
+                    <button type="submit" class="btn btn-primary" style="background-color: #E74C3C; border-color: #E74C3C; font-size: 1.2rem;">Iniciar Sesión</button>
                 </div>
 
                 <!-- Recuperación de contraseña -->
@@ -58,10 +58,11 @@
             </form>
 
             <!-- Enlace para el registro si no tiene una cuenta -->
-            <div class="text-center mt-3">
+            <div class="text-center mt-4">
                 <p>¿No tienes una cuenta? <a href="{% url 'Menu:registro' %}" class="text-primary">Regístrate aquí</a></p>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

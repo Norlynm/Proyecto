@@ -1,0 +1,80 @@
+body {
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    font-family: 'Arial', sans-serif;
+}
+#calendar {
+    border-radius: 15px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 10px 25px rgba(233, 233, 233, 0.1);
+    margin: 0 auto;
+    max-width: 1200px;
+}
+h2 {
+    color: #333;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.fc-event {
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.fc-event:hover {
+    background-color: #C70039;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+.fc-toolbar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.fc-button {
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.fc-button:hover {
+    background-color: #C70039;
+    border: none;
+}
+.fc-daygrid-day {
+    transition: background-color 0.3s ease;
+}
+.fc-event {
+    margin-bottom: 2px;
+}
+.fc-day-sat, .fc-day-sun {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.fc-day-today {
+    background-color: rgba(255, 87, 51, 0.2);
+    border: 2px solid #FF5733;
+    transition: background-color 0.3s ease, border 0.3s ease;
+}
+.fc-daygrid-day:hover {
+    background-color: rgba(255, 87, 51, 0.1);
+    cursor: pointer;
+}
+.fc-event {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

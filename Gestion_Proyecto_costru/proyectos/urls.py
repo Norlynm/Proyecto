@@ -14,6 +14,4 @@ urlpatterns = [
   path('mostrarequipo/', views.ListarEquipos.as_view(), name="mostrarequipo"),
   path('editarequipo/<int:pk>/', views.editarequipo.as_view(), name='editarequipo'),
   
-  
-  
 ]
