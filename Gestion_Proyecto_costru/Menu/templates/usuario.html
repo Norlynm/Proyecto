@@ -44,7 +44,7 @@
                         <div>
                             <i class="fas fa-briefcase"></i> <strong>{{ proyecto.nombre }}</strong> - {{ proyecto.descripcion }}
                         </div>
-                        <a href="#" class="btn-task">Ver Proyecto</a>
+                        <a href="{% url 'proyectos:inicio' %}" class="btn-task">Ver Proyecto</a>
                     </li>
                 {% endfor %}
             {% else %}

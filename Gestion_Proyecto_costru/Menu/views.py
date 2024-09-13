@@ -152,7 +152,7 @@ def calendario(request):
             'title': tarea.nombre,
             'start': tarea.fecha_inicio.strftime('%Y-%m-%d'),
             'end': tarea.fecha_fin.strftime('%Y-%m-%d'),
-            'color': ''  # Puedes cambiar el color de las tareas
+            'color': 'blue'  # Puedes cambiar el color de las tareas
         })
 
     # Agregar las fechas de los proyectos

@@ -25,11 +25,16 @@
                         {{ form.descripcion }}
                     </div>
 
-                    <!-- Usuarios con checkboxes -->
+                    <!-- Usuarios con checkboxes, alineados correctamente -->
                     <div class="mb-3">
                         <label for="usuarios" class="form-label">Usuarios</label>
-                        <div class="form-check">
-                            {{ form.usuarios }}
+                        <div class="form-check d-flex flex-wrap">
+                            {% for checkbox in form.usuarios %}
+                                <div class="form-check me-3 mb-2">
+                                    {{ checkbox.tag }}
+                                    {{ checkbox.choice_label }}
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
 

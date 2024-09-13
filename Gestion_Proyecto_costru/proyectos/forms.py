@@ -20,14 +20,14 @@ class ProyectoForm(forms.ModelForm):
             'equipo': forms.Select(attrs={'class': 'form-select'}),
         }
 
-        fecha_inicio = forms.DateTimeField(
+       # Aceptar varios formatos de fecha y hora para 'fecha_inicio' y 'fecha_fin'
+    fecha_inicio = forms.DateTimeField(
         input_formats=['%d/%m/%Y %I:%M %p', '%Y-%m-%dT%H:%M'],  # Formatos permitidos
-        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'})  # Se añade la clase 'form-control'
+        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'})
     )
-    
-        fecha_fin = forms.DateTimeField(
+    fecha_fin = forms.DateTimeField(
         input_formats=['%d/%m/%Y %I:%M %p', '%Y-%m-%dT%H:%M'],  # Formatos permitidos
-        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'})  # Se añade la clase 'form-control'
+        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'})
     )
     
 from django import forms

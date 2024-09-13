@@ -17,8 +17,7 @@
     <style>
       /* Fondo gradiente para toda la página */
       body {
-        background: linear-gradient(150deg, #FFF700, #FFE135, #FFD700, #FFC300, #FFB600, #FFA500);
-        background image: url('{% static "Menu/img/fondo2.jpg" %}') no-repeat center center fixed;
+        background: linear-gradient(150deg,  #FFE135, #FFD700, #FFC300, #FFB600, #FFA500);
         font-family: 'Arial', sans-serif;
     }
 
@@ -80,7 +79,7 @@
     <!-- Barra de Navegación -->
     {% block barra %}
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-      <div class="container-fluid" style="max-height: 100px;">
+      <div class="container-fluid" >
         <a class="navbar-brand" href="{% url 'Menu:principal' %}">
           <img src="{% static 'Menu/img/logo.png' %}" alt="Logo">
         </a>
