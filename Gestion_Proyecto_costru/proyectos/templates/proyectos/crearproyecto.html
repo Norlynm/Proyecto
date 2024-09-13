@@ -1,66 +1,57 @@
-{% extends 'base.html' %}
-
-{% block titulo %}Crear Proyecto{% endblock %}
-
-{% load form_tags %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <header class="mb-4">
-        <h1 class="text-center" style="font-size: 2.5rem; font-weight: bold; color: #FF8C00;">Crear Proyecto</h1>
-    </header>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-8">
+            <header class="mb-4 text-center">
+                <h1 class="display-4">Crear Proyecto</h1>
+                <h2 class="h5 text-muted">Gestión de proyectos</h2>
+            </header>
 
-    <section class="form-container">
-        <!-- Contenedor del formulario con estilo -->
-        <div class="card p-5 shadow-lg mx-auto" style="max-width: 800px; background-color: #FFFDE7; border-radius: 20px; border: 2px solid #FFD700;">
-            <form action="{% url 'proyectos:crearproyecto' %}" method="POST" class="form-horizontal">
-                {% csrf_token %}
-                
-                <!-- Campos del formulario con mayor tamaño de fuente y negrita -->
-                <div class="form-group row mb-4">
-                    <label for="nombre" class="col-sm-3 col-form-label" style="font-size: 1.2rem; font-weight: bold; color: #FF8C00;">Nombre del proyecto:</label>
-                    <div class="col-sm-9">
-                        {{ form.nombre|add_class:"form-control form-control-lg" }}
-                    </div>
-                </div>
+            <section class="form-container">
+                <form action="{% url 'proyectos:crearproyecto' %}" method="POST" class="p-4 bg-light rounded shadow">
+                    {% csrf_token %}
 
-                <div class="form-group row mb-4">
-                    <label for="descripcion" class="col-sm-3 col-form-label" style="font-size: 1.2rem; font-weight: bold; color: #FF8C00;">Descripción del proyecto:</label>
-                    <div class="col-sm-9">
-                        {{ form.descripcion|add_class:"form-control form-control-lg" }}
+                    <!-- Nombre del proyecto -->
+                    <div class="mb-3">
+                        {{ form.nombre.label_tag }}
+                        {{ form.nombre }}
                     </div>
-                </div>
 
-                <div class="form-group row mb-4">
-                    <label for="fecha_inicio" class="col-sm-3 col-form-label" style="font-size: 1.2rem; font-weight: bold; color: #FF8C00;">Fecha inicio:</label>
-                    <div class="col-sm-9">
-                        {{ form.fecha_inicio|add_class:"form-control form-control-lg" }}
+                    <!-- Descripción del proyecto -->
+                    <div class="mb-3">
+                        {{ form.descripcion.label_tag }}
+                        {{ form.descripcion }}
                     </div>
-                </div>
 
-                <div class="form-group row mb-4">
-                    <label for="fecha_fin" class="col-sm-3 col-form-label" style="font-size: 1.2rem; font-weight: bold; color: #FF8C00;">Fecha fin:</label>
-                    <div class="col-sm-9">
-                        {{ form.fecha_fin|add_class:"form-control form-control-lg" }}
+                    <!-- Fecha de inicio -->
+                    <div class="mb-3">
+                        {{ form.fecha_inicio.label_tag }}
+                        {{ form.fecha_inicio }}
                     </div>
-                </div>
 
-                <div class="form-group row mb-4">
-                    <label for="equipo" class="col-sm-3 col-form-label" style="font-size: 1.2rem; font-weight: bold; color: #FF8C00;">Equipo:</label>
-                    <div class="col-sm-9">
-                        {{ form.equipo|add_class:"form-control form-control-lg" }}
+                    <!-- Fecha de finalización -->
+                    <div class="mb-3">
+                        {{ form.fecha_fin.label_tag }}
+                        {{ form.fecha_fin }}
                     </div>
-                </div>
 
-                <!-- Botones -->
-                <div class="form-group row">
-                    <div class="col-sm-9 offset-sm-3">
-                        <button type="submit" class="btn btn-primary btn-lg" style="background-color: #FF8C00; border-color: #FF8C00;">Guardar</button>
-                        <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary btn-lg" style="margin-left: 10px;">Volver</a>
+                    <!-- Equipo -->
+                    <div class="mb-3">
+                        {{ form.equipo.label_tag }}
+                        {{ form.equipo }}
                     </div>
-                </div>
-            </form>
+
+                    <!-- Botones -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg me-2">Guardar</button>
+                        <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary btn-lg">Volver</a>
+                    </div>
+                </form>
+            </section>
         </div>
-    </section>
+    </div>
 </div>
 {% endblock %}

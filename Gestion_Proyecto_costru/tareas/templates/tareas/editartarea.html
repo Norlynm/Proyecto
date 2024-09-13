@@ -1,17 +1,72 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-    <link type='text/css' href='{% static "css/estilo.css" %}', rel='stylesheet'/>
-<head>
-    <title>Editar Tarea - Plataforma de Gestión de Proyectos</title>
-</head>
-<body>
-    <h1>Editar Tarea</h1>
-    <a href="{% url 'tareas:listartareas' %}">Volver a la lista de tareas</a>
-    <form action="{% url 'tareas:editartarea' pk=tarea.pk %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
-</body>
-</html>
+
+{% block content %}
+<div class="container mt-5" style="min-height: 80vh;">
+    <header class="mb-4 text-center">
+        <h1 class="display-5 fw-bold">Editar Tarea</h1>
+    </header>
+
+    <div class="text-center mb-4">
+        <a href="{% url 'tareas:listartareas' %}" class="btn btn-secondary btn-lg">
+            <i class="fas fa-arrow-left"></i> Volver a la lista de tareas
+        </a>
+    </div>
+
+    <section class="form-container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="{% url 'tareas:editartarea' pk=tarea.pk %}" method="POST" class="p-3 bg-light rounded shadow-sm">
+                    {% csrf_token %}
+                    
+                    <!-- Campos del formulario -->
+                    <div class="mb-3">
+                        {{ form.nombre.label_tag }}
+                        {{ form.nombre }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.descripcion.label_tag }}
+                        {{ form.descripcion }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.proyecto.label_tag }}
+                        {{ form.proyecto }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.asignado_a.label_tag }}
+                        {{ form.asignado_a }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.fecha_inicio.label_tag }}
+                        {{ form.fecha_inicio }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.fecha_fin.label_tag }}
+                        {{ form.fecha_fin }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.prioridad.label_tag }}
+                        {{ form.prioridad }}
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-m me-2">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                        <a href="{% url 'tareas:listartareas' %}" class="btn btn-secondary btn-m">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

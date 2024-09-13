@@ -1,58 +1,68 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- Formulario de búsqueda -->
-<form method="GET" action="{% url 'proyectos:mostrarproyecto' %}">
-    <input type="text" name="q" placeholder="Buscar proyecto..." value="{{ request.GET.q }}"> <!-- Mostrar valor buscado -->
-    <button type="submit">Buscar</button>
-</form>
-<h2>Listado de Proyectos</h2>
-<table border="2">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            <th>Equipo</th>
-            <th>Estado</th>
-            <th>Cambiar Estado</th>
-            <th>Acciones</th> <!-- Nueva columna para editar y eliminar -->
-        </tr>
-    </thead>
+<div class="container mt-5">
+    <!-- Botón de regresar -->
+    <div class="text-start mb-3">
+        <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary">Volver</a>
+    </div>
 
-    <tbody>
-        {% for proyecto in proyectos %}
-        <tr>
-            <td>{{ proyecto.id }}</td>
-            <td>{{ proyecto.nombre }}</td>
-            <td>{{ proyecto.descripcion }}</td>
-            <td>{{ proyecto.fecha_inicio }}</td>
-            <td>{{ proyecto.fecha_fin }}</td>
-            <td>{{ proyecto.equipo }}</td> <!-- Asegúrate de que el equipo se esté mostrando correctamente -->
-            <td>{{ proyecto.get_estado_display }}</td>
-            <td>
-                <form method="POST" action="{% url 'proyectos:mostrarproyecto' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="proyecto_id" value="{{ proyecto.id }}">
-                    <select name="estado">
-                        <option value="P" {% if proyecto.estado == 'P' %}selected{% endif %}>Pendiente</option>
-                        <option value="E" {% if proyecto.estado == 'E' %}selected{% endif %}>En progreso</option>
-                        <option value="C" {% if proyecto.estado == 'C' %}selected{% endif %}>Completado</option>
-                    </select>
-                    <button type="submit">Actualizar</button>
-                </form>
-            </td>
-            <td>
-                <!-- Botones para editar y eliminar -->
-                <a href="{% url 'proyectos:editarproyecto' proyecto.id %}">Editar</a>
-                |
-                <a href="{% url 'proyectos:eliminarproyecto' proyecto.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <!-- Título del listado -->
+    <h2 class="mb-4 text-center">Listado de Proyectos</h2>
 
+    <!-- Formulario de búsqueda -->
+    <form method="GET" action="{% url 'proyectos:mostrarproyecto' %}" class="mb-4">
+        <div class="input-group justify-content-center" style="max-width: 400px; margin: 0 auto;">
+            <input type="text" name="q" class="form-control" placeholder="Buscar proyecto..." value="{{ request.GET.q }}">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
+
+    <!-- Tabla de proyectos con estilo Bootstrap -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Equipo</th>
+                <th>Estado</th>
+                <th>Cambiar Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for proyecto in proyectos %}
+            <tr>
+                <td>{{ proyecto.id }}</td>
+                <td>{{ proyecto.nombre }}</td>
+                <td>{{ proyecto.descripcion }}</td>
+                <td>{{ proyecto.fecha_inicio }}</td>
+                <td>{{ proyecto.fecha_fin }}</td>
+                <td>{{ proyecto.equipo }}</td>
+                <td>{{ proyecto.get_estado_display }}</td>
+                <td>
+                    <form method="POST" action="{% url 'proyectos:mostrarproyecto' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="proyecto_id" value="{{ proyecto.id }}">
+                        <select name="estado" class="form-select">
+                            <option value="P" {% if proyecto.estado == 'P' %}selected{% endif %}>Pendiente</option>
+                            <option value="E" {% if proyecto.estado == 'E' %}selected{% endif %}>En progreso</option>
+                            <option value="C" {% if proyecto.estado == 'C' %}selected{% endif %}>Completado</option>
+                        </select>
+                        <button type="submit" class="btn btn-success mt-2">Actualizar</button>
+                    </form>
+                </td>
+                <td>
+                    <a href="{% url 'proyectos:editarproyecto' proyecto.id %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'proyectos:eliminarproyecto' proyecto.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

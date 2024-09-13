@@ -1,18 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipos</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-<form action="{% url 'proyectos:crearequipo' %}" method="POST">
-    {% csrf_token %}    
-    {{ form.as_p }}  
-    <button type="submit">Crear</button>
-    <button><a href="{% url 'proyectos:inicio' %}">Volver</a> </button>
-</form>
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-8">
+            <header class="mb-4 text-center">
+                <h1 class="display-4">Crear Equipo</h1>
+            </header>
 
-</body>
-</html>
+            <section class="form-container">
+                <!-- Formulario con Bootstrap -->
+                <form action="{% url 'proyectos:crearequipo' %}" method="POST" class="p-4 bg-light rounded shadow">
+                    {% csrf_token %}
+                    
+                    <!-- Renderizar el formulario -->
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del equipo</label>
+                        {{ form.nombre }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción del equipo</label>
+                        {{ form.descripcion }}
+                    </div>
+
+                    <!-- Usuarios con checkboxes -->
+                    <div class="mb-3">
+                        <label for="usuarios" class="form-label">Usuarios</label>
+                        <div class="form-check">
+                            {{ form.usuarios }}
+                        </div>
+                    </div>
+
+                    <!-- Botones con estilo Bootstrap -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg me-2">Crear Equipo</button>
+                        <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary btn-lg">Volver</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

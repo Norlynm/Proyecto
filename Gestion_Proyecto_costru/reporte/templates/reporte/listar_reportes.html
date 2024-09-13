@@ -1,41 +1,45 @@
+{% extends "base.html" %}
 
-<h1>Lista de Reportes</h1>
+{% block titulo %}Lista de Reportes{% endblock %}
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Título</th>
-            <th>Descripción</th>
-            <th>Fecha</th>
-            
-         
-            
-            <th>Opciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for reporte in reportes %}
-        <tr>
-            <td>{{ reporte.titulo }}</td>
-            <td>{{ reporte.descripcion }}</td>
-            <th>{{ reporte.fecha_creacion}}</th>
-            
-                
-            <td>
-                
-                <a href="{% url 'reporte:actualizar_reporte' reporte.pk %}" class="btn">Actualizar</a>
+{% block content %}
+<div class="text- mt-4">
+    <a href="{% url 'reporte:inicio' %}" class="btn btn-secondary btn-lg">
+        <i class="fas fa-arrow-left"></i> Volver
+    </a>
+</div>
+<div class="container mt-5">
+    <header class="mb-4 text-center">
+        <h1 class="display-4">Lista de Reportes</h1>
+    </header>
 
-                <a href="{% url 'reporte:eliminar_reporte' reporte.pk %}" class="btn">Eliminar</a>
-                <a href="{% url 'reporte:detalle_reporte' reporte.pk %}">Detalles</a>
-                   
-               
-            </td>
-        </tr>
-        {% endfor %}
-        
-    </tbody>
-</table>
+    <!-- Tabla de reportes con estilo Bootstrap -->
+    <table class="table table-bordered table-striped table-hover" style="font-size: 1.2rem;">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">Título</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reporte in reportes %}
+            <tr>
+                <td class="align-middle">{{ reporte.titulo }}</td>
+                <td class="align-middle">{{ reporte.descripcion }}</td>
+                <td class="align-middle text-center">{{ reporte.fecha_creacion }}</td>
+                <td class="align-middle text-center">
+                    <a href="{% url 'reporte:actualizar_reporte' reporte.pk %}" class="btn btn-warning btn-lg mb-1">Actualizar</a>
+                    <a href="{% url 'reporte:eliminar_reporte' reporte.pk %}" class="btn btn-danger btn-lg mb-1">Eliminar</a>
+                    <a href="{% url 'reporte:detalle_reporte' reporte.pk %}" class="btn btn-info btn-lg mb-1">Detalles</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-
-<!-- Botón para volver a la página de inicio -->
-<button><a href="{% url 'reporte:inicio' %}">Volver</a></button>
+    <!-- Botón para volver a la página de inicio -->
+  
+</div>
+{% endblock %}

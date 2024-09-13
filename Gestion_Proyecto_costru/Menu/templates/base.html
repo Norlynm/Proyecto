@@ -17,8 +17,8 @@
     <style>
       /* Fondo gradiente para toda la página */
       body {
-        background: linear-gradient(150deg, #FFD700, #F9C400, #F3B200, #EBAA00, #E0A000, #D79500);
-
+        background: linear-gradient(150deg, #FFF700, #FFE135, #FFD700, #FFC300, #FFB600, #FFA500);
+        background image: url('{% static "Menu/img/fondo2.jpg" %}') no-repeat center center fixed;
         font-family: 'Arial', sans-serif;
     }
 
@@ -79,19 +79,18 @@
     
     <!-- Barra de Navegación -->
     {% block barra %}
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+      <div class="container-fluid" style="max-height: 100px;">
         <a class="navbar-brand" href="{% url 'Menu:principal' %}">
           <img src="{% static 'Menu/img/logo.png' %}" alt="Logo">
         </a>
-
+    
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
+    
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto align-items-center">
-            <!-- Íconos del menú de navegación -->
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link" href="/Usuario">

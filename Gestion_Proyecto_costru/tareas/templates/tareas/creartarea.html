@@ -2,21 +2,68 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <header>
-        <h1>Crear Tarea</h1>
-        <h2>Primeras Tareas</h2>
-    </header>
+<div class="container d-flex justify-content-center align-items-start" style="min-height: 100vh; margin-top: 30px; margin-bottom: 50px;">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-8"> <!-- Se ha reducido a col-md-6 para que sea más pequeño -->
+            <header class="mb-4 text-center">
+                <h1 class="display-8">Crear Tarea</h1> <!-- display-6 hace el título un poco más pequeño -->
+                <h2 class="h6 text-muted">Primeras Tareas</h2>
+            </header>
 
-    <section class="form-container">
-        <form action="{% url 'tareas:creartarea' %}" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Guardar</button>
-            <a href="{% url 'tareas:tareaInicio' %}">volver</a> 
-        </form>
-    </section>
-    <section>
-    </section>
+            <section class="form-container p-3 bg-light rounded shadow-sm"> <!-- Se ha reducido el padding y shadow-sm -->
+                <form action="{% url 'tareas:creartarea' %}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- Nombre de la tarea -->
+                    <div class="mb-2">
+                        {{ form.nombre.label_tag }}
+                        {{ form.nombre }}
+                    </div>
+
+                    <!-- Descripción de la tarea -->
+                    <div class="mb-2">
+                        {{ form.descripcion.label_tag }}
+                        {{ form.descripcion }}
+                    </div>
+
+                    <!-- Proyecto asociado -->
+                    <div class="mb-2">
+                        {{ form.proyecto.label_tag }}
+                        {{ form.proyecto }}
+                    </div>
+
+                    <!-- Asignado a -->
+                    <div class="mb-2">
+                        {{ form.asignado_a.label_tag }}
+                        {{ form.asignado_a }}
+                    </div>
+
+                    <!-- Fecha de inicio -->
+                    <div class="mb-2">
+                        {{ form.fecha_inicio.label_tag }}
+                        {{ form.fecha_inicio }} <!-- Campo de fecha y hora -->
+                    </div>
+
+                    <!-- Fecha de fin -->
+                    <div class="mb-2">
+                        {{ form.fecha_fin.label_tag }}
+                        {{ form.fecha_fin }} <!-- Campo de fecha y hora -->
+                    </div>
+
+                    <!-- Prioridad -->
+                    <div class="mb-2">
+                        {{ form.prioridad.label_tag }}
+                        {{ form.prioridad }}
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-m me-2">Guardar</button> <!-- btn-sm para hacer el botón más pequeño -->
+                        <a href="{% url 'tareas:tareaInicio' %}" class="btn btn-secondary btn-m">Volver</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
 </div>
 {% endblock %}
