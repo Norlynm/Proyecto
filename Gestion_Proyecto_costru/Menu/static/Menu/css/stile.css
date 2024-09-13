@@ -1,0 +1,124 @@
+
+    /* Efecto de rebote */
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-30px);
+        }
+        60% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .user-avatar img {
+        animation: bounce 2s infinite; /* Aplica la animación al logo */
+        width: 100px;
+        border: 3px solid #E74C3C;
+        border-radius: 50%;
+    }
+
+    
+
+   
+    /* Registro Asegurar que el fondo cubra toda la pantalla */
+    body, html {
+        margin: 0;
+        padding: 0;
+        background-image: url('{% static "Menu/img/fondo2.jpg" %}');
+    }
+  
+    .register-page {
+   
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /* Estilo de la tarjeta de registro */
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        padding: 30px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilo para la imagen del logo */
+    .user-avatar {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .user-avatar img {
+        width: 100px;
+        border-radius: 50%;
+        border: 3px solid #E74C3C;
+    }
+
+    /* Estilos para los campos de entrada */
+    .input-group-text {
+        background-color: #FF5733;
+        color: white;
+        border: none;
+    }
+
+    .form-control {
+        border-radius: 0;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #FF6B6B;
+        box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+    }
+
+    /* Botón principal - igual que el de inicio de sesión */
+    .btn-primary {
+        background-color: green;
+        border-color: #E74C3C;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+    }
+
+    /* Botón de cancelar */
+    .btn-secondary {
+        background-color: red;
+        border: none;
+        font-size: 1.2rem;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    /* Enlace de inicio de sesión */
+    .text-decoration-none {
+        color: #FF6B6B;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .text-decoration-none:hover {
+        color: #e63946;
+    }
+
+    .card-header h3 {
+        font-weight: bold; /* Negrita */
+        color: #2C3E50; /* Color del texto */
+        font-size: 1.8rem; /* Tamaño de la fuente */
+        text-transform: uppercase; /* Transformación de texto a mayúsculas */
+        border-bottom: 2px solid #E74C3C; /* Línea inferior */
+        padding-bottom: 10px;
+    }
+

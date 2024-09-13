@@ -12,5 +12,5 @@ urlpatterns = [
     path('registro/',views.registro, name="registro"),
     path('calendario/', views.calendario, name='calendario'),
     path('mostrar_calendario/', views.mostrar_calendario, name='mostrar_calendario'),
-    path('cerrar_sesion/', views.cerrar_sesion, name='Cerrar_sesion'),
+    path('despedida/', views.despedida, name='despedida'),
 ]

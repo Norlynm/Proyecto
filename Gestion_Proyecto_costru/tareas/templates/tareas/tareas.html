@@ -1,17 +1,85 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block titulo %}
-Tareas
+{% block titulo %}Gestión de Tareas{% endblock %}
+
+{% block extra_styles %}
+<!-- Cargar CSS de Bootstrap y FontAwesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+    /* Estilo del contenedor de acciones */
+    .action-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    .action-box {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+
+    .action-box:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        background-color: #007bff;  /* Cambio de color de fondo a azul */
+        color: white; /* Cambio de color del texto */
+        border: 2px solid #007bff; /* Borde azul al hacer hover */
+    }
+
+    .action-icon {
+        font-size: 3rem;
+        color: #2575fc;
+        margin-bottom: 15px;
+        transition: color 0.3s ease;
+    }
+
+    .action-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    /* Cambiar el color del ícono al hacer hover */
+    .action-box:hover .action-icon {
+        color: white;  /* Ícono cambia a blanco */
+    }
+</style>
 {% endblock %}
 
-
-
 {% block content %}
-  <main>
-    <section>
-        <a href="{% url 'tareas:creartarea' %}">Crear tareas</a>
-        <a href="{% url 'tareas:listartareas' %}">listar tareas</a>
-    </section>
-  </main>
+<div class="container mt-5">
+    <h2 class="text-center">Gestión de Tareas</h2>
+    <p class="text-center text-muted">Elige una opción para crear o gestionar tareas.</p>
+
+    <!-- Contenedor de las opciones de acciones -->
+    <div class="row action-container mt-4">
+        <!-- Opción: Crear Tarea -->
+        <div class="col-md-6">
+            <a href="{% url 'tareas:creartarea' %}">
+                <div class="action-box">
+                    <i class="fas fa-clipboard-list action-icon"></i>  <!-- Ícono actualizado -->
+                    <div class="action-title">Crear Tarea</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Opción: Listar Tareas -->
+        <div class="col-md-6">
+            <a href="{% url 'tareas:listartareas' %}">
+                <div class="action-box">
+                    <i class="fas fa-list-ul action-icon"></i>
+                    <div class="action-title">Listar Tareas</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

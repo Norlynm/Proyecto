@@ -168,3 +168,13 @@ def calendario(request):
 
 def mostrar_calendario(request):
     return render(request, 'calendario.html')
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('Menu:despedida')
+
+def despedida(request):
+    return render(request, 'despedida.html')

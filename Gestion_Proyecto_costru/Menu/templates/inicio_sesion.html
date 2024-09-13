@@ -4,21 +4,20 @@
 {% block titulo %}Inicio de Sesión{% endblock %}
 {% block barra %}{% endblock %}
 
-{% block content %}
 
-<!-- Fondo geométrico con estilo moderno -->
-<div class="login-page" style="position: relative; height: 100vh; background-color: #F7F8FA;">
-    <!-- Estilos geométricos -->
-    <div class="background-shapes" style="position: absolute; width: 100%; height: 100%; overflow: hidden;">
-        <div class="shape" style="position: absolute; background-color: #FF5733; top: 0; left: 0; width: 60%; height: 50%; transform: skewY(-20deg);"></div>
-        <div class="shape" style="position: absolute; background-color: #2C3E50; top: 50%; left: 40%; width: 100%; height: 50%; transform: skewY(-10deg);"></div>
-    </div>
+{% block extra_styles %}
+<!-- Enlazar el archivo CSS externo -->
+<link rel="stylesheet" href="{% static 'Menu/css/stile.css' %}">
+
+
+<!-- Fondo de imagen completa -->
+<div class="login-page" style="position: relative; height: 100vh; background-image: url('{% static "Menu/img/fondo2.jpg" %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     
     <!-- Contenedor de la tarjeta de inicio de sesión -->
     <div class="login-container d-flex justify-content-center align-items-center" style="height: 100%; z-index: 1; position: relative;">
         
         <!-- Tarjeta de inicio de sesión -->
-        <div class="card text-center p-4 shadow-lg" style="border-radius: 15px; width: 400px; background-color: white;">
+        <div class="card text-center p-4 shadow-lg" style="border-radius: 15px; width: 400px; background-color: rgba(255, 255, 255, 0.85);">
             
             <!-- Encabezado con imagen de usuario -->
             <div class="user-avatar mb-4">
@@ -48,12 +47,12 @@
                 
                 <!-- Botón de inicio de sesión -->
                 <div class="d-grid mb-4">
-                    <button type="submit" class="btn btn-primary" style="background-color: #E74C3C; border-color: #E74C3C; font-size: 1.2rem;">Iniciar Sesión</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: green; border-color: #E74C3C; font-size: 1.2rem;">Iniciar Sesión</button>
                 </div>
 
                 <!-- Recuperación de contraseña -->
                 <div class="text-center">
-                    <a href="#" class="text-muted">¿Olvidaste tu contraseña?</a>
+                
                 </div>
             </form>
 
