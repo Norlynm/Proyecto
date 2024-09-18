@@ -1,46 +1,45 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Reportes</title>
-    
-</head>
-<body>
+{% block titulo %}Lista de Reportes{% endblock %}
 
-    <h1>Listado de Reportes</h1>
+{% block content %}
+<div class="text- mt-4">
+    <a href="{% url 'reporte:inicio' %}" class="btn btn-secondary btn-lg">
+        <i class="fas fa-arrow-left"></i> Volver
+    </a>
+</div>
+<div class="container mt-5">
+    <header class="mb-4 text-center">
+        <h1 class="display-4">Lista de Reportes</h1>
+    </header>
 
-    <table border="1">
-        <thead>
+    <!-- Tabla de reportes con estilo Bootstrap -->
+    <table class="table table-bordered table-striped table-hover" style="font-size: 1.2rem;">
+        <thead class="table-dark">
             <tr>
-                <th>Título</th>
-                <th>Tipo</th>
-                <th>Fecha de Creación</th>
-                <th>Descripción</th>
-                <th>Archivo</th>
+                <th class="text-center">Título</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Opciones</th>
             </tr>
         </thead>
         <tbody>
             {% for reporte in reportes %}
             <tr>
-                <td>{{ reporte.titulo }}</td>
-                <td>{{ reporte.tipo }}</td>
-                <td>{{ reporte.fecha_creacion }}</td>
-                <td>{{ reporte.descripcion }}</td>
-                <td>
-                    {% if reporte.archivo %}
-                        <a href="{{ reporte.archivo.url }}">Ver Archivo</a>
-                    {% else %}
-                        No disponible
-                    {% endif %}
+                <td class="align-middle">{{ reporte.titulo }}</td>
+                <td class="align-middle">{{ reporte.descripcion }}</td>
+                <td class="align-middle text-center">{{ reporte.fecha_creacion }}</td>
+                <td class="align-middle text-center">
+                    <a href="{% url 'reporte:actualizar_reporte' reporte.pk %}" class="btn btn-warning btn-lg mb-1">Actualizar</a>
+                    <a href="{% url 'reporte:eliminar_reporte' reporte.pk %}" class="btn btn-danger btn-lg mb-1">Eliminar</a>
+                    <a href="{% url 'reporte:detalle_reporte' reporte.pk %}" class="btn btn-info btn-lg mb-1">Detalles</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="">Crear nuevo reporte</a>
-
-</body>
-</html>
+    <!-- Botón para volver a la página de inicio -->
+  
+</div>
+{% endblock %}

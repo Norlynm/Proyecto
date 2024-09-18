@@ -1,13 +1,55 @@
-
+{% extends 'base.html' %} 
+{% load static %}
 
 {% block content %}
-<h1>Editar equipo</h1>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-8">
+            <header class="mb-4 text-center">
+                <h1 class="display-4">Editar Equipo</h1>
+            </header>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar cambios</button>
-    <a href="{% url 'proyectos:mostrarequipo' %}">Cancelar</a> <!-- Vuelve a la lista de equipos -->
-</form>
+            <section class="form-container">
+                <!-- Formulario con Bootstrap -->
+                <form action="" method="POST" class="p-4 bg-light rounded shadow">
+                    {% csrf_token %}
+                    
+                    <!-- Renderizar el formulario -->
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del equipo</label>
+                        {{ form.nombre }}
+                    </div>
 
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción del equipo</label>
+                        {{ form.descripcion }}
+                    </div>
+
+                    <!-- Usuarios con checkboxes -->
+                    <div class="mb-3">
+                        <label for="usuarios" class="form-label">Usuarios</label>
+                        <div class="form-check">
+                            <div class="row">
+                                <!-- Aquí hacemos un loop sobre los checkboxes -->
+                                {% for checkbox in form.usuarios %}
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        {{ checkbox.tag }} {{ checkbox.choice_label }}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones con estilo Bootstrap -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg me-2">Guardar cambios</button>
+                        <a href="{% url 'proyectos:mostrarequipo' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
 {% endblock %}

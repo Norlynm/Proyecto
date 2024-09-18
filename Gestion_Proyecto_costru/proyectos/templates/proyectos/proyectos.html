@@ -1,21 +1,105 @@
-{% extends 'base.html' %} 
-
+{% extends 'base.html' %}
 {% load static %}
 
-{% block titulo %}
+{% block titulo %}Gestión de Proyectos{% endblock %}
 
-Proyectos
+{% block extra_styles %}
+<!-- Cargar CSS de Bootstrap y FontAwesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+    /* Estilo del contenedor de acciones */
+    .action-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    .action-box {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+
+    .action-box:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        background-color: #007bff;  /* Cambio de color de fondo a azul */
+        color: white; /* Cambio de color del texto */
+        border: 2px solid #007bff; /* Borde azul al hacer hover */
+    }
+
+    .action-icon {
+        font-size: 3rem;
+        color: #2575fc;
+        margin-bottom: 15px;
+        transition: color 0.3s ease;
+    }
+
+    .action-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    /* Cambiar el color del ícono al hacer hover */
+    .action-box:hover .action-icon {
+        color: white;  /* Ícono cambia a blanco */
+    }
+</style>
 {% endblock %}
 
-
 {% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Gestión de Proyectos</h2>
+    <p class="text-center text-muted">Elige una opción para crear o gestionar proyectos y equipos.</p>
 
-<a href="{% url 'proyectos:crearproyecto' %}">Crear Nuevo proyecto</a> 
-<a href="{% url 'proyectos:mostrarproyecto' %}"> Lista de proyectos</a>
-<a href="{% url 'proyectos:crearequipo' %}">Crear equipos</a>
-<a href="{% url 'proyectos:mostrarequipo' %}">Mostrar Equipos</a>
+    <!-- Contenedor de las opciones de acciones -->
+    <div class="row action-container mt-4">
+        <!-- Opción: Crear Proyecto -->
+        <div class="col-md-4">
+            <a href="{% url 'proyectos:crearproyecto' %}">
+                <div class="action-box">
+                    <i class="fas fa-plus-circle action-icon"></i>
+                    <div class="action-title">Crear Proyecto</div>
+                </div>
+            </a>
+        </div>
 
+        <!-- Opción: Listar Proyectos -->
+        <div class="col-md-4">
+            <a href="{% url 'proyectos:mostrarproyecto' %}">
+                <div class="action-box">
+                    <i class="fas fa-list-ul action-icon"></i>
+                    <div class="action-title">Lista de Proyectos</div>
+                </div>
+            </a>
+        </div>
 
+        <!-- Opción: Crear Equipo -->
+        <div class="col-md-4">
+            <a href="{% url 'proyectos:crearequipo' %}">
+                <div class="action-box">
+                    <i class="fas fa-users action-icon"></i>
+                    <div class="action-title">Crear Equipo</div>
+                </div>
+            </a>
+        </div>
 
-
+        <!-- Opción: Listar Equipos -->
+        <div class="col-md-4 mt-4">
+            <a href="{% url 'proyectos:mostrarequipo' %}">
+                <div class="action-box">
+                    <i class="fas fa-users-cog action-icon"></i>
+                    <div class="action-title">Mostrar Equipos</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

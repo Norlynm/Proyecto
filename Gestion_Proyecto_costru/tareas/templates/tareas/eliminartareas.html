@@ -1,19 +1,32 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link type='text/css' href='{% static "ruta/del/css/aqui.css" %}' rel='stylesheet'/>
-    <title>Eliminar Tarea</title>
-</head>
-<body>
-    <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
+{% extends "base.html" %}
 
-    <a href="{% url 'tareas:tareaInicio' %}">Cancelar</a>
+{% block titulo %}Eliminar Tarea{% endblock %}
 
-    <form action="{% url 'tareas:eliminar_tareas' pk=tarea.pk %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Eliminar Tarea</button>
-    </form>
-</body>
-</html>
+{% block content %}
+<div class="container mt-5">
+    <header class="mb-4 text-center">
+        <h1 class="display-4">Eliminar Tarea</h1>
+    </header>
+
+    <div class="text-center mb-4">
+        <p>¿Estás seguro de que deseas eliminar esta tarea?</p>
+        <a href="{% url 'tareas:tareaInicio' %}" class="btn btn-secondary btn-lg me-2">
+            <i class="fas fa-arrow-left"></i> Cancelar
+        </a>
+    </div>
+
+    <section class="form-container">
+        <form action="{% url 'tareas:eliminar_tareas' pk=tarea.pk %}" method="POST" class="p-4 bg-light rounded shadow text-center">
+            {% csrf_token %}
+            <div class="form-group mb-4">
+                {{ form.as_p }}
+            </div>
+            
+            <!-- Botón para eliminar -->
+            <button type="submit" class="btn btn-danger btn-lg">
+                <i class="fas fa-trash-alt"></i> Eliminar Tarea
+            </button>
+        </form>
+    </section>
+</div>
+{% endblock %}

@@ -1,27 +1,224 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block titulo %}
-Pagina principal
+Página principal
 {% endblock %}
 
+{% block extra_styles %}
+<style>
+  /* Efectos para las tarjetas */
+  .card {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+      border-radius: 15px;
+  }
+  .contact-section {
+    background-image: url("{% static 'Menu/img/map.png' %}"); /* Ruta de tu imagen */
+    background-size: cover; /* La imagen cubrirá toda la sección */
+    background-position: center; /* Centra la imagen en el contenedor */
+    width: 100vw; /* Asegura que ocupe todo el ancho del viewport */
+    margin-left: calc(-50vw + 50%); /* Centra la sección en el viewport */
+    padding: 100px 0; /* Espacio vertical alrededor del contenido */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    padding: 100px 0; /* Espacio vertical alrededor del contenido */
+    color: white; /* Color blanco para el texto */
+    background-color: black; 
+    }
+  .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(255, 87, 51, 0.5), 0 0 20px rgba(255, 87, 51, 0.7);
+  }
 
+  h2{
+    color: #0000;
+  }
+
+  /* Estilos para los íconos en círculos */
+  .icon-circle {
+      background-color: #FFC300; /* Color amarillo para el fondo del círculo */
+      border-radius: 50%;
+      padding: 20px;
+      display: inline-block;
+      color: white; /* Icono en blanco */
+      font-size: 40px;
+  }
+
+  .icon-title {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #2C3E50; /* Color de título */
+  }
+
+  .icon-container {
+      text-align: center;
+      margin: 30px 0;
+  }
+
+  .section {
+      padding: 100px 0; /* Espacio vertical en la sección */
+  }
+
+  .section h2 {
+      color: #FF5733;
+      font-weight: bold;
+  }
+
+  .custom-image:hover {
+      transform: translateY(-10px); /* Elevar imagen al pasar el mouse */
+      box-shadow: 0 12px 20px rgba(255, 87, 51, 0.5), 0 0 20px rgba(255, 87, 51, 0.7); /* Sombra similar a las tarjetas */
+  }
+
+  /* Sección de fondo negro con degradado */
+  .full-width-section {
+      background: linear-gradient(to bottom, black, #212529); /* Degradado de negro a gris oscuro */
+      width: 100vw; /* 100% del ancho de la ventana */
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 10px 0;
+
+
+    }
+  
+</style>
+{% endblock %}
 
 {% block content %}
+<div class="container mt-5">
+    <!-- Título principal con efecto -->
+    <div class="section text-center">
+        <h1 class="display-4 mb-5" style="color: #2C3E50; font-weight: bold;">Gestión de Proyectos</h1>
 
-<h1>Pagina principal </h1>
-<h2> Por que deberias usar nuestro Producto?</h2>
+      
+        <h2 class="mb-3" style="color: #fff;">¿Por qué deberías usar nuestro Gestor de Proyectos?</h2>
+        
+        <!-- Contenedor de los iconos -->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="icon-container">
+              <!-- Icono de facilitamos el trabajo -->
+              <span class="icon-circle"><i class="fas fa-hands-helping"></i></span>
+              <h3 class="icon-title">Facilitamos el trabajo</h3>
+              <p>Optimiza tu flujo de trabajo con nuestras herramientas.</p>
+            </div>
+          </div>
 
-<p> "Facilitamos la gestión de proyectos de principio a fin, optimizando el trabajo en equipo y garantizando el éxito en cada tarea.".</p>
+          <div class="col-md-4">
+            <div class="icon-container">
+              <!-- Icono de mejorar la productividad -->
+              <span class="icon-circle"><i class="fas fa-chart-line"></i></span>
+              <h3 class="icon-title">Mejoramos la productividad</h3>
+              <p>Incrementa tu productividad al automatizar tareas clave.</p>
+            </div>
+          </div>
 
+          <div class="col-md-4">
+            <div class="icon-container">
+              <!-- Icono de optimización de tiempo -->
+              <span class="icon-circle"><i class="fas fa-clock"></i></span>
+              <h3 class="icon-title">Optimización del tiempo</h3>
+              <p>Administra mejor tu tiempo con nuestras funciones.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
 
-<h2> Que ofrecemos?</h2>
+<!-- Nueva sección con fondo negro degradado que ocupa todo el ancho -->
+<div class="full-width-section">
+    <!-- Espacio en blanco o contenido adicional puede ir aquí -->
+</div>
 
-<p>Colaboración eficiente: "Una plataforma diseñada para que los equipos trabajen juntos de manera eficaz."
-    Gestión simplificada: "Organiza, asigna y monitoriza todas tus tareas y proyectos desde un solo lugar."
-    Control total: "Monitorea el progreso, cumple los plazos y mantén el control sobre cada etapa del proyecto."
-    Fácil de usar: "Una interfaz intuitiva que simplifica el trabajo diario, incluso en los proyectos más complejos."
-    .</p>
+<div class="container">
+    <!-- Sección ¿Qué ofrecemos? con fondo negro degradado -->
+    <div class="section section-white text-center">
+        <h1 class="mb-4">¿Qué ofrecemos?</h1>
+
+        <!-- Tarjetas con información -->
+        <div class="row justify-content-center">
+            <!-- Tarjeta de Tareas -->
+            <div class="col-md-3 mb-4">
+                <div class="card shadow-lg border-0 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tasks fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title font-weight-bold">Tareas</h5>
+                        <p class="card-text">Listar tus tareas de tu proyecto en tiempo real.</p>
+                        <a href="{% url 'tareas:tareaInicio' %}" class="btn btn-primary" style="background-color: #FF5733; border-color: #FF5733;">Conoce más →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Proyectos -->
+            <div class="col-md-3 mb-4">
+                <div class="card shadow-lg border-0 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-calendar-check fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title font-weight-bold">Proyectos</h5>
+                        <p class="card-text">Monitorea y gestiona tus proyectos eficientemente.</p>
+                        <a href="{% url 'proyectos:inicio' %}" class="btn btn-primary" style="background-color: #FF5733; border-color: #FF5733;">Conoce más →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Reportes -->
+            <div class="col-md-3 mb-4">
+                <div class="card shadow-lg border-0 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-alt fa-3x text-danger mb-3"></i>
+                        <h5 class="card-title font-weight-bold">Reportes</h5>
+                        <p class="card-text">Visualiza y crea reportes detallados de tus proyectos.</p>
+                        <a href="{% url 'reporte:inicio' %}" class="btn btn-primary" style="background-color: #FF5733; border-color: #FF5733;">Conoce más →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Fechas (Calendario) -->
+            <div class="col-md-3 mb-4">
+                <div class="card shadow-lg border-0 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock fa-3x text-success mb-3"></i>
+                        <h5 class="card-title font-weight-bold">Fechas</h5>
+                        <p class="card-text">Consulta las fechas y plazos de los proyectos.</p>
+                        <a href="{% url 'Menu:mostrar_calendario' %}" class="btn btn-primary" style="background-color: #FF5733; border-color: #FF5733;">Conoce más →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contact-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <h2 class="text-white">CONTACTANOS</h2>
+                <p class="text-light"></p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-3">
+                <input type="text" class="form-control" placeholder="Tu Nombre *">
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="email" class="form-control" placeholder="Tu Correo *">
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="text" class="form-control" placeholder="Numero de Telefono *">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8 mb-3">
+                <textarea class="form-control" rows="5" placeholder="Mensaje *"></textarea>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <button class="btn btn-warning btn-block">ENVIAR MENSAJE</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

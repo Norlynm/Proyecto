@@ -13,22 +13,26 @@ class Equipo(models.Model):
 
      
 class Proyecto(models.Model):
-  
+    ESTADOS_PROYECTO = [
+        ('P', 'Pendiente'),
+        ('E', 'En progreso'),
+        ('C', 'Completado'),
+    ]
 
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    ESTADOS =  [  ('P','Pendiente'),
-             ('E','En progreso'),        
-            ('C','Completado'),
-            ]
-    estado=models.CharField(max_length=1,choices=ESTADOS,default='P')
-    equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE) # Relación con el equipo, borra el proyecto si el equipo se borra.
+    estado = models.CharField(
+        max_length=1, 
+        choices=ESTADOS_PROYECTO, 
+        default='P'
+    )
+    equipo = models.ForeignKey('Equipo', on_delete=models.CASCADE)  # Relación con el equipo
 
-    
     def __str__(self):
-            return self.nombre # Devuelve el nombre del proyecto cuando se imprime el objeto.
+        return self.nombre
+
 
         # Modelo para representar los miembros del equipo en un proyecto.
 class MiembroEquipo(models.Model):

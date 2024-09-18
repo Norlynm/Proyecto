@@ -1,25 +1,53 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'colocar la ruta del css aqui' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Crear Proyecto</title>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>PLATAFORMA DE GESTION DE PROYECTOS <i class="fas fa-home"></i></h1>
-        </header>
-     
-        <section class="form-container">
-            <form action="{% url 'proyectos:crearproyecto' %}" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Guardar</button>
-                <button type="submit" ><a href="{% url 'proyectos:inicio' %}">Volver</a></button>
-            </form>
-        </section>
-    </div>
-</body>
-</html>
+
+{% block content %}
+<div class="container mt-5">
+    <header class="mb-4 text-center">
+        <h1 class="display-4">Crear Proyecto</h1>
+        <h2 class="h5 text-muted">Gestión de proyectos</h2>
+    </header>
+
+    <section class="form-container">
+        <form action="{% url 'proyectos:crearproyecto' %}" method="POST" class="p-4 bg-light rounded shadow">
+            {% csrf_token %}
+
+            <!-- Nombre del proyecto -->
+            <div class="mb-3">
+                {{ form.nombre.label_tag }}
+                {{ form.nombre }}
+            </div>
+
+            <!-- Descripción del proyecto -->
+            <div class="mb-3">
+                {{ form.descripcion.label_tag }}
+                {{ form.descripcion }}
+            </div>
+
+            <!-- Fecha de inicio -->
+            <div class="mb-3">
+                {{ form.fecha_inicio.label_tag }}
+                {{ form.fecha_inicio }}
+            </div>
+
+            <!-- Fecha de finalización -->
+            <div class="mb-3">
+                {{ form.fecha_fin.label_tag }}
+                {{ form.fecha_fin }}
+            </div>
+
+            <!-- Equipo -->
+            <div class="mb-3">
+                {{ form.equipo.label_tag }}
+                {{ form.equipo }}
+            </div>
+
+            <!-- Botones -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-success btn-lg me-2">Guardar</button>
+                <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary btn-lg">Volver</a>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}

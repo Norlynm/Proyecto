@@ -1,0 +1,125 @@
+{% extends 'base.html' %} <!-- Esta línea debe ser la primera -->
+
+{% block titulo %}Detalles del Reporte{% endblock %}
+
+{% block extra_styles %}
+<style>
+    /* Estilo del contenedor principal */
+    .reporte-detalles {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .reporte-detalles h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+    .reporte-detalles p {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .reporte-detalles h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-top: 30px;
+        color: #007bff;
+    }
+
+    .reporte-detalles ul {
+        padding-left: 20px;
+    }
+
+    .reporte-detalles ul li {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    /* Estilo del archivo descargable */
+    .reporte-detalles a {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .reporte-detalles a:hover {
+        background-color: #0056b3;
+    }
+
+    /* Botón de volver */
+    .btn-volver {
+        display: inline-block;
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+    }
+
+    .btn-volver:hover {
+        background-color: #5a6268;
+    }
+
+    /* Estilo del encabezado */
+    header h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #343a40;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <header class="mb-4">
+        <h1>Detalles del Reporte</h1>
+        <a href="{% url 'reporte:listar_reportes' %}" class="btn-volver">
+            <i class="fas fa-arrow-left"></i> Volver a Reportes
+        </a>
+    </header>
+
+    <section class="reporte-detalles">
+        <h2>{{ reporte.titulo }}</h2>
+        <p><strong>Fecha de Creación:</strong> {{ reporte.fecha_creacion }}</p>
+        <p><strong>Descripción:</strong> {{ reporte.descripcion }}</p>
+
+        <h3>Tareas Asociadas</h3>
+        <ul>
+            {% for tarea in tareas %}
+            <li>{{ tarea.nombre }} - Estado: {{ tarea.estado }}</li>
+            {% empty %}
+            <li>No hay tareas asociadas a este reporte.</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Proyecto Asociado</h3>
+        <ul>
+            <li>{{ proyecto.nombre }} - Equipo: {{ proyecto.equipo.nombre }}</li>
+        </ul>
+
+        <h3>Archivo del Reporte</h3>
+        {% if reporte.archivo %}
+        <a href="{{ reporte.archivo.url }}" download><i class="fas fa-file-download"></i> Descargar Archivo</a>
+        {% else %}
+        <p>No hay archivo disponible para este reporte.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

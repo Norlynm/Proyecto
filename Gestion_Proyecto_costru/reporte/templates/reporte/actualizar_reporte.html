@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <header class="mb-4 text-center">
+        <h1 class="display-20">Actualizar Reporte: {{ reporte.titulo }}</h1>
+    </header>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Formulario de actualización de reporte con Bootstrap -->
+            <form method="POST" enctype="multipart/form-data" class="p-4 bg-light rounded shadow">
+                {% csrf_token %}
+                
+                <!-- Renderizado del formulario -->
+                <div class="mb-3">
+                    {{ form.titulo.label_tag }}
+                    {{ form.titulo }}
+                </div>
+                
+                <div class="mb-3">
+                    {{ form.descripcion.label_tag }}
+                    {{ form.descripcion }}
+                </div>
+                
+                <div class="mb-3">
+                    {{ form.archivo.label_tag }}
+                    {{ form.archivo }}
+                </div>
+                
+                <div class="mb-3">
+                    {{ form.tareas.label_tag }}
+                    {{ form.tareas }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.proyecto.label_tag }}
+                    {{ form.proyecto }}
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg me-2">Guardar cambios</button>
+                    <a href="{% url 'reporte:listar_reportes' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

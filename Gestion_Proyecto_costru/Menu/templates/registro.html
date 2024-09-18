@@ -1,71 +1,197 @@
 {% extends 'base.html' %}
-
-{% load custom_filters %}  <!-- Cargar el filtro personalizado -->
-
+{% load static %}
+{% load custom_filters %}
 {% block titulo %}Registro{% endblock %}
+{% block barra %}{% endblock %}
 
-{% block barra %}{% endblock %}  <!-- Se omite la barra de navegación -->
+{% block extra_styles %}
+<!-- Estilos personalizados para el formulario de registro -->
+<style>
+    /* Efecto de rebote */
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-30px);
+        }
+        60% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .user-avatar img {
+        animation: bounce 2s infinite; /* Aplica la animación al logo */
+        width: 100px;
+        border: 3px solid #E74C3C;
+        border-radius: 50%;
+    }
+
+    /* Asegurar que el fondo cubra toda la pantalla */
+    body, html {
+        margin: 0;
+        padding: 0;
+      
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .register-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* Estilo de la tarjeta de registro */
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        padding: 30px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilo para la imagen del logo */
+    .user-avatar {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Estilos para los campos de entrada */
+    .input-group-text {
+        background-color: #ADD8E6; /* Fondo azul claro */
+        color: black;              /* Color del icono negro */
+        border: none;
+    }
+
+    .form-control {
+        border-radius: 0;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #FF6B6B;
+        box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+    }
+
+    /* Botón principal */
+    .btn-primary {
+        background-color: green;
+        border-color: #E74C3C;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+    }
+
+    /* Botón de cancelar */
+    .btn-secondary {
+        background-color: red;
+        border: none;
+        font-size: 1.2rem;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    /* Enlace de inicio de sesión */
+    .text-decoration-none {
+        color: #FF6B6B;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .text-decoration-none:hover {
+        color: #e63946;
+    }
+
+    .card-header h3 {
+        font-weight: bold;
+        color: #2C3E50;
+        font-size: 1.8rem;
+        text-transform: uppercase;
+        border-bottom: 2px solid #E74C3C;
+        padding-bottom: 10px;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="col-md-6">
-        <div class="card shadow-lg border-0">
-            <div class="card-header bg-dark text-center">
-                <h2 style="color: white; border-bottom: 2px solid #FFA500;">Registrarse</h2>
-            </div>
-            <div class="card-body p-4">
-                {% if error %}
-                    <div class="alert alert-danger">
-                        {{ error }}
+<div class="register-page">
+    <div class="form-container">
+        <!-- Logo centrado en la parte superior -->
+        <div class="user-avatar">
+            <img src="{% static 'Menu/img/logo.png' %}" alt="Avatar de Usuario">
+        </div>
+
+        <div class="card-header text-center mb-4">
+            <h3>Registrarse</h3>
+        </div>
+
+        <!-- Formulario de registro -->
+        <div class="card-body p-4">
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form action="{% url 'Menu:registro' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-user"> Usuario</i></span>
+                        {{ form.username|add_class:"form-control" }}  
                     </div>
-                {% endif %}
-                
-                <form action="{% url 'Menu:registro' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-user"> Usuario</i></span>
-                            {{ form.username|add_class:"form-control" }}
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-envelope"> Email</i></span>
+                        {{ form.email|add_class:"form-control" }}
                     </div>
-                    <div class="form-group mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-envelope"> Correo</i></span>
-                            {{ form.email|add_class:"form-control" }}
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-user-tag"> Nombre</i></span>
+                        {{ form.first_name|add_class:"form-control" }}
                     </div>
-                    <div class="form-group mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-user-tag"> Nombre</i></span>
-                            {{ form.first_name|add_class:"form-control" }}
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-user-tag"> Apellido</i></span>
+                        {{ form.last_name|add_class:"form-control" }}
                     </div>
-                    <div class="form-group mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-user-tag"> Apellido</i></span>
-                            {{ form.last_name|add_class:"form-control" }}
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-lock"> Contraseña</i></span>
+                        {{ form.password1|add_class:"form-control" }}
                     </div>
-                    <div class="form-group mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-lock"> Contraseña</i></span>
-                            {{ form.password1|add_class:"form-control" }}
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-lock"> Confirmar</i></span>
+                        {{ form.password2|add_class:"form-control" }}
                     </div>
-                    <div class="form-group mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-lock"> Confirmar</i></span>
-                            {{ form.password2|add_class:"form-control" }}
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100 mb-3">Registrarse</button>
-                </form>
-            </div>
-            <div class="card-footer text-center">
-                <a href="{% url 'Menu:principal'%}" class="btn btn-secondary w-100 mt-2">Cancelar</a>
-                <br />
-                <a href="{% url 'Menu:iniciar_sesion'%}" class="text-decoration-none mt-3 d-block">Iniciar Sesión</a>
-            </div>
+                </div>
+
+                <!-- Botón de registrarse -->
+                <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+            </form>
+        </div>
+
+        <!-- Footer con el botón de cancelar y el enlace para iniciar sesión -->
+        <div class="card-footer text-center mt-4">
+            <a href="{% url 'Menu:principal'%}" class="btn btn-secondary w-100">Cancelar</a>
+            <a href="{% url 'Menu:iniciar_sesion' %}" class="text-decoration-none mt-3 d-block">Iniciar Sesión</a>
         </div>
     </div>
 </div>

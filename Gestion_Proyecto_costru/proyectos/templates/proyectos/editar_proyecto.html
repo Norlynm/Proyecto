@@ -1,25 +1,54 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link type='text/css' href='{% static "colocar la ruta del css aqui" %}' rel='stylesheet'/>
-    <title>Editar Proyecto - Plataforma de Gestión de Proyectos</title>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>PLATAFORMA DE GESTION DE PROYECTOS</h1>
-        </header>
-        <nav>
-            <a href="{% url 'proyectos:inicio' %}">Volver al inicio</a>
-        </nav>
-        <section>
-            <form action="{% url 'proyectos:editarproyecto' pk=proyecto.pk %}" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Guardar</button>
-            </form>
-        </section>
+{% extends 'base.html' %}
+
+{% block titulo %}Editar Proyecto{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-start mb-3">
+        <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary">Volver</a>
     </div>
-</body>
-</html>
+
+    <!-- Aumenta el tamaño del título -->
+    <h2 class="mb-4 text-center display-4">Editar Proyecto</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Añade más margen inferior y superior al formulario -->
+            <form action="{% url 'proyectos:editarproyecto' pk=proyecto.pk %}" method="POST" class="p-4 bg-light rounded shadow" style="margin-bottom: 50px;">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre del proyecto</label>
+                    {{ form.nombre }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción del proyecto</label>
+                    {{ form.descripcion }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="fecha_inicio" class="form-label">Fecha de inicio</label>
+                    {{ form.fecha_inicio }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="fecha_fin" class="form-label">Fecha de finalización</label>
+                    {{ form.fecha_fin }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="equipo" class="form-label">Equipo</label>
+                    {{ form.equipo }}
+                </div>
+
+                <!-- Centrar los botones -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                    <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

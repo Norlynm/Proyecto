@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}  <!-- Cargar la etiqueta 'static' para usar archivos estáticos -->
+
+{% block titulo %}Calendario{% endblock %}
+
+{% block extra_styles %}
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" />
+    <style>
+        /* Estilos generales para el contenedor del calendario */
+        .container {
+            padding: 20px;
+        }
+
+        /* Estilo del calendario */
+        #calendar {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Título del calendario */
+        h2 {
+            font-weight: bold;
+            font-size: 2rem;
+            color: #2C3E50;
+        }
+
+        /* Estilo de los botones de navegación del calendario */
+        .fc-button {
+            background-color: #FF5733;
+            border-color: #FF5733;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .fc-button:hover {
+            background-color: #C0392B;
+            border-color: #C0392B;
+        }
+
+        /* Animación al mostrar eventos */
+        .fc-event {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Estilo para los eventos del calendario */
+        .fc-event {
+            background-color: #FF5733 !important;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            padding: 5px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .fc-event:hover {
+            transform: scale(1.05);
+        }
+
+        /* Cambiar color de los días de la tabla del calendario */
+        .fc-daygrid-day {
+            background-color: #f7f9fc; /* Color de fondo de los días */
+            border: 1px solid #e6ecf3; /* Borde alrededor de los días */
+        }
+
+        .fc-daygrid-day:hover {
+            background-color: #e6ecf3; /* Fondo cuando pasas el mouse sobre un día */
+        }
+
+        /* Cambiar el color del día actual */
+        .fc-day-today {
+            background-color: #FFEEEB !important; /* Color de fondo del día actual */
+        }
+
+        /* Cambiar el color de los nombres de los días (Lunes, Martes, etc.) */
+        .fc-col-header-cell {
+            background-color: #FF5733;
+            color: white;
+            font-weight: bold;
+            border: 1px solid #e6ecf3;
+        }
+
+        /* Estilo del header del calendario (mes, semana, día) */
+        .fc-toolbar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2C3E50;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="text-center">Calendario de Tareas y Proyectos</h2>
+        <div id="calendar" class="shadow p-4 mt-4"></div>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: '/calendario/', // Aquí puedes poner la ruta de tus eventos.
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                themeSystem: 'bootstrap',
+                eventColor: '#FF5733',
+                editable: true,
+                eventTimeFormat: { hour: '2-digit', minute: '2-digit', meridiem: false },
+                height: 'auto',
+                eventDidMount: function(info) {
+                    info.el.style.animation = "fadeIn 0.5s";
+                }
+            });
+            calendar.render();
+        });
+    </script>
+{% endblock %}

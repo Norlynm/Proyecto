@@ -1,48 +1,67 @@
 {% extends 'base.html' %}
-
-{% load custom_filters %}  <!-- Cargar el filtro personalizado -->
-
+{% load static %}
+{% load custom_filters %}
 {% block titulo %}Inicio de Sesión{% endblock %}
 {% block barra %}{% endblock %}
-{% block content %}
-<div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header bg-dark text-center">
-                <h2 style="color: white; border-bottom: 2px solid #FFA500;">Iniciar Sesión</h2>
-            </div>
+
+
+{% block extra_styles %}
+<!-- Enlazar el archivo CSS externo -->
+<link rel="stylesheet" href="{% static 'Menu/css/stile.css' %}">
+
+
+<!-- Fondo de imagen completa -->
+<div class="login-page" style="position: relative; height: 100vh; background-image: url('{% static "Menu/img/fondo2.jpg" %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    
+    <!-- Contenedor de la tarjeta de inicio de sesión -->
+    <div class="login-container d-flex justify-content-center align-items-center" style="height: 100%; z-index: 1; position: relative;">
+        
+        <!-- Tarjeta de inicio de sesión -->
+        <div class="card text-center p-4 shadow-lg" style="border-radius: 15px; width: 400px; background-color: rgba(255, 255, 255, 0.85);">
             
-            <div class="card-body">
-                {% if error %}
-                    <div class="alert alert-danger">
-                        {{ error }}
-                    </div>
-                {% endif %}
-                
-                <form action="{% url 'Menu:iniciar_sesion' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group mb-3">
-                        <label for="username"><i class="fas fa-user"> Usuario</i> </label>
-                        <div class="input-group">
-                         
-                            {{ form.username|add_class:"form-control" }}  
-                        </div>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="password"><i class="fas fa-lock"> Contraseña</i> </label>
-                        <div class="input-group">
-                        
-                            {{ form.password|add_class:"form-control" }}  
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">Iniciar Sesión</button>
-                </form>
+            <!-- Encabezado con imagen de usuario -->
+            <div class="user-avatar mb-4">
+                <img src="{% static 'Menu/img/logo.png' %}" alt="Avatar de Usuario" class="rounded-circle" style="width: 100px; border: 3px solid #E74C3C;">
             </div>
-            <div class="card-footer text-center">
-                <p>¿No tienes una cuenta? <a href="{% url 'Menu:registro' %}">Registrarse</a></p>
-                <a href="{% url 'Menu:principal'%}" class="btn btn-secondary mt-2">Cancelar</a>
+            <h3 class="mb-4" style="font-weight: bold; color: #2C3E50;">Inicia Sesión</h3>
+            
+            <!-- Formulario de inicio de sesión -->
+            <form action="{% url 'Menu:iniciar_sesion' %}" method="POST">
+                {% csrf_token %}
+                
+                <!-- Campo de Usuario -->
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text" style="background-color: #FF5733; color: white;"><i class="fas fa-user"></i></span>
+                        {{ form.username|add_class:"form-control" }}  
+                    </div>
+                </div>
+                
+                <!-- Campo de Contraseña -->
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text" style="background-color: #FF5733; color: white;"><i class="fas fa-lock"></i></span>
+                        {{ form.password|add_class:"form-control" }}  
+                    </div>
+                </div>
+                
+                <!-- Botón de inicio de sesión -->
+                <div class="d-grid mb-4">
+                    <button type="submit" class="btn btn-primary" style="background-color: green; border-color: #E74C3C; font-size: 1.2rem;">Iniciar Sesión</button>
+                </div>
+
+                <!-- Recuperación de contraseña -->
+                <div class="text-center">
+                
+                </div>
+            </form>
+
+            <!-- Enlace para el registro si no tiene una cuenta -->
+            <div class="text-center mt-4">
+                <p>¿No tienes una cuenta? <a href="{% url 'Menu:registro' %}" class="text-primary">Regístrate aquí</a></p>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

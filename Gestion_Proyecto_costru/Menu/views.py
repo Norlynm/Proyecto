@@ -54,6 +54,7 @@ def registro(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect ('Menu:principal')
+
 #Aqui se inicia sesion usando un formulario de Authentification 
 def inicio_sesion(request):
     if request.method == 'GET':
@@ -76,43 +77,104 @@ def inicio_sesion(request):
      
 
 from django.shortcuts import redirect
+from django.shortcuts import render
+from proyectos.models import Proyecto  # Asegúrate de importar tu modelo de Proyecto
+from tareas.models import Tarea  # Asegúrate de importar tu modelo de Tarea
 
 def usuario(request):
+    usuario_actual = request.user  # Obtener el usuario actual
+
+    # Obtener proyectos en los que participa el usuario (relación con el equipo)
+    proyectos_asignados = Proyecto.objects.filter(equipo__usuarios=usuario_actual)
+
+    # Obtener tareas asignadas al usuario
+    tareas_asignadas = Tarea.objects.filter(asignado_a=usuario_actual)
+
+    # Si el método es POST, maneja el formulario de edición
     if request.method == "POST" and 'cambiar' in request.POST:
-        # Mostrar formulario editable
         usuario_form = FormularioPropio(instance=request.user)
         return render(request, 'usuario.html', {
             'form': usuario_form,
-            'cambiar': True
+            'cambiar': True,
+            'proyectos_asignados': proyectos_asignados,
+            'tareas_asignadas': tareas_asignadas,
         })
 
     elif request.method == "POST" and 'guardar' in request.POST:
-        # Guardar cambios
         usuario_form = FormularioPropio(request.POST, instance=request.user)
         if usuario_form.is_valid():
-            usuario_form.save()  # Guarda los cambios en el usuario
+            usuario_form.save()
             return render(request, 'usuario.html', {
                 'form': usuario_form,
                 'mensaje': 'Los datos han sido actualizados correctamente',
-                'cambiar': False  # Volver a la vista sin edición
+                'cambiar': False,
+                'proyectos_asignados': proyectos_asignados,
+                'tareas_asignadas': tareas_asignadas,
             })
         else:
             return render(request, 'usuario.html', {
                 'form': usuario_form,
                 'error': 'Hubo un error con el formulario',
-                'cambiar': True
+                'cambiar': True,
+                'proyectos_asignados': proyectos_asignados,
+                'tareas_asignadas': tareas_asignadas,
             })
 
     elif request.method == "POST" and 'cancelar' in request.POST:
-        # Redirigir a la página principal al cancelar
         return redirect('usuario.html')
 
-    else:  # Método GET, solo mostrar los datos sin permitir edición
+    else:
         usuario_form = FormularioPropio(instance=request.user)
         for field in usuario_form.fields.values():
-            field.widget.attrs['readonly'] = True  # Hacer que todos los campos sean de solo lectura
+            field.widget.attrs['readonly'] = True  # Campos de solo lectura
         return render(request, 'usuario.html', {
             'form': usuario_form,
-            'cambiar': False
+            'cambiar': False,
+            'proyectos_asignados': proyectos_asignados,
+            'tareas_asignadas': tareas_asignadas,
         })
 
+# calendario
+from django.http import JsonResponse
+from proyectos.models import Proyecto  # Cambia 'Menu.models' por 'proyectos.models'
+from tareas.models import Tarea 
+
+def calendario(request):
+    # Recoger las tareas y proyectos con sus fechas
+    tareas = Tarea.objects.all()
+    proyectos = Proyecto.objects.all()
+
+    eventos = []
+
+    # Agregar las fechas de las tareas
+    for tarea in tareas:
+        eventos.append({
+            'title': tarea.nombre,
+            'start': tarea.fecha_inicio.strftime('%Y-%m-%d'),
+            'end': tarea.fecha_fin.strftime('%Y-%m-%d'),
+            'color': 'blue'  # Puedes cambiar el color de las tareas
+        })
+
+    # Agregar las fechas de los proyectos
+    for proyecto in proyectos:
+        eventos.append({
+            'title': proyecto.nombre,
+            'start': proyecto.fecha_inicio.strftime('%Y-%m-%d'),
+            'end': proyecto.fecha_fin.strftime('%Y-%m-%d'),
+            'color': 'green'  # Puedes cambiar el color de los proyectos
+        })
+
+    return JsonResponse(eventos, safe=False)
+
+def mostrar_calendario(request):
+    return render(request, 'calendario.html')
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('Menu:despedida')
+
+def despedida(request):
+    return render(request, 'despedida.html')

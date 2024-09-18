@@ -1,130 +1,124 @@
-body {
-    font-family: 'Roboto', sans-serif; /* Fuente moderna y estilizada */
-    background-color: #f4f4f9; /* Fondo suave y neutral */
-    color: #333; /* Color del texto para buena legibilidad */
-    margin: 0;
-    padding: 0;
-    line-height: 1.6; /* Mejora la legibilidad del texto */
-    background-image: linear-gradient(135deg, #FFA500 25%, #FFD700 100%); /* Degradado moderno */
-}
 
-/* Añadir sombras suaves a los elementos */
-.container, .card {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-    border-radius: 10px; /* Bordes redondeados para un look más suave */
-    background-color: #fff; /* Fondo blanco para el contenido */
-    padding: 20px;
-    margin: 20px; /* Añadir espacio alrededor de los elementos */
-}
+    /* Efecto de rebote */
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-30px);
+        }
+        60% {
+            transform: translateY(-15px);
+        }
+    }
 
-/* Mejorar el aspecto de los botones */
-button {
-    background-color: #FFA500; /* Naranja para los botones */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
+    .user-avatar img {
+        animation: bounce 2s infinite; /* Aplica la animación al logo */
+        width: 100px;
+        border: 3px solid #E74C3C;
+        border-radius: 50%;
+    }
 
-button:hover {
-    background-color: #ff7f00; /* Un tono más oscuro al pasar el ratón */
-    transform: translateY(-2px); /* Eleva ligeramente el botón al hacer hover */
-}
+    
 
-/* Diseño de enlaces */
-a {
-    color: #FFA500; /* Color naranja para los enlaces */
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
+   
+    /* Registro Asegurar que el fondo cubra toda la pantalla */
+    body, html {
+        margin: 0;
+        padding: 0;
+        background-image: url('{% static "Menu/img/fondo2.jpg" %}');
+    }
+  
+    .register-page {
+   
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /* Estilo de la tarjeta de registro */
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        padding: 30px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    }
 
-a:hover {
-    text-decoration: underline;
-    color: #ff7f00; /* Un tono más oscuro al pasar el ratón */
-}
+    /* Estilo para la imagen del logo */
+    .user-avatar {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-/* Estilo para el contenedor principal */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+    .user-avatar img {
+        width: 100px;
+        border-radius: 50%;
+        border: 3px solid #E74C3C;
+    }
 
-/* Estilos para encabezados */
-h1 {
-    font-size: 3em;
-    text-align: center;
-    color: rgb(65, 65, 65);
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra suave para el texto */
-}
+    /* Estilos para los campos de entrada */
+    .input-group-text {
+        background-color: #FF5733;
+        color: white;
+        border: none;
+    }
 
-h2 {
-    font-size: 2em;
-    color: #0c0c0c;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 5px;
-}
+    .form-control {
+        border-radius: 0;
+        transition: all 0.3s ease;
+    }
 
-/* Estilo para párrafos */
-p {
-    font-size: 1.2em;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 15px;
-}
+    .form-control:focus {
+        border-color: #FF6B6B;
+        box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+    }
 
-/* Sección estilizada con fondo blanco */
-section {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    transition: box-shadow 0.3s ease;
-}
+    /* Botón principal - igual que el de inicio de sesión */
+    .btn-primary {
+        background-color: green;
+        border-color: #E74C3C;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
 
-section:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más profunda al hacer hover */
-}
+    .btn-primary:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+    }
 
-/* Footer estilizado */
-footer {
-    background-color: #464543; /* Color de fondo del footer */
-    color: white; 
-    text-align: center;
-    padding: 10px 0;
-    position: fixed; /* Fija el footer en la parte inferior */
-    width: 100%; /* Asegura que el footer ocupe todo el ancho de la pantalla */
-    bottom: 0; /* Posiciónalo en la parte inferior */
-}
+    /* Botón de cancelar */
+    .btn-secondary {
+        background-color: red;
+        border: none;
+        font-size: 1.2rem;
+    }
 
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
 
+    /* Enlace de inicio de sesión */
+    .text-decoration-none {
+        color: #FF6B6B;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
 
-input[type="text"], input[type="email"], input[type="password"], textarea {
-    border: 1px solid #ddd;
-    border-radius: 40px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box; /* Asegura que el padding no rompa el diseño */
-    margin-bottom: 0px;
-    font-size: 1rem;
-}
+    .text-decoration-none:hover {
+        color: #e63946;
+    }
 
-input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
-    outline: none;
-    border-color: #FFA500; /* Resalta el borde en naranja cuando está enfocado */
-    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5); /* Añade un efecto de brillo */
-}
+    .card-header h3 {
+        font-weight: bold; /* Negrita */
+        color: #2C3E50; /* Color del texto */
+        font-size: 1.8rem; /* Tamaño de la fuente */
+        text-transform: uppercase; /* Transformación de texto a mayúsculas */
+        border-bottom: 2px solid #E74C3C; /* Línea inferior */
+        padding-bottom: 10px;
+    }
 
-label {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
-}

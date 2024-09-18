@@ -1,8 +1,33 @@
-<form action="{% url 'proyectos:eliminarequipo' equipo.pk %}" method="post">
-   <h2>Seguro que quieres eliminar el equipo?</h2>
-   
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Eliminar equipo</button>
-</form>
-<a href="{% url 'proyectos:inicio' %}">Cancelar</a>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-6">
+            <header class="mb-4 text-center">
+                <h1 class="display-5">Eliminar Equipo</h1>
+                <p class="text-muted">¿Estás seguro de que quieres eliminar este equipo?</p>
+            </header>
+
+            <section class="form-container p-4 bg-light rounded shadow">
+                <!-- Formulario de eliminación -->
+                <form action="{% url 'proyectos:eliminarequipo' equipo.pk %}" method="POST">
+                    {% csrf_token %}
+                    <!-- Mostrar los detalles del equipo a eliminar si es necesario -->
+                    <div class="mb-3">
+                        <p><strong>Equipo:</strong> {{ equipo.nombre }}</p>
+                        <p><strong>Descripción:</strong> {{ equipo.descripcion }}</p>
+                    </div>
+
+                    <!-- Botón para confirmar eliminación -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-danger btn-lg me-2">Eliminar equipo</button>
+                        <a href="{% url 'proyectos:inicio' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
